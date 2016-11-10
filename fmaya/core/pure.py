@@ -6,3 +6,6 @@ cmap = lambda f: lambda xs: map(f, xs)
 curry = lambda f: lambda x: lambda y: f(x, y)
 uncurry = lambda f: lambda x, y: f(x)(y)
 
+fst = lambda (x, _): x
+snd = lambda (_, y): y
+
