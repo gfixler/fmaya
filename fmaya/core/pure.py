@@ -13,3 +13,6 @@ concat = lambda xss: [x for xs in xss for x in xs]
 noneToEmpty = lambda xs: xs if xs else []
 isEmpty = lambda xs: xs == []
 
+preadd = lambda p: lambda s: p + s
+postadd = lambda p: lambda s: s + p
+
