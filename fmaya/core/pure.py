@@ -9,3 +9,7 @@ uncurry = lambda f: lambda x, y: f(x)(y)
 fst = lambda (x, _): x
 snd = lambda (_, y): y
 
+concat = lambda xss: [x for xs in xss for x in xs]
+noneToEmpty = lambda xs: xs if xs else []
+isEmpty = lambda xs: xs == []
+
