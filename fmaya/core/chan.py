@@ -3,3 +3,6 @@ attrFromChannel = lambda channel: channel.split('.')[-1]
 chanFromChannel = lambda channel: (nodeFromChannel(channel), attrFromChannel(channel))
 attrToChannel = lambda node: preadd(node + ".")
 
+getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
+getChannel = getChannelAtTime(cmds.currentTime(query=True))
+
