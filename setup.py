@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 
 setup(
     name = 'fmaya',
@@ -8,7 +8,7 @@ setup(
     author = 'Gary Fixler',
     author_email = 'gfixler@gmail.com',
     url = 'https://github.com/gfixler/fmaya',
-    download_url = 'https://github.com/gfixler/fmaya/archive/v0.2-alpha.tar.gz'
+    download_url = 'https://github.com/gfixler/fmaya/archive/v0.2-alpha.tar.gz',
     license = 'GNU GPLv3',
 )
 
