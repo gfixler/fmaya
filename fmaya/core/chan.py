@@ -1,6 +1,6 @@
 import maya.cmds as cmds
 
-from .pure import preadd
+from .pure import preadd, noneToEmpty
 
 # PURE
 
@@ -14,4 +14,8 @@ attrToChannel = lambda node: preadd(node + ".")
 
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
 getChannel = getChannelAtTime(cmds.currentTime(query=True))
+
+getKeyTimes = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, timeChange=True))
+getKeyValues = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, valueChange=True))
+getKeys = lambda channel: zip(getKeyTimes(channel), getKeyValues(channel))
 
