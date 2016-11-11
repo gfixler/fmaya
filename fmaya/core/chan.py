@@ -20,6 +20,8 @@ getKeyTimes = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, tim
 getKeyValues = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, valueChange=True))
 getKeys = lambda channel: zip(getKeyTimes(channel), getKeyValues(channel))
 
+artistChannels = lambda node: cmap(attrToChannel(node))(cmds.listAttr(node, keyable=True, visible=True, unlocked=True))
+
 keysValueRange = lambda keys: (lambda vs: (min(vs), max(vs)))(cmap(snd)(keys))
 keysMedianValue = comp(uncurry(mid), keysValueRange, getKeys)
 
