@@ -24,6 +24,10 @@ getKeys = lambda channel: zip(getKeyTimes(channel), getKeyValues(channel))
 
 artistChannels = lambda node: cmap(attrToChannel(node))(cmds.listAttr(node, keyable=True, visible=True, unlocked=True))
 
+numericChannelTypes = ['doubleLinear','doubleAngle','double']
+isNumericChannel = lambda channel: attrType(channel) in numericChannelTypes
+numericArtistChannels = lambda node: filter(isNumericChannel, artistChannels(node))
+
 keysValueRange = lambda keys: (lambda vs: (min(vs), max(vs)))(cmap(snd)(keys))
 keysMedianValue = comp(uncurry(mid), keysValueRange, getKeys)
 
