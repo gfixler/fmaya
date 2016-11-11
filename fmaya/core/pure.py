@@ -10,7 +10,7 @@ fst = lambda (x, _): x
 snd = lambda (_, y): y
 
 concat = lambda xss: [x for xs in xss for x in xs]
-noneToEmpty = lambda xs: xs if xs else []
+noneToEmpty = lambda xs: xs or []
 isEmpty = lambda xs: xs == []
 
 preadd = lambda p: lambda s: p + s
