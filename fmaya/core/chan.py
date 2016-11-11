@@ -1,3 +1,7 @@
+import maya.cmds as cmds
+
+from .pure import preadd
+
 # PURE
 
 nodeFromChannel = lambda channel: channel.split('.')[0]
