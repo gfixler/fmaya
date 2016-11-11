@@ -1,6 +1,7 @@
 import maya.cmds as cmds
 
-from .pure import preadd, noneToEmpty
+from .pure import comp, cmap, uncurry, snd, mid, preadd, noneToEmpty
+
 
 # PURE
 
@@ -18,4 +19,7 @@ getChannel = getChannelAtTime(cmds.currentTime(query=True))
 getKeyTimes = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, timeChange=True))
 getKeyValues = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, valueChange=True))
 getKeys = lambda channel: zip(getKeyTimes(channel), getKeyValues(channel))
+
+keysValueRange = lambda keys: (lambda vs: (min(vs), max(vs)))(cmap(snd)(keys))
+keysMedianValue = comp(uncurry(mid), keysValueRange, getKeys)
 
