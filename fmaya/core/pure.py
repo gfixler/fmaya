@@ -16,3 +16,5 @@ isEmpty = lambda xs: xs == []
 preadd = lambda p: lambda s: p + s
 postadd = lambda p: lambda s: s + p
 
+mid = lambda a: lambda b: (a + b) / 2
+
