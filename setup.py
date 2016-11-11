@@ -1,12 +1,14 @@
 from setuptools import setup
 
-setup(name='fmaya',
-      version='0.1',
-      description='Functional expressions for Autodesk Maya.',
-      url='https://github.com/gfixler/fmaya',
-      author='Gary Fixler',
-      author_email='gfixler@gmail.com',
-      license='GNU GPLv3',
-      packages=['fmaya'],
-      zip_safe=False)
+setup(
+    name = 'fmaya',
+    packages = ['fmaya'],
+    version = '0.2-alpha',
+    description = 'Functional expressions for Autodesk Maya.',
+    author = 'Gary Fixler',
+    author_email = 'gfixler@gmail.com',
+    url = 'https://github.com/gfixler/fmaya',
+    download_url = 'https://github.com/gfixler/fmaya/archive/v0.2-alpha.tar.gz'
+    license = 'GNU GPLv3',
+)
 
