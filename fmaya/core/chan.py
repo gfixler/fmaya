@@ -13,6 +13,8 @@ attrToChannel = lambda node: preadd(node + ".")
 
 # IMPURE
 
+attrType = lambda channel: cmds.getAttr(channel, type=True)
+
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
 getChannel = getChannelAtTime(cmds.currentTime(query=True))
 
