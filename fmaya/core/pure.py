@@ -14,9 +14,13 @@ noneToEmpty = lambda xs: xs or []
 isEmpty = lambda xs: xs == []
 
 bnot = lambda b: not b
+eq = lambda a: lambda b: a == b
+neq = lambda a: comp(bnot, eq(a))
 
 preadd = lambda p: lambda s: p + s
 postadd = lambda p: lambda s: s + p
 
 mid = lambda a: lambda b: (a + b) / 2
+
+filt = lambda f: lambda xs: filter(f, xs)
 
