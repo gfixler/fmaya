@@ -10,8 +10,9 @@ attrFromChannel = lambda channel: channel.split('.')[-1]
 chanFromChannel = lambda channel: (nodeFromChannel(channel), attrFromChannel(channel))
 attrToChannel = lambda node: preadd(node + ".")
 
-keysValueRange = lambda keys: (lambda vs: (min(vs), max(vs)))(cmap(snd)(keys))
-keysMedianValue = comp(uncurry(mid), keysValueRange, getKeys)
+minAndMax = lambda xs: (min(xs), max(xs)) # non-total: fails on empty list
+keysValueRange = lambda keys: minAndMax(cmap(snd)(keys)) # non-total: fails on empty keys list
+keysMedianValue = comp(uncurry(mid), keysValueRange) # non-total: fails on empty keys list
 
 
 # IMPURE
@@ -29,5 +30,5 @@ artistChannels = lambda node: cmap(attrToChannel(node))(cmds.listAttr(node, keya
 
 numericChannelTypes = ['doubleLinear','doubleAngle','double']
 isNumericChannel = lambda channel: attrType(channel) in numericChannelTypes
-numericArtistChannels = lambda node: filter(isNumericChannel, artistChannels(node))
+numericArtistChannels = lambda node: filter(isNumericChannel, artistChannels(node)) # non-total: fails on empty list
 
