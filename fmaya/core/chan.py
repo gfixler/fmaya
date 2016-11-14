@@ -17,6 +17,8 @@ keysMedianValue = comp(uncurry(mid), keysValueRange) # non-total: fails on empty
 
 # IMPURE
 
+curTime = lambda: cmds.currentTime(query=True)
+
 attrType = lambda channel: cmds.getAttr(channel, type=True)
 
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
