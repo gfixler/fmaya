@@ -1,4 +1,7 @@
-import maya.cmds as cmds
+try:
+    import maya.cmds as cmds
+except ImportError:
+    print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
 from .pure import comp, cmap, uncurry, snd, mid, preadd, noneToEmpty
 
