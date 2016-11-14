@@ -25,7 +25,7 @@ curTime = lambda: cmds.currentTime(query=True)
 attrType = lambda channel: cmds.getAttr(channel, type=True)
 
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
-getChannel = getChannelAtTime(cmds.currentTime(query=True))
+getChannel = comp(getChannelAtTime, curTime)
 
 getKeyTimes = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, timeChange=True))
 getKeyValues = lambda channel: noneToEmpty(cmds.keyframe(channel, query=True, valueChange=True))
