@@ -53,3 +53,15 @@ class Test_attrToChannel (unittest.TestCase):
     def test_attrToChannel_emptyNodeAndAttr (self):
         self.assertEquals(chan.attrToChannel("")(""), ".")
 
+
+class Test_minAndMax (unittest.TestCase):
+
+    def test_minAndMax_raisesOnEmptyList (self):
+        self.assertRaises(ValueError, lambda: chan.minAndMax([]))
+
+    def test_minAndMax_findsOnlyElementInSingletonList (self):
+        self.assertEquals(chan.minAndMax([3]), (3, 3))
+
+    def test_minAndMax_findsMinAndMaxInLengthNList (self):
+        self.assertEquals(chan.minAndMax([3,4,2,8,1,2,7]), (1, 8))
+
