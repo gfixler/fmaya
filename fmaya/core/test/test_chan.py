@@ -38,3 +38,18 @@ class Test_chanFromChannel (unittest.TestCase):
     def test_chanFromChannel_emptyStringsFromEmptyString (self):
         self.assertEquals(chan.chanFromChannel(""), ("", ""))
 
+
+class Test_attrToChannel (unittest.TestCase):
+
+    def test_attrToChannel_createsChannel (self):
+        self.assertEquals(chan.attrToChannel("foo")("bar"), "foo.bar")
+
+    def test_attrToChannel_emptyNode (self):
+        self.assertEquals(chan.attrToChannel("")("bar"), ".bar")
+
+    def test_attrToChannel_emptyAttr (self):
+        self.assertEquals(chan.attrToChannel("foo")(""), "foo.")
+
+    def test_attrToChannel_emptyNodeAndAttr (self):
+        self.assertEquals(chan.attrToChannel("")(""), ".")
+
