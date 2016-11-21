@@ -8,7 +8,8 @@ except ImportError:
 
 from .. import chan
 
-class Test_pureChannelStringFunctions (unittest.TestCase):
+
+class Test_nodeFromChannel (unittest.TestCase):
 
     def test_nodeFromChannel_getsNodeFromNormalChannel (self):
         self.assertEquals(chan.nodeFromChannel("foo.bar"), "foo")
@@ -19,11 +20,17 @@ class Test_pureChannelStringFunctions (unittest.TestCase):
     def test_nodeFromChannel_handlesEmptyString (self):
         self.assertEquals(chan.nodeFromChannel(""), "")
 
+
+class Test_attrFromChannel (unittest.TestCase):
+
     def test_attrFromChannel_getsAttrFromNormalChannel (self):
         self.assertEquals(chan.attrFromChannel("foo.bar"), "bar")
 
     def test_attrFromChannel_doesNotAffectNonDottedName (self):
         self.assertEquals(chan.attrFromChannel("bar"), "bar")
+
+
+class Test_chanFromChannel (unittest.TestCase):
 
     def test_chanFromChannel_splitsAChannel (self):
         self.assertEquals(chan.chanFromChannel("foo.bar"), ("foo", "bar"))
