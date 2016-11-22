@@ -182,3 +182,27 @@ class Test_neq (unittest.TestCase):
     def test_neq_findsStringInnequality (self):
         self.assertEquals(pure.neq("bar")("foo"), True)
 
+
+class Test_preadd (unittest.TestCase):
+
+    def test_preadd_canAddNumbers (self):
+        self.assertEquals(pure.preadd(3)(4), 7)
+
+    def test_preadd_canPrependToString (self):
+        self.assertEquals(pure.preadd("foo")("bar"), "foobar")
+
+    def test_preadd_canPrependNumberList (self):
+        self.assertEquals(pure.preadd([1,2,3])([4,5]), [1,2,3,4,5])
+
+
+class Test_postadd (unittest.TestCase):
+
+    def test_postadd_canAddNumbers (self):
+        self.assertEquals(pure.postadd(3)(4), 7)
+
+    def test_postadd_canPostpendString (self):
+        self.assertEquals(pure.postadd("foo")("bar"), "barfoo")
+
+    def test_postadd_canPrependNumberList (self):
+        self.assertEquals(pure.postadd([1,2,3])([4,5]), [4,5,1,2,3])
+
