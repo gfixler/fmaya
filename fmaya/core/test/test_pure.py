@@ -52,3 +52,25 @@ class Test_cmap (unittest.TestCase):
     def test_cmap_mapsOverBooleans (self):
         self.assertEquals(pure.cmap(lambda x: not x)([True,False,False,True]), [False,True,True,False])
 
+
+class Test_curry (unittest.TestCase):
+
+    def test_curry_curriesAddition (self):
+        add = lambda x, y: x + y
+        self.assertEquals(pure.curry(add)(7)(9), 16)
+
+    def test_curry_curriesComparison (self):
+        lessThan = lambda x, y: x < y
+        self.assertEquals(pure.curry(lessThan)(7)(9), True)
+
+
+class Test_uncurry (unittest.TestCase):
+
+    def test_uncurry_uncurriesAddition (self):
+        add = lambda x: lambda y: x + y
+        self.assertEquals(pure.uncurry(add)((7, 9)), 16)
+
+    def test_uncurry_uncurriesComparison (self):
+        lessThan = lambda x: lambda y: x < y
+        self.assertEquals(pure.uncurry(lessThan)((7, 9)), True)
+
