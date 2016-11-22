@@ -15,7 +15,7 @@ attrToChannel = lambda node: preadd(node + ".")
 
 minAndMax = lambda xs: (min(xs), max(xs)) # non-total: fails on empty list
 keysValueRange = lambda keys: minAndMax(cmap(snd)(keys)) # non-total: fails on empty keys list
-keysMedianValue = comp(uncurry(mid), keysValueRange) # non-total: fails on empty keys list
+keysValueCenter = comp(uncurry(mid), keysValueRange) # non-total: fails on empty keys list
 
 
 # IMPURE
