@@ -10,7 +10,7 @@ fst = lambda (x, _): x
 snd = lambda (_, y): y
 
 concat = lambda xss: reduce(lambda x, y: x + y, xss)
-noneToEmpty = lambda xs: xs or []
+emptyNone = lambda xs: xs or []
 isEmpty = lambda xs: xs == []
 
 bnot = lambda b: not b
