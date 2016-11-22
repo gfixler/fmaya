@@ -11,7 +11,7 @@ snd = lambda (_, y): y
 
 concat = lambda xss: reduce(lambda x, y: x + y, xss)
 emptyNone = lambda xs: xs or []
-isEmpty = lambda xs: xs == []
+isEmpty = lambda xs: len(xs) == 0
 
 bnot = lambda b: not b
 eq = lambda a: lambda b: a == b

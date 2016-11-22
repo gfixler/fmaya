@@ -104,3 +104,24 @@ class Test_concat (unittest.TestCase):
     def test_concatsBooleanList (self):
         self.assertEquals(pure.concat([[True],[],[False,True],[False],[]]), [True,False,True,False])
 
+
+class Test_isEmpty (unittest.TestCase):
+
+    def test_isEmpty_emptyListIsEmpty (self):
+        self.assertEquals(pure.isEmpty([]), True)
+
+    def test_isEmpty_singleNumberListIsNotEmpty (self):
+        self.assertEquals(pure.isEmpty([3]), False)
+
+    def test_isEmpty_singletonStringListIsNotEmpty (self):
+        self.assertEquals(pure.isEmpty(["foo"]), False)
+
+    def test_isEmpty_multiElementBoolListIsNotEmpty (self):
+        self.assertEquals(pure.isEmpty([True,False,False,True]), False)
+
+    def test_isEmpty_stringIsNotEmpty (self):
+        self.assertEquals(pure.isEmpty("foo"), False)
+
+    def test_isEmpty_emptyStringIsEmpty (self):
+        self.assertEquals(pure.isEmpty(""), True)
+
