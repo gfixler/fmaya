@@ -20,7 +20,7 @@ neq = lambda a: comp(bnot, eq(a))
 preadd = lambda p: lambda s: p + s
 postadd = lambda p: lambda s: s + p
 
-mid = lambda a: lambda b: (a + b) / 2
+mid = lambda a: lambda b: (a + b) / 2.0
 
 filt = lambda f: lambda xs: filter(f, xs)
 
