@@ -218,3 +218,18 @@ class Test_mid (unittest.TestCase):
     def test_mid_findsMidpointWithNegative (self):
         self.assertEquals(pure.mid(-9)(7), -1)
 
+
+class Test_filt (unittest.TestCase):
+
+    def test_filt_keepTrueValues (self):
+        self.assertEquals(pure.filt(lambda b: b)([False,True,True,False,True]), [True,True,True])
+
+    def test_filt_keepFalseValues (self):
+        self.assertEquals(pure.filt(lambda b: not b)([False,True,True,False,True]), [False,False])
+
+    def test_filt_keepValuesGreaterThan5 (self):
+        self.assertEquals(pure.filt(lambda n: n > 5)([2,3,6,4,7,2,1,7,4,6,8,4]), [6,7,7,6,8])
+
+    def test_filt_keepVowelsInString (self):
+        self.assertEquals(pure.filt(lambda c: c in "aeiou")("eleanor"), "eeao")
+
