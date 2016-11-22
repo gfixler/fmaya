@@ -125,3 +125,12 @@ class Test_isEmpty (unittest.TestCase):
     def test_isEmpty_emptyStringIsEmpty (self):
         self.assertEquals(pure.isEmpty(""), True)
 
+
+class Test_bnot (unittest.TestCase):
+
+    def test_bnot_flipsTrueToFalse (self):
+        self.assertEquals(pure.bnot(True), False)
+
+    def test_bnot_flipsFalseToTrue (self):
+        self.assertEquals(pure.bnot(False), True)
+
