@@ -206,3 +206,15 @@ class Test_postadd (unittest.TestCase):
     def test_postadd_canPrependNumberList (self):
         self.assertEquals(pure.postadd([1,2,3])([4,5]), [4,5,1,2,3])
 
+
+class Test_mid (unittest.TestCase):
+
+    def test_mid_findsSameNumberGivenTwice (self):
+        self.assertEquals(pure.mid(7)(7), 7)
+
+    def test_mid_findsMidpoint (self):
+        self.assertEquals(pure.mid(3)(7), 5)
+
+    def test_mid_findsMidpointWithNegative (self):
+        self.assertEquals(pure.mid(-9)(7), -1)
+
