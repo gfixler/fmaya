@@ -9,6 +9,8 @@ except ImportError:
     print 'WARNING (%s): failed to load maya.mel module.' % __file__
 
 
+# IMPURE
+
 selection = lambda: (lambda xs: xs if xs else [])(cmds.ls(selection=True, flatten=True))
 selection1 = lambda: selection()[0] # non-total; errors on empty selection
 

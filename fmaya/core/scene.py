@@ -8,8 +8,13 @@ except ImportError:
 from .pure import cmap
 
 
+# PURE
+
 validNameChars = digits + ascii_letters
 toValidMayaName = lambda name: ''.join(cmap(lambda x: x if x in validNameChars else '_')(name))
+
+
+# IMPURE
 
 scenePath = lambda: cmds.file(query=True, sceneName=True)
 sceneName = lambda: scenePath().split('/')[-1]
