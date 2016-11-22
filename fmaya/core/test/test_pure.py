@@ -134,3 +134,51 @@ class Test_bnot (unittest.TestCase):
     def test_bnot_flipsFalseToTrue (self):
         self.assertEquals(pure.bnot(False), True)
 
+
+class Test_eq (unittest.TestCase):
+
+    def test_eq_findsBooleanEquality (self):
+        self.assertEquals(pure.eq(False)(False), True)
+
+    def test_eq_findsBooleanInequality (self):
+        self.assertEquals(pure.eq(True)(False), False)
+
+    def test_eq_findsAlternateBooleanInequality (self):
+        self.assertEquals(pure.eq(False)(True), False)
+
+    def test_eq_findsNumericEquality (self):
+        self.assertEquals(pure.eq(3)(3), True)
+
+    def test_eq_findsNumericInequality (self):
+        self.assertEquals(pure.eq(8)(3), False)
+
+    def test_eq_findsStringEquality (self):
+        self.assertEquals(pure.eq("foo")("foo"), True)
+
+    def test_eq_findsStringInequality (self):
+        self.assertEquals(pure.eq("bar")("foo"), False)
+
+
+class Test_neq (unittest.TestCase):
+
+    def test_neq_findsBooleanEquality (self):
+        self.assertEquals(pure.neq(False)(False), False)
+
+    def test_neq_findsBooleanInnequality (self):
+        self.assertEquals(pure.neq(True)(False), True)
+
+    def test_neq_findsAlternateBooleanInnequality (self):
+        self.assertEquals(pure.neq(False)(True), True)
+
+    def test_neq_findsNumericEquality (self):
+        self.assertEquals(pure.neq(3)(3), False)
+
+    def test_neq_findsNumericInnequality (self):
+        self.assertEquals(pure.neq(8)(3), True)
+
+    def test_neq_findsStringEquality (self):
+        self.assertEquals(pure.neq("foo")("foo"), False)
+
+    def test_neq_findsStringInnequality (self):
+        self.assertEquals(pure.neq("bar")("foo"), True)
+
