@@ -74,3 +74,21 @@ class Test_uncurry (unittest.TestCase):
         lessThan = lambda x: lambda y: x < y
         self.assertEquals(pure.uncurry(lessThan)((7, 9)), True)
 
+
+class Test_fst (unittest.TestCase):
+
+    def test_fst_getsFirstElementInTuple (self):
+        self.assertEquals(pure.fst((3,"foo")), 3)
+
+    def test_fst_getsFirstElementInAnotherTuple (self):
+        self.assertEquals(pure.fst((False, "bar")), False)
+
+
+class Test_snd (unittest.TestCase):
+
+    def test_snd_getsSecondElementInTuple (self):
+        self.assertEquals(pure.snd((3,"foo")), "foo")
+
+    def test_snd_getsSecondElementInAnotherTuple (self):
+        self.assertEquals(pure.snd((False, "bar")), "bar")
+
