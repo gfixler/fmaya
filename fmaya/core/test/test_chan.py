@@ -78,3 +78,14 @@ class Test_keysValueRange (unittest.TestCase):
         self.assertEquals(chan.keysValueRange([(2,3),(4,2),(5,-1),(8,1)]), (-1, 3))
 
 
+class Test_keysValueCenter (unittest.TestCase):
+
+    def test_keysValueCenter_raisesOnEmptyList (self):
+        self.assertRaises(ValueError, lambda: chan.keysValueCenter([]))
+
+    def test_keysValueCenter_reportsProperRangeOnSingletonKeysList (self):
+        self.assertEquals(chan.keysValueCenter([(2,3)]), 3)
+
+    def test_keysValueCenter_getsProperValueCenter (self):
+        self.assertEquals(chan.keysValueCenter([(2,3),(4,2),(5,-1),(8,1)]), 1)
+
