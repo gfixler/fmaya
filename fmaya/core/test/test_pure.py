@@ -92,3 +92,15 @@ class Test_snd (unittest.TestCase):
     def test_snd_getsSecondElementInAnotherTuple (self):
         self.assertEquals(pure.snd((False, "bar")), "bar")
 
+
+class Test_concat (unittest.TestCase):
+
+    def test_concatsStrings (self):
+        self.assertEquals(pure.concat(["foo","bar","baz"]), "foobarbaz")
+
+    def test_concatsNumberList (self):
+        self.assertEquals(pure.concat([[1,2,3],[],[4,5],[6],[]]), [1,2,3,4,5,6])
+
+    def test_concatsBooleanList (self):
+        self.assertEquals(pure.concat([[True],[],[False,True],[False],[]]), [True,False,True,False])
+
