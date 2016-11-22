@@ -65,3 +65,16 @@ class Test_minAndMax (unittest.TestCase):
     def test_minAndMax_findsMinAndMaxInLengthNList (self):
         self.assertEquals(chan.minAndMax([3,4,2,8,1,2,7]), (1, 8))
 
+
+class Test_keysValueRange (unittest.TestCase):
+
+    def test_keysValueRange_raisesOnEmptyList (self):
+        self.assertRaises(ValueError, lambda: chan.keysValueRange([]))
+
+    def test_keysValueRange_reportsProperRangeOnSingletonKeysList (self):
+        self.assertEquals(chan.keysValueRange([(2,3)]), (3, 3))
+
+    def test_keysValueRange_getsProperValueRange (self):
+        self.assertEquals(chan.keysValueRange([(2,3),(4,2),(5,-1),(8,1)]), (-1, 3))
+
+
