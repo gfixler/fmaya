@@ -111,7 +111,7 @@ class Test_getTime (unittest.TestCase):
 
 
 @attr('maya')
-class Test_attrType (unittest.TestCase):
+class Test_getAttrType (unittest.TestCase):
 
     def test_getAttrType_translateX (self):
         self.assertEquals(chan.getAttrType('persp.translateX'), 'doubleLinear')
