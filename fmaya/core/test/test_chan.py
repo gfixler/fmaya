@@ -109,3 +109,13 @@ class Test_getTime (unittest.TestCase):
         cmds.currentTime(123, edit=True)
         self.assertEquals(chan.getTime(), 123)
 
+
+@attr('maya')
+class Test_attrType (unittest.TestCase):
+
+    def test_getAttrType_translateX (self):
+        self.assertEquals(chan.getAttrType('persp.translateX'), 'doubleLinear')
+
+    def test_getAttrType_visibility (self):
+        self.assertEquals(chan.getAttrType('persp.visibility'), 'bool')
+
