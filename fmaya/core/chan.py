@@ -20,12 +20,12 @@ keysValueCenter = comp(uncurry(mid), keysValueRange) # non-total: fails on empty
 
 # IMPURE
 
-curTime = lambda: cmds.currentTime(query=True)
+getTime = lambda: cmds.currentTime(query=True)
 
 attrType = lambda channel: cmds.getAttr(channel, type=True)
 
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
-getChannel = comp(getChannelAtTime, curTime)
+getChannel = comp(getChannelAtTime, getTime)
 
 getKeyTimes = lambda channel: emptyNone(cmds.keyframe(channel, query=True, timeChange=True))
 getKeyValues = lambda channel: emptyNone(cmds.keyframe(channel, query=True, valueChange=True))

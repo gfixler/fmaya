@@ -9,6 +9,8 @@ except ImportError:
 from .. import chan
 
 
+# PURE
+
 class Test_nodeFromChannel (unittest.TestCase):
 
     def test_nodeFromChannel_getsNodeFromNormalChannel (self):
@@ -88,4 +90,22 @@ class Test_keysValueCenter (unittest.TestCase):
 
     def test_keysValueCenter_getsProperValueCenter (self):
         self.assertEquals(chan.keysValueCenter([(2,3),(4,2),(5,-1),(8,1)]), 1)
+
+
+# IMPURE
+
+@attr('maya')
+class Test_getTime (unittest.TestCase):
+
+    def test_getTime_time0 (self):
+        cmds.currentTime(5, edit=True)
+        self.assertEquals(chan.getTime(), 5)
+
+    def test_getTime_timeNegative20 (self):
+        cmds.currentTime(-20, edit=True)
+        self.assertEquals(chan.getTime(), -20)
+
+    def test_getTime_time123 (self):
+        cmds.currentTime(123, edit=True)
+        self.assertEquals(chan.getTime(), 123)
 
