@@ -119,3 +119,16 @@ class Test_getAttrType (unittest.TestCase):
     def test_getAttrType_visibility (self):
         self.assertEquals(chan.getAttrType('persp.visibility'), 'bool')
 
+@attr('maya')
+class Test_getChannelAtTime (unittest.TestCase):
+
+    def setUp (self):
+        cmds.setKeyframe('persp.tx', time=3, value=7)
+        cmds.setKeyframe('persp.tx', time=8, value=13)
+
+    def test_getChannelAtTime_getsAKeyValue (self):
+        self.assertEquals(chan.getChannelAtTime(3)('persp.tx'), 7)
+
+    def test_getChannelAtTime_getsAnotherKeyValue (self):
+        self.assertEquals(chan.getChannelAtTime(8)('persp.tx'), 13)
+
