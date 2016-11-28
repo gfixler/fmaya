@@ -158,3 +158,10 @@ class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
     def test_getKeys_getsKeys (self):
         self.assertEquals(chan.getKeys('persp.tx'), [(-3,100),(0,-56),(5,33)])
 
+
+@attr('maya')
+class Test_artistChannels (unittest.TestCase):
+
+    # this relies on the GUI, and is therefore untestable
+    pass
+
