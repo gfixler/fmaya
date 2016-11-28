@@ -123,6 +123,7 @@ class Test_getAttrType (unittest.TestCase):
 class Test_getChannelAtTime (unittest.TestCase):
 
     def setUp (self):
+        cmds.file(new=True, force=True)
         cmds.setKeyframe('persp.tx', time=-3, value=7)
         cmds.setKeyframe('persp.tx', time=8, value=13)
 
@@ -137,4 +138,23 @@ class Test_getChannelAtTime (unittest.TestCase):
 
     def test_getChannelAtTime_getsValueAtAnotherKey (self):
         self.assertEquals(chan.getChannelAtTime(8)('persp.tx'), 13)
+
+
+@attr('maya')
+class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+        cmds.setKeyframe('persp.tx', time=-3, value=100)
+        cmds.setKeyframe('persp.tx', time=0, value=-56)
+        cmds.setKeyframe('persp.tx', time=5, value=33)
+
+    def test_getKeyTimes_getsKeys (self):
+        self.assertEquals(chan.getKeyTimes('persp.tx'), [-3,0,5])
+
+    def test_getKeyValues_getsValues (self):
+        self.assertEquals(chan.getKeyValues('persp.tx'), [100,-56,33])
+
+    def test_getKeys_getsKeys (self):
+        self.assertEquals(chan.getKeys('persp.tx'), [(-3,100),(0,-56),(5,33)])
 
