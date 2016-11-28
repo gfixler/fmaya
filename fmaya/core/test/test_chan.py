@@ -165,3 +165,13 @@ class Test_artistChannels (unittest.TestCase):
     # this relies on the GUI, and is therefore untestable
     pass
 
+
+@attr('maya')
+class Test_isNumericChannel (unittest.TestCase):
+
+    def test_isNumericChannel_nonNumericChannelYieldsFalse (self):
+        self.assertEquals(chan.isNumericChannel('persp.visibility'), False)
+
+    def test_isNumericChannel_nonNumericChannelYieldsTrue (self):
+        self.assertEquals(chan.isNumericChannel('persp.rx'), True)
+
