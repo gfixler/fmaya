@@ -123,12 +123,18 @@ class Test_getAttrType (unittest.TestCase):
 class Test_getChannelAtTime (unittest.TestCase):
 
     def setUp (self):
-        cmds.setKeyframe('persp.tx', time=3, value=7)
+        cmds.setKeyframe('persp.tx', time=-3, value=7)
         cmds.setKeyframe('persp.tx', time=8, value=13)
 
-    def test_getChannelAtTime_getsAKeyValue (self):
-        self.assertEquals(chan.getChannelAtTime(3)('persp.tx'), 7)
+    def test_getChannelAtTime_getsValueOfUnkeyedChannel (self):
+        cmds.setAttr('persp.rz', 23)
+        self.assertEquals(chan.getChannelAtTime(-4)('persp.rz'), 23)
+        self.assertEquals(chan.getChannelAtTime(0)('persp.rz'), 23)
+        self.assertEquals(chan.getChannelAtTime(17)('persp.rz'), 23)
 
-    def test_getChannelAtTime_getsAnotherKeyValue (self):
+    def test_getChannelAtTime_getsValueAtKey (self):
+        self.assertEquals(chan.getChannelAtTime(-3)('persp.tx'), 7)
+
+    def test_getChannelAtTime_getsValueAtAnotherKey (self):
         self.assertEquals(chan.getChannelAtTime(8)('persp.tx'), 13)
 
