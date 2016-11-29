@@ -9,6 +9,8 @@ except ImportError:
 from .. import select
 
 
+# IMPURE
+
 @attr('maya')
 class Test_selectionAndSelection1 (unittest.TestCase):
 
