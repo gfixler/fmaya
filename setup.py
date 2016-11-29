@@ -10,5 +10,7 @@ setup(
     url = 'https://github.com/gfixler/fmaya',
     download_url = 'https://github.com/gfixler/fmaya/archive/v0.2-alpha.tar.gz',
     license = 'GNU GPLv3',
+    test_suite='nose.collector',
+    tests_require['nose','rednose'],
 )
 
