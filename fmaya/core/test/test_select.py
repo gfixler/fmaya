@@ -48,3 +48,10 @@ class Test_selectionAndSelection1 (unittest.TestCase):
         cmds.select(xs)
         self.assertEquals(select.selection1(), xs[0])
 
+
+@attr('maya')
+class Test_channelBoxSelection (unittest.TestCase):
+
+    # this relies on the GUI, and is therefore untestable
+    pass
+
