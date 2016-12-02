@@ -36,5 +36,5 @@ artistChannels = lambda node: cmap(attrToChannel(node))(artistAttrs(node))
 
 numericChannelTypes = ['doubleLinear','doubleAngle','double']
 isNumericChannel = lambda channel: getAttrType(channel) in numericChannelTypes
-numericArtistChannels = lambda node: filter(isNumericChannel, artistChannels(node)) # non-total: fails on empty list
+numericArtistChannels = lambda node: filter(isNumericChannel, artistChannels(node))
 
