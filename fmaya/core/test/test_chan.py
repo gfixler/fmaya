@@ -160,6 +160,55 @@ class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
 
 
 @attr('maya')
+class Test_artistAttrs (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+        self.cube = cmds.polyCube()[0]
+
+        self.ball = cmds.polySphere()[0]
+        cmds.setAttr(self.ball + ".tz", lock=True)
+        cmds.setAttr(self.ball + ".sx", keyable=False)
+        cmds.addAttr(self.ball, longName="foo", keyable=True, hidden=True)
+        cmds.addAttr(self.ball, longName="bar", keyable=True)
+
+        self.loc = cmds.spaceLocator()[0]
+        for attr in ["tx","ty","tz","rx","ry","rz","sx","sy","sz","v"]:
+            cmds.setAttr(self.loc + "." + attr, keyable=False)
+
+    def test_artistAttrs_findsDefaultChannels (self):
+        expected = [ "translateX"
+                   , "translateY"
+                   , "translateZ"
+                   , "rotateX"
+                   , "rotateY"
+                   , "rotateZ"
+                   , "scaleX"
+                   , "scaleY"
+                   , "scaleZ"
+                   , "visibility"
+                   ]
+        self.assertEquals(sorted(chan.artistAttrs(self.cube)), sorted(expected))
+
+    def test_artistAttrs_doesNotFindHiddenLockedOrNonKeyableChannels (self):
+        expected = [ "translateX"
+                   , "translateY"
+                   , "rotateX"
+                   , "rotateY"
+                   , "rotateZ"
+                   , "scaleY"
+                   , "scaleZ"
+                   , "visibility"
+                   , "bar"
+                   ]
+        self.assertEquals(sorted(chan.artistAttrs(self.ball)), sorted(expected))
+
+    def test_artistAttrs_returnsEmptyListWhenAllChannelsNonKeyable (self):
+        self.assertEquals(chan.artistAttrs(self.loc), [])
+
+
+@attr('maya')
 class Test_artistChannels (unittest.TestCase):
 
     # this relies on the GUI, and is therefore untestable
