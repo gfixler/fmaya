@@ -211,8 +211,50 @@ class Test_artistAttrs (unittest.TestCase):
 @attr('maya')
 class Test_artistChannels (unittest.TestCase):
 
-    # this relies on the GUI, and is therefore untestable
-    pass
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+        self.cube = cmds.polyCube()[0]
+
+        self.ball = cmds.polySphere()[0]
+        cmds.setAttr(self.ball + ".tz", lock=True)
+        cmds.setAttr(self.ball + ".sx", keyable=False)
+        cmds.addAttr(self.ball, longName="foo", keyable=True, hidden=True)
+        cmds.addAttr(self.ball, longName="bar", keyable=True)
+
+        self.loc = cmds.spaceLocator()[0]
+        for attr in ["tx","ty","tz","rx","ry","rz","sx","sy","sz","v"]:
+            cmds.setAttr(self.loc + "." + attr, keyable=False)
+
+    def test_artistChannels_findsDefaultChannels (self):
+        expected = [ self.cube + ".translateX"
+                   , self.cube + ".translateY"
+                   , self.cube + ".translateZ"
+                   , self.cube + ".rotateX"
+                   , self.cube + ".rotateY"
+                   , self.cube + ".rotateZ"
+                   , self.cube + ".scaleX"
+                   , self.cube + ".scaleY"
+                   , self.cube + ".scaleZ"
+                   , self.cube + ".visibility"
+                   ]
+        self.assertEquals(sorted(chan.artistChannels(self.cube)), sorted(expected))
+
+    def test_artistChannels_doesNotFindHiddenLockedOrNonKeyableChannels (self):
+        expected = [ self.ball + ".translateX"
+                   , self.ball + ".translateY"
+                   , self.ball + ".rotateX"
+                   , self.ball + ".rotateY"
+                   , self.ball + ".rotateZ"
+                   , self.ball + ".scaleY"
+                   , self.ball + ".scaleZ"
+                   , self.ball + ".visibility"
+                   , self.ball + ".bar"
+                   ]
+        self.assertEquals(sorted(chan.artistChannels(self.ball)), sorted(expected))
+
+    def test_artistChannels_returnsEmptyListWhenAllChannelsNonKeyable (self):
+        self.assertEquals(chan.artistChannels(self.loc), [])
 
 
 @attr('maya')

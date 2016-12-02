@@ -32,7 +32,7 @@ getKeyValues = lambda channel: emptyNone(cmds.keyframe(channel, query=True, valu
 getKeys = lambda channel: zip(getKeyTimes(channel), getKeyValues(channel))
 
 artistAttrs = lambda node: cmds.listAttr(node, keyable=True, visible=True, unlocked=True) or []
-artistChannels = lambda node: cmap(attrToChannel(node))(cmds.listAttr(node, keyable=True, visible=True, unlocked=True))
+artistChannels = lambda node: cmap(attrToChannel(node))(artistAttrs(node))
 
 numericChannelTypes = ['doubleLinear','doubleAngle','double']
 isNumericChannel = lambda channel: getAttrType(channel) in numericChannelTypes
