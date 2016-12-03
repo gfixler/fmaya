@@ -93,6 +93,24 @@ class Test_snd (unittest.TestCase):
         self.assertEquals(pure.snd((False, "bar")), "bar")
 
 
+class Test_onFst (unittest.TestCase):
+
+    def test_onFst_identityDoesNotChangeAnything (self):
+        self.assertEquals(pure.onFst(lambda x: x)((3,"foo")), (3,"foo"))
+
+    def test_onFst_worksOnFirstValue (self):
+        self.assertEquals(pure.onFst(lambda x: x*2)((3,"foo")), (6,"foo"))
+
+
+class Test_onSnd (unittest.TestCase):
+
+    def test_onSnd_identityDoesNotChangeAnything (self):
+        self.assertEquals(pure.onSnd(lambda x: x)((3,"foo")), (3,"foo"))
+
+    def test_onSnd_worksOnSecondValue (self):
+        self.assertEquals(pure.onSnd(lambda x: x[::-1])((3,"foo")), (3,"oof"))
+
+
 class Test_concat (unittest.TestCase):
 
     def test_concatsStrings (self):

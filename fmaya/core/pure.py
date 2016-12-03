@@ -8,6 +8,8 @@ uncurry = lambda f: lambda (x, y): f(x)(y)
 
 fst = lambda (x, _): x
 snd = lambda (_, y): y
+onFst = lambda f: lambda (x, y): (f(x), y)
+onSnd = lambda f: lambda (x, y): (x, f(y))
 
 concat = lambda xss: reduce(lambda x, y: x + y, xss) if xss else []
 emptyNone = lambda xs: xs or []
