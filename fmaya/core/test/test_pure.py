@@ -251,3 +251,15 @@ class Test_filt (unittest.TestCase):
     def test_filt_keepVowelsInString (self):
         self.assertEquals(pure.filt(lambda c: c in "aeiou")("eleanor"), "eeao")
 
+
+class Test_lerp (unittest.TestCase):
+
+    def test_lerp_0YieldsFirstPoint (self):
+        self.assertEquals(pure.lerp(0)(3)(7), 3)
+
+    def test_lerp_1YieldsSecondPoint (self):
+        self.assertEquals(pure.lerp(1)(3)(7), 7)
+
+    def test_lerp_0_5YieldsMidpoint (self):
+        self.assertEquals(pure.lerp(0.5)(3)(7), 5.0)
+
