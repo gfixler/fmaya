@@ -119,6 +119,7 @@ class Test_getAttrType (unittest.TestCase):
     def test_getAttrType_visibility (self):
         self.assertEquals(chan.getAttrType('persp.visibility'), 'bool')
 
+
 @attr('maya')
 class Test_getChannelAtTime (unittest.TestCase):
 
@@ -138,6 +139,26 @@ class Test_getChannelAtTime (unittest.TestCase):
 
     def test_getChannelAtTime_getsValueAtAnotherKey (self):
         self.assertEquals(chan.getChannelAtTime(8)('persp.tx'), 13)
+
+
+@attr('maya')
+class Test_setChannel (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+        cmds.setKeyframe('persp.tx', time=-3, value=7)
+        cmds.setKeyframe('persp.tx', time=8, value=13)
+
+    def test_setChannel_setsValuesAtTimes (self):
+        chan.setChannel("persp.rz")((5,23))
+        chan.setChannel("persp.rz")((7,-3))
+        chan.setChannel("persp.rz")((2,13))
+        cmds.currentTime(2, edit=True)
+        self.assertAlmostEquals(cmds.getAttr("persp.rz"), 13)
+        cmds.currentTime(5, edit=True)
+        self.assertAlmostEquals(cmds.getAttr("persp.rz"), 23)
+        cmds.currentTime(7, edit=True)
+        self.assertAlmostEquals(cmds.getAttr("persp.rz"), -3)
 
 
 @attr('maya')
@@ -263,7 +284,7 @@ class Test_isNumericChannel (unittest.TestCase):
     def test_isNumericChannel_nonNumericChannelYieldsFalse (self):
         self.assertEquals(chan.isNumericChannel('persp.visibility'), False)
 
-    def test_isNumericChannel_nonNumericChannelYieldsTrue (self):
+    def test_isNumericChannel_numericChannelYieldsTrue (self):
         self.assertEquals(chan.isNumericChannel('persp.rx'), True)
 
 

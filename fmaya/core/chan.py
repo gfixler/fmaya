@@ -27,6 +27,8 @@ getAttrType = lambda channel: cmds.getAttr(channel, type=True)
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
 getChannel = comp(getChannelAtTime, getTime)
 
+setChannel = lambda c: lambda (t, v): cmds.setKeyframe(c, time=t, value=v)
+
 getKeyTimes = lambda channel: emptyNone(cmds.keyframe(channel, query=True, timeChange=True))
 getKeyValues = lambda channel: emptyNone(cmds.keyframe(channel, query=True, valueChange=True))
 getKeys = lambda channel: zip(getKeyTimes(channel), getKeyValues(channel))
