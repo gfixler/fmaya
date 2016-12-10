@@ -35,6 +35,20 @@ class Test_flip (unittest.TestCase):
         self.assertEquals(pure.flip(enlist)("x")("y"), ["y","x"])
 
 
+class Test_juxt (unittest.TestCase):
+
+    def test_juxt_noFunctionsYieldsEmptyList (self):
+        self.assertEquals(pure.juxt()(3), [])
+
+    def test_juxt_oneFunctionYieldsOneCorrectResult (self):
+        self.assertEquals(pure.juxt(len)("banana"), [6])
+
+    def test_juxt_handlesSeveralFunctions (self):
+        rev = lambda xs: xs[::-1]
+        cap = lambda s: s.upper()
+        self.assertEquals(pure.juxt(rev, len, cap)("function"), ["noitcnuf", 8, "FUNCTION"])
+
+
 class Test_comp (unittest.TestCase):
 
     def test_comp_oneFunctionWorksAsApply (self):
