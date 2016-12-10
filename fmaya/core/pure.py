@@ -1,5 +1,6 @@
 ident = lambda x: x
 const = lambda x: lambda _: x
+app = lambda f: lambda x: f(x)
 flip = lambda f: lambda x: lambda y: f(y)(x)
 juxt = lambda *fs: lambda x: [f(x) for f in fs]
 comp = lambda *fs: reduce(lambda f, g: lambda x: f(g(x)), fs, ident)

@@ -28,6 +28,15 @@ class Test_const (unittest.TestCase):
         self.assertEquals(pure.const(None)(True), None)
 
 
+class Test_app (unittest.TestCase):
+
+    def test_app_respectsIdentity (self):
+        self.assertEquals(pure.app(lambda x: x)("foo"), "foo")
+
+    def test_app_appliesAFunction (self):
+        self.assertEquals(pure.app(len)("hooberbloob"), 11)
+
+
 class Test_flip (unittest.TestCase):
 
     def test_flip_flipsArgs (self):
