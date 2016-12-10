@@ -28,6 +28,13 @@ class Test_const (unittest.TestCase):
         self.assertEquals(pure.const(None)(True), None)
 
 
+class Test_flip (unittest.TestCase):
+
+    def test_flip_flipsArgs (self):
+        enlist = lambda x: lambda y: [x, y]
+        self.assertEquals(pure.flip(enlist)("x")("y"), ["y","x"])
+
+
 class Test_comp (unittest.TestCase):
 
     def test_comp_oneFunctionWorksAsApply (self):

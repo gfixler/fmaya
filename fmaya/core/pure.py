@@ -1,5 +1,6 @@
 ident = lambda x: x
 const = lambda x: lambda _: x
+flip = lambda f: lambda x: lambda y: f(y)(x)
 comp = lambda *fs: reduce(lambda f, g: lambda x: f(g(x)), fs, ident)
 cmap = lambda f: lambda xs: map(f, xs)
 
