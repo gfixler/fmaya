@@ -1,3 +1,5 @@
+import re
+
 ident = lambda x: x
 const = lambda x: lambda _: x
 app = lambda f: lambda x: f(x)
@@ -30,4 +32,6 @@ mid = lambda a: lambda b: (a + b) / 2.0
 filt = lambda f: lambda xs: filter(f, xs)
 
 lerp = lambda t: lambda a: lambda b: (b - a) * t + a
+
+grep = lambda pat: lambda xs: [x for x in xs if re.search(pat, x)]
 

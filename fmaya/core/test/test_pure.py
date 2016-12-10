@@ -293,3 +293,28 @@ class Test_lerp (unittest.TestCase):
     def test_lerp_0_5YieldsMidpoint (self):
         self.assertEquals(pure.lerp(0.5)(3)(7), 5.0)
 
+
+class Test_grep (unittest.TestCase):
+
+    def test_grep_emptyStringPatternReturnsEntireList (self):
+        stream = ["foo","bar","baz"]
+        self.assertEquals(pure.grep('')(stream), stream)
+
+    def test_grep_findsLiterals (self):
+        given = ["apple","banana","banana_apple","apple-pen","grapple","appple"]
+        expected = ["apple","banana_apple","apple-pen","grapple"]
+        self.assertEquals(pure.grep('apple')(given), expected)
+
+    def test_grep_findsAtBeginning (self):
+        self.assertEquals(pure.grep("^abc")(["abc","cabc","abcdef"]), ["abc","abcdef"])
+
+    def test_grep_findsAtEnd (self):
+        given = ["!","!?","yay!","ah!ha","woo!!!"]
+        expected = ["!","yay!","woo!!!"]
+        self.assertEquals(pure.grep("!$")(given), expected)
+
+    def test_grep_findsARealisticRegex (self):
+        given = ["a:b","a:b:c","a","b","a:b:d","a:e","::"]
+        expected = ["a:b:c","a:b:d","::"]
+        self.assertEquals(pure.grep("^[^:]*:[^:]*:[^:]*$")(given), expected)
+
