@@ -5,7 +5,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import cmap
+from .pure import cmap, grep
 
 
 # PURE
@@ -18,4 +18,6 @@ toValidMayaName = lambda name: ''.join(cmap(lambda x: x if x in validNameChars e
 
 scenePath = lambda: cmds.file(query=True, sceneName=True)
 sceneName = lambda: scenePath().split('/')[-1]
+
+grepScene = lambda pat: grep(pat)(cmds.ls(allPaths=True))
 

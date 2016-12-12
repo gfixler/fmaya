@@ -51,3 +51,32 @@ class Test_scenePath (unittest.TestCase):
         cmds.file(rename=testPath)
         self.assertEquals(scene.sceneName(), testName)
 
+
+@attr('maya')
+class Test_grepScene (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_grepScene_emptyPatternFindsAllObjects (self):
+        self.assertEquals(scene.grepScene(""), cmds.ls(allPaths=True))
+
+    def test_grepScene_findsCameras (self):
+        self.assertEquals(set(scene.grepScene("Shape$")), set(["perspShape","topShape","frontShape","sideShape"]))
+
+    def test_grepScene_findsDefaultGlobals (self):
+        expected = ["defaultRenderGlobals","defaultHardwareRenderGlobals","defaultColorMgtGlobals"]
+        self.assertEquals(set(scene.grepScene("^default.*Globals$")), set(expected))
+
+    def test_grepScene_findsNumericPatterns (self):
+        for i in xrange(20):
+            cmds.spaceLocator(name="loc{0:b}".format(i))
+        expected = ["loc101", "loc1111", "loc1101", "loc111"]
+        self.assertEquals(set(scene.grepScene("1[01]1$")), set(expected))
+
+    def test_grepScene_findsNamesWithNoCapitalLetters (self):
+        self.assertEquals(set(scene.grepScene("^[a-z]+$")), set(["front","persp","top","side"]))
+
+    def test_grepScene_findsASpecificPattern (self):
+        self.assertEquals(set(scene.grepScene("e......s")), set(["strokeGlobals", "defaultRenderingList1"]))
+
