@@ -83,6 +83,27 @@ class Test_cmap (unittest.TestCase):
         self.assertEquals(pure.cmap(lambda x: not x)([True,False,False,True]), [False,True,True,False])
 
 
+class Test_czip (unittest.TestCase):
+
+    def test_czip_emptyListsYieldEmptyList (self):
+        self.assertEquals(pure.czip([])([]), [])
+
+    def test_czip_emptyFirstListYieldsEmptyList (self):
+        self.assertEquals(pure.czip([])([1,2,4]), [])
+
+    def test_czip_emptySecondListYieldsEmptyList (self):
+        self.assertEquals(pure.czip([8,3,1])([]), [])
+
+    def test_czip_canZip2ListsOfSameLength (self):
+        self.assertEquals(pure.czip([1,2,3])([4,5,6]), [(1,4),(2,5),(3,6)])
+
+    def test_czip_shorterFirstListTruncatesSecondList (self):
+        self.assertEquals(pure.czip([1,2,3])([4,5,6,7,8]), [(1,4),(2,5),(3,6)])
+
+    def test_czip_shorterSecondListTruncatesFirstList (self):
+        self.assertEquals(pure.czip([1,2,3,4,5])([6,7,8]), [(1,6),(2,7),(3,8)])
+
+
 class Test_curry (unittest.TestCase):
 
     def test_curry_curriesAddition (self):

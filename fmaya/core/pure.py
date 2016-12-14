@@ -7,6 +7,7 @@ flip = lambda f: lambda x: lambda y: f(y)(x)
 juxt = lambda *fs: lambda x: [f(x) for f in fs]
 comp = lambda *fs: reduce(lambda f, g: lambda x: f(g(x)), fs, ident)
 cmap = lambda f: lambda xs: map(f, xs)
+czip = lambda xs: lambda ys: zip(xs, ys)
 
 curry = lambda f: lambda x: lambda y: f(x, y)
 uncurry = lambda f: lambda (x, y): f(x)(y)
