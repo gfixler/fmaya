@@ -303,6 +303,24 @@ class Test_filt (unittest.TestCase):
         self.assertEquals(pure.filt(lambda c: c in "aeiou")("eleanor"), "eeao")
 
 
+class Test_anyBy (unittest.TestCase):
+
+    def test_anyBy_constTrueYieldsTrue (self):
+        self.assertEquals(pure.anyBy(lambda _: True)([1,3,7,8,9]), True)
+
+    def test_anyBy_constFalseYieldsFalse (self):
+        self.assertEquals(pure.anyBy(lambda _: False)([1,3,7,8,9]), False)
+
+    def test_anyBy_returnsTrueOnMatchingALetter (self):
+        self.assertEquals(pure.anyBy(lambda x: x == 'e')("awesome"), True)
+
+    def test_anyBy_returnsFalseWhenNoNumberIsGreatEnough (self):
+        self.assertEquals(pure.anyBy(lambda x: x > 5)([1,2,4,2,1,3,2,4,1]), False)
+
+    def test_anyBy_returnsTrueWhenANumberIsGreatEnough (self):
+        self.assertEquals(pure.anyBy(lambda x: x > 5)([1,2,4,2,7,3,2,4,1]), True)
+
+
 class Test_lerp (unittest.TestCase):
 
     def test_lerp_0YieldsFirstPoint (self):

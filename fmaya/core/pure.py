@@ -31,6 +31,7 @@ postadd = lambda p: lambda s: s + p
 mid = lambda a: lambda b: (a + b) / 2.0
 
 filt = lambda f: lambda xs: filter(f, xs)
+anyBy = lambda f: lambda xs: any(cmap(f)(xs))
 
 lerp = lambda t: lambda a: lambda b: (b - a) * t + a
 
