@@ -109,3 +109,18 @@ class Test_inNS (unittest.TestCase):
         loc = cmds.spaceLocator()[0]
         self.assertFalse(scene.inNS("foo:bar")(loc))
 
+
+@attr('maya')
+class Test_lsNamespaces (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_lsNamespaces_findsDefaults (self):
+        self.assertEquals(set(scene.lsNamespaces()), set([":","UI","shared"]))
+
+    def test_lsNamespaces_findsUserCreated (self):
+        cmds.namespace(add="foo:bar")
+        cmds.namespace(add="baz")
+        self.assertEquals(set(scene.lsNamespaces()), set([":","UI","shared","foo","foo:bar","baz"]))
+

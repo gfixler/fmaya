@@ -25,4 +25,5 @@ grepScene = lambda pat: grep(pat)(cmds.ls(allPaths=True))
 obExists = lambda x: cmds.objExists(x)
 
 inNS = lambda ns: comp(obExists, withNS(ns))
+lsNamespaces = lambda: [":"] + cmds.namespaceInfo(':', listOnlyNamespaces=True, recurse=True)
 
