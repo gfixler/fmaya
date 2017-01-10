@@ -124,3 +124,21 @@ class Test_lsNamespaces (unittest.TestCase):
         cmds.namespace(add="baz")
         self.assertEquals(set(scene.lsNamespaces()), set([":","UI","shared","foo","foo:bar","baz"]))
 
+
+@attr('maya')
+class Test_lsNamespacesContaining (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_lsNamespacesContaining_findsPerspInDefaultSceneRoot (self):
+        self.assertEquals(set(scene.lsNamespacesContaining("persp")), set([":"]))
+
+    def test_lsNamespacesContaining_findsObjectNamespaceAmongMany (self):
+        cmds.namespace(add="foo:bar")
+        cmds.namespace(add="baz")
+        cmds.namespace(set="foo")
+        cmds.spaceLocator(name="Waldo")
+        cmds.namespace(set=":")
+        self.assertEquals(scene.lsNamespacesContaining("Waldo"), ["foo"])
+
