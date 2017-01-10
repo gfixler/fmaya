@@ -13,6 +13,8 @@ from .pure import cmap, grep
 validNameChars = digits + ascii_letters
 toValidMayaName = lambda name: ''.join(cmap(lambda x: x if x in validNameChars else '_')(name))
 
+withNS = lambda ns: lambda x: ns + ":" + x
+
 
 # IMPURE
 
