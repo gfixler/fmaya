@@ -6,14 +6,13 @@ except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
 from .pure import comp, cmap, grep
+from .name import withNS
 
 
 # PURE
 
 validNameChars = digits + ascii_letters
 toValidMayaName = lambda name: ''.join(cmap(lambda x: x if x in validNameChars else '_')(name))
-
-withNS = lambda ns: lambda x: ns + ":" + x
 
 
 # IMPURE

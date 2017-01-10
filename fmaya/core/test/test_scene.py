@@ -32,15 +32,6 @@ class Test_toValidMayaName (unittest.TestCase):
         self.assertEquals(scene.toValidMayaName("  This 'is' a test!"), "__This__is__a_test_")
 
 
-class Test_withNS (unittest.TestCase):
-
-    def test_withNS_prependsColonWhenNSIsEmptyString (self):
-        self.assertEquals(scene.withNS("")("foo"), ":foo")
-
-    def test_withNS_joinsAroundColon (self):
-        self.assertEquals(scene.withNS("bar")("foo"), "bar:foo")
-
-
 # IMPURE
 
 @attr('maya')
