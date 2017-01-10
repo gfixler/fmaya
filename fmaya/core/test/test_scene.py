@@ -41,7 +41,6 @@ class Test_withNS (unittest.TestCase):
         self.assertEquals(scene.withNS("bar")("foo"), "bar:foo")
 
 
-
 # IMPURE
 
 @attr('maya')
