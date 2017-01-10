@@ -1,18 +1,10 @@
-from string import digits, ascii_letters
-
 try:
     import maya.cmds as cmds
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import comp, cmap, flip, grep, filt
+from .pure import comp, flip, grep, filt
 from .name import withNS
-
-
-# PURE
-
-validNameChars = digits + ascii_letters
-toValidMayaName = lambda name: ''.join(cmap(lambda x: x if x in validNameChars else '_')(name))
 
 
 # IMPURE
