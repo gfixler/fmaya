@@ -80,3 +80,16 @@ class Test_grepScene (unittest.TestCase):
     def test_grepScene_findsASpecificPattern (self):
         self.assertEquals(set(scene.grepScene("e......s")), set(["strokeGlobals", "defaultRenderingList1"]))
 
+
+@attr('maya')
+class Test_obExists (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_obExists_falseOnNonExistence (self):
+        self.assertFalse(scene.obExists("thisDoesNotExist"))
+
+    def test_obExists_trueOnExistence (self):
+        self.assertTrue(scene.obExists("persp"))
+
