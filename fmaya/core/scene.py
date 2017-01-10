@@ -21,5 +21,5 @@ sceneName = lambda: scenePath().split('/')[-1]
 
 grepScene = lambda pat: grep(pat)(cmds.ls(allPaths=True))
 
-obExists = cmds.objExists
+obExists = lambda x: cmds.objExists(x)
 
