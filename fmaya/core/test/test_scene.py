@@ -41,6 +41,7 @@ class Test_withNS (unittest.TestCase):
         self.assertEquals(scene.withNS("bar")("foo"), "bar:foo")
 
 
+
 # IMPURE
 
 @attr('maya')
@@ -101,4 +102,20 @@ class Test_obExists (unittest.TestCase):
 
     def test_obExists_trueOnExistence (self):
         self.assertTrue(scene.obExists("persp"))
+
+
+@attr('maya')
+class Test_inNS (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+        cmds.namespace(add=":foo:bar")
+
+    def test_inNS_doesNotFindThingNotInNamespace (self):
+        self.assertFalse(scene.inNS("foo:bar")("persp"))
+
+    def test_inNS_findsThingInNamespace (self):
+        cmds.namespace(set=":foo:bar")
+        loc = cmds.spaceLocator()[0]
+        self.assertFalse(scene.inNS("foo:bar")(loc))
 
