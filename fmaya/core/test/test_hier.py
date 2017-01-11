@@ -66,3 +66,25 @@ class Test_parentPred (unittest.TestCase):
         a2 = cmds.parent(a, b)[0]
         self.assertTrue(hier.parentPred(lambda x: x == b)(a2))
 
+
+@attr('maya')
+class Test_parentNameIs (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_parentNameIs_returnsFalseWhenNoParent (self):
+        self.assertFalse(hier.parentNameIs("foo")("persp"))
+
+    def test_parentNameIs_returnsFalseWhenNameDoesNotMatch (self):
+        a = cmds.spaceLocator()[0]
+        b = cmds.spaceLocator()[0]
+        a2 = cmds.parent(a, b)[0]
+        self.assertFalse(hier.parentNameIs("wrongname")(a2))
+
+    def test_parentNameIs_returnsTrueWhenNameMatches (self):
+        a = cmds.spaceLocator()[0]
+        b = cmds.spaceLocator()[0]
+        a2 = cmds.parent(a, b)[0]
+        self.assertTrue(hier.parentNameIs(b)(a2))
+
