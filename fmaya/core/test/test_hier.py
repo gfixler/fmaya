@@ -26,6 +26,29 @@ class Test_getParent (unittest.TestCase):
 
 
 @attr('maya')
+class Test_withParent (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_withParent_returnsDefaultWhenNoParent (self):
+        self.assertEquals(hier.withParent("nope")(lambda x: x)("persp"), "nope")
+
+    def test_withParent_returnsParentViaIdentityFunction (self):
+        a = cmds.spaceLocator()[0]
+        b = cmds.spaceLocator()[0]
+        a2 = cmds.parent(a, b)
+        self.assertEquals(hier.withParent("default")(lambda x: x)(a2), b)
+
+    def test_withParent_canRunPredicatesOnTheParent (self):
+        a = cmds.spaceLocator()[0]
+        b = cmds.spaceLocator(name="dad")[0]
+        a2 = cmds.parent(a, b)
+        self.assertTrue(hier.withParent(False)(lambda x: x == "dad")(a2))
+        self.assertFalse(hier.withParent(False)(lambda x: x == "mom")(a2))
+
+
+@attr('maya')
 class Test_parentPred (unittest.TestCase):
 
     def setUp (self):
