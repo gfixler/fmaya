@@ -6,5 +6,5 @@ except ImportError:
 
 getParent = lambda x: (lambda y: y[0] if y else None)(cmds.listRelatives(x, parent=True))
 withParent = lambda d: lambda f: lambda x: (lambda y: f(y) if y else d)(getParent(x))
-parentPred = lambda p: lambda x: (lambda y: p(y) if y else False)(getParent(x))
+parentPred = withParent(False)
 
