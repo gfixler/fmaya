@@ -24,3 +24,22 @@ class Test_getParent (unittest.TestCase):
         a2 = cmds.parent(a, b)
         self.assertEquals(hier.getParent(a2), b)
 
+
+@attr('maya')
+class Test_parentPred (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_parentPred_canCheckForExistence (self):
+        a = cmds.spaceLocator()[0]
+        b = cmds.spaceLocator()[0]
+        a2 = cmds.parent(a, b)[0]
+        self.assertTrue(hier.parentPred(lambda x: x)(a2))
+
+    def test_parentPred_canCheckName (self):
+        a = cmds.spaceLocator()[0]
+        b = cmds.spaceLocator()[0]
+        a2 = cmds.parent(a, b)[0]
+        self.assertTrue(hier.parentPred(lambda x: x == b)(a2))
+
