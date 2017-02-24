@@ -4,6 +4,7 @@ from nose.plugins.attrib import attr
 from .. import node
 
 
+@attr('maya')
 class Test_hasAttr (unittest.TestCase):
 
     def test_hasAttr_returnsFalseWhenAttrDoesNotExist (self):
