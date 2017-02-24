@@ -37,3 +37,5 @@ lerp = lambda t: lambda a: lambda b: (b - a) * t + a
 
 grep = lambda pat: lambda xs: [x for x in xs if re.search(pat, x)]
 
+xyzAdd = lambda (x, y, z): lambda (u, v, w): (x + u, y + v, z + w)
+
