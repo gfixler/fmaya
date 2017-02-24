@@ -369,3 +369,15 @@ class Test_xyzAdd (unittest.TestCase):
     def test_xyzAdd_rightIdentity (self):
         self.assertEquals(pure.xyzAdd((3,2,7))((0,0,0)), (3,2,7))
 
+
+class Test_xyzSub (unittest.TestCase):
+
+    def test_xyzSub_subtracts (self):
+        self.assertEquals(pure.xyzSub((1,2,3))((2,1,1)), (-1,1,2))
+
+    def test_xyzSub_noLeftIdentity (self):
+        self.assertEquals(pure.xyzSub((0,0,0))((2,1,1)), (-2,-1,-1))
+
+    def test_xyzSub_rightIdentity (self):
+        self.assertEquals(pure.xyzSub((3,2,7))((0,0,0)), (3,2,7))
+
