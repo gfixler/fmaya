@@ -25,89 +25,58 @@ xyzHypot = xyzDist((0, 0, 0))
 xyzUnit = lambda (x, y, z): (lambda d: (x/d, y/d, z/d))(xyzHypot(xyz))
 
 
-class TForm (object):
+class V3 (object):
 
-    def __init__ (self, locT=(0,0,0), worldT=(0,0,0), locR=(0,0,0), worldR=(0,0,0)):
-        self.locT = locT
-        self.worldT = worldT
-        self.locR = locR
-        self.worldR = worldR
+    def __init__ (self, xyz=(0,0,0)):
+        self.xyz = xyz
 
-    def getLocal (self, tf):
-        self.locT = getPos(tf)
-        self.locR = getRot(tf)
-
-    def getWorld (self, tf):
-        self.worldT = getWSPos(tf)
-        self.worldR = getWSRot(tf)
-
-    def get (self, tf):
-        self.getLocal(tf)
-        self.getWorld(tf)
-
-    def setLocalT (self, tf):
-        setPos(tf)(self.locT)
-
-    def setWorldT (self, tf):
-        setWSPos(tf)(self.worldT)
-
-    def setT (self, tf):
-        self.setLocalT(tf)
-        self.setWorldT(tf)
-
-    def setLocalR (self, tf):
-        setRot(tf)(self.locR)
-
-    def setWorldR (self, tf):
-        setWSRot(tf)(self.worldR)
-
-    def setR (self, tf):
-        self.setLocalR(tf)
-        self.setWorldR(tf)
-
-    def set (self, tf):
-        self.setT(tf)
-        self.setR(tf)
+    def __repr__ (self):
+        return ("V3 " + str(tuple(self.xyz)))
 
     def __neg__ (self):
-        return TForm ( xyzMul(self.locT)((-1, -1, -1))
-                     , xyzMul(self.worldT)((-1, -1, -1))
-                     , xyzMul(self.locR)((-1, -1, -1))
-                     , xyzMul(self.worldR)((-1, -1, -1))
-                     )
+        return V3(xyzMul(self.xyz)((-1,-1,-1)))
 
     def __add__ (self, other):
-        return TForm ( xyzAdd(self.locT)(other.locT)
-                     , xyzAdd(self.worldT)(other.worldT)
-                     , xyzAdd(self.locR)(other.locR)
-                     , xyzAdd(self.worldR)(other.worldR)
-                     )
+        if type(other) == int or type(other) == float:
+            return V3(xyzAdd(self.xyz)((other,other,other)))
+        else:
+            return V3(xyzAdd(self.xyz)(other.xyz))
 
     def __radd__ (self, other):
-        if other == 0:
-            return self
-        else:
-            return self.__add__(other)
+        return self.__add__(other)
 
     def __sub__ (self, other):
-        return self + -(other)
+        if type(other) == int or type(other) == float:
+            return V3(xyzSub(self.xyz)((other,other,other)))
+        else:
+            return V3(xyzSub(self.xyz)(other.xyz))
+
+    def __rsub__ (self, other):
+        return self.__sub__(other)
 
     def __mul__ (self, other):
-        try:
-            return TForm ( xyzScale(other)(self.locT)
-                         , xyzScale(other)(self.worldT)
-                         , xyzScale(other)(self.locR)
-                         , xyzScale(other)(self.worldR)
-                         )
-        except TypeError:
-            return TForm ( xyzMul(self.locT)(other.locT)
-                         , xyzMul(self.worldT)(other.worldT)
-                         , xyzMul(self.locR)(other.locR)
-                         , xyzMul(self.worldR)(other.worldR)
-                         )
+        if type(other) == int or type(other) == float:
+            return V3(xyzMul(self.xyz)((other,other,other)))
+        else:
+            return V3(xyzMul(self.xyz)(other.xyz))
 
     def __rmul__ (self, other):
         return self.__mul__(other)
+
+    def __div__ (self, other):
+        if type(other) == int or type(other) == float:
+            return V3(xyzDiv(self.xyz)((other,other,other)))
+        else:
+            return V3(xyzDiv(self.xyz)(other.xyz))
+
+    def __rdiv__ (self, other):
+        return self.__div__(other)
+
+    def mag (self):
+        return xyzHypot(self.xyz)
+
+    def unit (self):
+        return self / self.mag()
 
 
 fromTF = lambda tf: (lambda inst: const(inst)(inst.get(tf)))(TForm())
