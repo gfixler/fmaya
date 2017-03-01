@@ -112,18 +112,3 @@ class TForm (object):
 
 fromTF = lambda tf: (lambda inst: const(inst)(inst.get(tf)))(TForm())
 
-
-t = fromTF("Hips_Ctr")
-u = fromTF("L_Foot_Ctr")
-
-print sum([t,u])
-t / (3,4,5)
-.set("locator1")
-
-print xyzAvg([t, t, t]).worldT
-print sum([t, t, t])
-
-
-print t.worldT
-print (t * 3).worldT
-print xyzAvg([(1,2,3),(3,2,2)])
