@@ -2,16 +2,16 @@ const = lambda x: lambda _: x
 
 uncurry2 = lambda f: lambda x, y: f(x)(y)
 
-getPos = lambda tf: cmds.xform(tf, query=True, translation=True)
+getPos = lambda tf: tuple(cmds.xform(tf, query=True, translation=True))
 setPos = lambda tf: lambda xyz: cmds.xform(tf, translation=xyz)
 
-getRot = lambda tf: cmds.xform(tf, query=True, rotation=True)
+getRot = lambda tf: tuple(cmds.xform(tf, query=True, rotation=True))
 setRot = lambda tf: lambda xyz: cmds.xform(tf, rotation=xyz)
 
-getWSPos = lambda tf: cmds.xform(tf, query=True, worldSpace=True, translation=True)
+getWSPos = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, translation=True))
 setWSPos = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, translation=xyz)
 
-getWSRot = lambda tf: cmds.xform(tf, query=True, worldSpace=True, rotation=True)
+getWSRot = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, rotation=True))
 setWSRot = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, rotation=xyz)
 
 xyzAdd = lambda (x, y, z): lambda (u, v, w): (x + u, y + v, z + w)
@@ -28,10 +28,10 @@ xyzUnit = lambda (x, y, z): (lambda d: (x/d, y/d, z/d))(xyzHypot(xyz))
 class V3 (object):
 
     def __init__ (self, xyz=(0,0,0)):
-        self.xyz = xyz
+        self.xyz = tuple(xyz)
 
     def __repr__ (self):
-        return ("V3 " + str(tuple(self.xyz)))
+        return ("V3 " + str(self.xyz))
 
     def __neg__ (self):
         return V3(xyzMul(self.xyz)((-1,-1,-1)))
