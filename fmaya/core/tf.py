@@ -105,3 +105,6 @@ class V3 (object):
         return self / self.mag()
 
 
+v3T = lambda tf: V3(getWSPos(tf))
+v3R = lambda tf: V3(getWSRot(tf))
+
