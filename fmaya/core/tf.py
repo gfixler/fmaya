@@ -7,4 +7,5 @@ except ImportError:
 # PURE
 
 xyzAdd = lambda (x,y,z): lambda (u,v,w): (x+u, y+v, z+w)
+xyzSub = lambda (x,y,z): lambda (u,v,w): (x-u, y-v, z-w)
 
