@@ -1,3 +1,5 @@
+from math import sqrt
+
 const = lambda x: lambda _: x
 
 uncurry2 = lambda f: lambda x, y: f(x)(y)
