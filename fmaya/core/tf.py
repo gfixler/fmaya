@@ -108,3 +108,6 @@ class V3 (object):
 v3T = lambda tf: V3(getWSPos(tf))
 v3R = lambda tf: V3(getWSRot(tf))
 
+v3Avg = lambda vs: sum(vs) / len(vs)
+v3Mid = lambda a, b: v3Avg([a,b])
+
