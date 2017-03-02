@@ -105,5 +105,3 @@ class V3 (object):
         return self / self.mag()
 
 
-fromTF = lambda tf: (lambda inst: const(inst)(inst.get(tf)))(TForm())
-
