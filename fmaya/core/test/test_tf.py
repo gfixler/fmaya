@@ -71,3 +71,31 @@ class Test_xyzMul (unittest.TestCase):
     def test_xyzMul_negativesAndPositives (self):
         self.assertEquals(tf.xyzMul((-2,3,1))((2,-1,3)), (-4,-3,3))
 
+
+class Test_xyzDiv (unittest.TestCase):
+
+    def test_xyzDiv_dividingByZeroesRaises (self):
+        self.assertRaises(ZeroDivisionError, lambda: tf.xyzDiv((1,1,1))((0,0,0)))
+
+    def test_xyzDiv_identities (self):
+        self.assertEquals(tf.xyzDiv((1,1,1))((1,1,1)), (1.0,1.0,1.0))
+
+    def test_xyzDiv_noLeftIdentity (self):
+        self.assertEquals(tf.xyzDiv((1,1,1))((2,1,5)), (0.5,1.0,0.2))
+
+    def test_xyzDiv_rightIdentity (self):
+        self.assertEquals(tf.xyzDiv((3,2,5))((1,1,1)), (3.0,2.0,5.0))
+
+    def test_xyzDiv_allResultsPreservedAsOrPromotedToFloats (self):
+        x, y, z = tf.xyzDiv((9,7,13))((3,3,4))
+        self.assertTrue(type(x) == float and type(y) == float and type(z) == float)
+
+    def test_xyzDiv_positives (self):
+        self.assertEquals(tf.xyzDiv((3,2,5))((2,1,1)), (1.5,2.0,5.0))
+
+    def test_xyzDiv_negatives (self):
+        self.assertEquals(tf.xyzDiv((-2,-3,-3))((-2,-1,-3)), (1.0,3.0,1.0))
+
+    def test_xyzDiv_negativesAndPositives (self):
+        self.assertEquals(tf.xyzDiv((-2,3,3))((2,-1,3)), (-1.0,-3.0,1.0))
+
