@@ -47,3 +47,27 @@ class Test_xyzSub (unittest.TestCase):
     def test_xyzSub_negativesAndPositives (self):
         self.assertEquals(tf.xyzSub((-2,3,1))((2,-1,3)), (-4,4,-2))
 
+
+class Test_xyzMul (unittest.TestCase):
+
+    def test_xyzMul_zeroes (self):
+        self.assertEquals(tf.xyzMul((0,0,0))((0,0,0)), (0,0,0))
+
+    def test_xyzMul_identities (self):
+        self.assertEquals(tf.xyzMul((1,1,1))((1,1,1)), (1,1,1))
+
+    def test_xyzMul_leftIdentity (self):
+        self.assertEquals(tf.xyzMul((1,1,1))((2,1,5)), (2,1,5))
+
+    def test_xyzMul_rightIdentity (self):
+        self.assertEquals(tf.xyzMul((3,2,5))((1,1,1)), (3,2,5))
+
+    def test_xyzMul_positives (self):
+        self.assertEquals(tf.xyzMul((3,2,5))((2,1,1)), (6,2,5))
+
+    def test_xyzMul_negatives (self):
+        self.assertEquals(tf.xyzMul((-2,-3,-1))((-2,-1,-3)), (4,3,3))
+
+    def test_xyzMul_negativesAndPositives (self):
+        self.assertEquals(tf.xyzMul((-2,3,1))((2,-1,3)), (-4,-3,3))
+
