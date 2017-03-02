@@ -99,3 +99,18 @@ class Test_xyzDiv (unittest.TestCase):
     def test_xyzDiv_negativesAndPositives (self):
         self.assertEquals(tf.xyzDiv((-2,3,3))((2,-1,3)), (-1.0,-3.0,1.0))
 
+
+class Test_xyzScale (unittest.TestCase):
+
+    def test_xyzScale_zeroZeroOut (self):
+        self.assertEquals(tf.xyzScale(0)((-2,3,3)), (0,0,0))
+
+    def test_xyzScale_hasIdentity (self):
+        self.assertEquals(tf.xyzScale(1)((-2,3,1)), (-2,3,1))
+
+    def test_xyzScale_scales (self):
+        self.assertEquals(tf.xyzScale(3)((-2,3,1)), (-6,9,3))
+
+    def test_xyzScale_inverseScales (self):
+        self.assertEquals(tf.xyzScale(-1)((-2,3,1)), (2,-3,-1))
+
