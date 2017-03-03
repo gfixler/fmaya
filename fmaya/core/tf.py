@@ -27,3 +27,5 @@ xyzUnit = lambda xyz: xyzScale(1.0/xyzHypot(xyz))(xyz)
 getPos = lambda tf: tuple(cmds.xform(tf, query=True, translation=True))
 setPos = lambda tf: lambda xyz: cmds.xform(tf, translation=xyz)
 
+getWSPos = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, translation=True))
+

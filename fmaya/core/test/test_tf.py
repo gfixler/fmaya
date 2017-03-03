@@ -278,3 +278,32 @@ class Test_setPos (unittest.TestCase):
         result = tf.setPos(loc)((4,2,1))
         self.assertEquals(result, None)
 
+
+@attr('maya')
+class Test_getWSPos (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_getWSPos_newTransformAtOrigin (self):
+        loc = cmds.spaceLocator()[0]
+        self.assertEquals(tf.getWSPos(loc), (0,0,0))
+
+    def test_getWSPos_getsSetPos (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.move(1, 2, 3, loc)
+        self.assertEquals(tf.getWSPos(loc), (1,2,3))
+
+    def test_getWSPos_getsWorldPosFromInsideMovedContainer (self):
+        loc = cmds.spaceLocator()[0]
+        grp = cmds.group()
+        cmds.move(1, 2, 3, grp)
+        self.assertEquals(tf.getWSPos(loc), (1,2,3))
+
+    def test_getWSPos_getsWorldPosFromSetPosInsideMovedContainer (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.move(2, -3, 1, loc)
+        grp = cmds.group()
+        cmds.move(1, 2, 3, grp)
+        self.assertEquals(tf.getWSPos(loc), (3,-1,4))
+
