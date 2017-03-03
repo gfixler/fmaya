@@ -144,3 +144,30 @@ class Test_xyzAvg (unittest.TestCase):
     def test_xyzAvg_averagesSomeIntegers (self):
         self.assertEquals(tf.xyzAvg([(1,2,3),(2,3,1),(3,4,-3),(2,3,-1)]), (2,3,0))
 
+
+class Test_xyzDist (unittest.TestCase):
+
+    def test_xyzDist_zeroWhenBothPointsAtOrigin (self):
+        self.assertEquals(tf.xyzDist((0,0,0))((0,0,0)), 0.0)
+
+    def test_xyzDist_zeroWhenBothPointsMatchAllPositive (self):
+        self.assertEquals(tf.xyzDist((1,3,2))((1,3,2)), 0.0)
+
+    def test_xyzDist_zeroWhenBothPointsMatchAllPositive (self):
+        self.assertEquals(tf.xyzDist((-2,-4,-1))((-2,-4,-1)), 0.0)
+
+    def test_xyzDist_getsLengthDownXAxisOnly (self):
+        self.assertEquals(tf.xyzDist((1,2,3))((6,2,3)), 5.0)
+
+    def test_xyzDist_getsLengthDownYAxisOnly (self):
+        self.assertEquals(tf.xyzDist((1,2,3))((1,12,3)), 10.0)
+
+    def test_xyzDist_getsLengthDownZAxisOnly (self):
+        self.assertEquals(tf.xyzDist((1,2,3))((1,2,18)), 15.0)
+
+    def test_xyzDist_345TriangleInXYPlane (self):
+        self.assertEquals(tf.xyzDist((0,0,0))((3,4,0)), 5.0)
+
+    def test_xyzDist_345TriangleInYZPlane (self):
+        self.assertEquals(tf.xyzDist((0,0,0))((0,4,3)), 5.0)
+
