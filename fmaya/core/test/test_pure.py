@@ -119,11 +119,11 @@ class Test_uncurry (unittest.TestCase):
 
     def test_uncurry_uncurriesAddition (self):
         add = lambda x: lambda y: x + y
-        self.assertEquals(pure.uncurry(add)((7, 9)), 16)
+        self.assertEquals(pure.uncurry(add)(7, 9), 16)
 
     def test_uncurry_uncurriesComparison (self):
         lessThan = lambda x: lambda y: x < y
-        self.assertEquals(pure.uncurry(lessThan)((7, 9)), True)
+        self.assertEquals(pure.uncurry(lessThan)(7, 9), True)
 
 
 class Test_uncurryPair (unittest.TestCase):
