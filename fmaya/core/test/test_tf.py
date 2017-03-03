@@ -260,3 +260,21 @@ class Test_getPos (unittest.TestCase):
         cmds.move(1, 2, 3, grp)
         self.assertEquals(tf.getPos(loc), (2,-3,1))
 
+
+@attr('maya')
+class Test_setPos (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_setPos_canSetPos (self):
+        loc = cmds.spaceLocator()[0]
+        tf.setPos(loc)((4,2,1))
+        pos = tuple(cmds.xform(loc, query=True, translation=True))
+        self.assertEquals(pos, (4,2,1))
+
+    def test_setPos_returnsNone (self):
+        loc = cmds.spaceLocator()[0]
+        result = tf.setPos(loc)((4,2,1))
+        self.assertEquals(result, None)
+
