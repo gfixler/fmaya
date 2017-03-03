@@ -1,6 +1,8 @@
 import unittest
 from nose.plugins.attrib import attr
 
+from math import sqrt
+
 from .. import tf
 
 
@@ -188,4 +190,37 @@ class Test_xyzHypot (unittest.TestCase):
 
     def test_xyzHypot_unitCubeDiagonalEqualsSquareRootOf3 (self):
         self.assertEquals(tf.xyzHypot((1,1,1)), sqrt(3))
+
+
+class Test_xyzUnit (unittest.TestCase):
+
+    def test_xyzUnit_preservesXIdentity (self):
+        self.assertEquals(tf.xyzUnit((1,0,0)), (1,0,0))
+
+    def test_xyzUnit_preservesYIdentity (self):
+        self.assertEquals(tf.xyzUnit((0,1,0)), (0,1,0))
+
+    def test_xyzUnit_preservesZIdentity (self):
+        self.assertEquals(tf.xyzUnit((0,0,1)), (0,0,1))
+
+    def test_xyzUnit_shrinksAlongX (self):
+        self.assertEquals(tf.xyzUnit((5,0,0)), (1,0,0))
+
+    def test_xyzUnit_expandsAlongX (self):
+        self.assertEquals(tf.xyzUnit((0.1,0,0)), (1,0,0))
+
+    def test_xyzUnit_shrinksAlongY (self):
+        self.assertEquals(tf.xyzUnit((0,5,0)), (0,1,0))
+
+    def test_xyzUnit_expandsAlongY (self):
+        self.assertEquals(tf.xyzUnit((0,0.1,0)), (0,1,0))
+
+    def test_xyzUnit_shrinksAlongZ (self):
+        self.assertEquals(tf.xyzUnit((0,0,5)), (0,0,1))
+
+    def test_xyzUnit_expandsAlongZ (self):
+        self.assertEquals(tf.xyzUnit((0,0,0.1)), (0,0,1))
+
+    def test_xyzUnit_hypotOfResultIs1 (self):
+        self.assertEquals(tf.xyzHypot(tf.xyzUnit((23.3,-12.8,4.2))), 1.0)
 
