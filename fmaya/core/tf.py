@@ -31,4 +31,5 @@ getWSPos = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, translat
 setWSPos = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, translation=xyz)
 
 getRot = lambda tf: tuple(cmds.xform(tf, query=True, rotation=True))
+setRot = lambda tf: lambda xyz: cmds.xform(tf, rotation=xyz)
 

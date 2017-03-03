@@ -353,3 +353,29 @@ class Test_getRot (unittest.TestCase):
         cmds.xform(grp, rotation=(37,-23,14))
         self.assertEquals(tf.getRot(loc), (0,0,0))
 
+
+@attr('maya')
+class Test_setRot (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_setRot_canSetRot (self):
+        loc = cmds.spaceLocator()[0]
+        tf.setRot(loc)((23,34,45))
+        rot = cmds.xform(loc, query=True, rotation=True)
+
+    def test_setRot_setsLocalRotationInRotatedContainer (self):
+        loc = cmds.spaceLocator()[0]
+        grp = cmds.group()
+        cmds.xform(grp, rotation=(34,56,23))
+        tf.setRot(loc)((10,23,34))
+        rot = cmds.xform(loc, query=True, rotation=True)
+        self.assertEquals(tf.getRot(loc), (10,23,34))
+
+    def test_setRot_returnsNone (self):
+        loc = cmds.spaceLocator()[0]
+        result = tf.setRot(loc)((55,98,-23))
+        self.assertEquals(result, None)
+
+
