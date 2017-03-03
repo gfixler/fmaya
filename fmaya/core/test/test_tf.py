@@ -171,3 +171,21 @@ class Test_xyzDist (unittest.TestCase):
     def test_xyzDist_345TriangleInYZPlane (self):
         self.assertEquals(tf.xyzDist((0,0,0))((0,4,3)), 5.0)
 
+
+class Test_xyzHypot (unittest.TestCase):
+
+    def test_xyzHypot_zeroAtOrigin (self):
+        self.assertEquals(tf.xyzHypot((0,0,0)), 0.0)
+
+    def test_xyzHypot_345TriangleInXYPlane (self):
+        self.assertEquals(tf.xyzHypot((3,4,0)), 5.0)
+
+    def test_xyzHypot_345TriangleInXZPlane (self):
+        self.assertEquals(tf.xyzHypot((3,0,4)), 5.0)
+
+    def test_xyzHypot_345TriangleInYZPlane (self):
+        self.assertEquals(tf.xyzHypot((0,3,4)), 5.0)
+
+    def test_xyzHypot_unitCubeDiagonalEqualsSquareRootOf3 (self):
+        self.assertEquals(tf.xyzHypot((1,1,1)), sqrt(3))
+
