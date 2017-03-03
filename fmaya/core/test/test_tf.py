@@ -3,6 +3,11 @@ from nose.plugins.attrib import attr
 
 from math import sqrt
 
+try:
+    import maya.cmds as cmds
+except ImportError:
+    print 'WARNING (%s): failed to load maya.cmds module.' % __file__
+
 from .. import tf
 
 
@@ -223,4 +228,35 @@ class Test_xyzUnit (unittest.TestCase):
 
     def test_xyzUnit_hypotOfResultIs1 (self):
         self.assertEquals(tf.xyzHypot(tf.xyzUnit((23.3,-12.8,4.2))), 1.0)
+
+
+# IMPURE
+
+@attr('maya')
+class Test_getPos (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_getPos_newTransformAtOrigin (self):
+        loc = cmds.spaceLocator()[0]
+        self.assertEquals(tf.getPos(loc), (0,0,0))
+
+    def test_getPos_getsSetPos (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.move(1, 2, 3, loc)
+        self.assertEquals(tf.getPos(loc), (1,2,3))
+
+    def test_getPos_getsLocalPos (self):
+        loc = cmds.spaceLocator()[0]
+        grp = cmds.group()
+        cmds.move(1, 2, 3, grp)
+        self.assertEquals(tf.getPos(loc), (0,0,0))
+
+    def test_getPos_getsLocalSetPos (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.move(2, -3, 1, loc)
+        grp = cmds.group()
+        cmds.move(1, 2, 3, grp)
+        self.assertEquals(tf.getPos(loc), (2,-3,1))
 

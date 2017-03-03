@@ -21,3 +21,8 @@ xyzDist = lambda (x,y,z): lambda (u,v,w): sqrt((x-u) * (x-u) + (y-v) * (y-v) + (
 xyzHypot = xyzDist((0,0,0))
 xyzUnit = lambda xyz: xyzScale(1.0/xyzHypot(xyz))(xyz)
 
+
+# IMPURE
+
+getPos = lambda tf: tuple(cmds.xform(tf, query=True, translation=True))
+
