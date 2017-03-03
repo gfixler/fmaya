@@ -126,6 +126,17 @@ class Test_uncurry (unittest.TestCase):
         self.assertEquals(pure.uncurry(lessThan)((7, 9)), True)
 
 
+class Test_uncurryPair (unittest.TestCase):
+
+    def test_uncurryPair_uncurriesAddition (self):
+        add = lambda x: lambda y: x + y
+        self.assertEquals(pure.uncurryPair(add)((7, 9)), 16)
+
+    def test_uncurryPair_uncurriesComparison (self):
+        lessThan = lambda x: lambda y: x < y
+        self.assertEquals(pure.uncurryPair(lessThan)((7, 9)), True)
+
+
 class Test_fst (unittest.TestCase):
 
     def test_fst_getsFirstElementInTuple (self):
