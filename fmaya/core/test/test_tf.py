@@ -114,3 +114,18 @@ class Test_xyzScale (unittest.TestCase):
     def test_xyzScale_inverseScales (self):
         self.assertEquals(tf.xyzScale(-1)((-2,3,1)), (2,-3,-1))
 
+
+class Test_xyzAvg (unittest.TestCase):
+
+    def test_xyzAvg_preservesIdentity (self):
+        self.assertEquals(tf.xyzAvg([]), [])
+
+    def test_xyzAvg_keepsSingletonElement (self):
+        self.assertEquals(tf.xyzAvg([(2,1,-3)]), (2,1,-3))
+
+    def test_xyzAvg_sameTriplesAverageToThemselves (self):
+        self.assertEquals(tf.xyzAvg([(1,2,3)] * 35), (1,2,3))
+
+    def test_xyzAvg_averagesSomeIntegers (self):
+        self.assertEquals(tf.xyzAvg([(1,2,3),(2,3,1),(3,4,-3),(2,3,-1)]), (2,3,0))
+
