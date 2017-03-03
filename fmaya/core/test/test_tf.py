@@ -130,13 +130,16 @@ class Test_xyzSum (unittest.TestCase):
 class Test_xyzAvg (unittest.TestCase):
 
     def test_xyzAvg_preservesIdentity (self):
-        self.assertEquals(tf.xyzAvg([]), [])
+        self.assertEquals(tf.xyzAvg([]), (0,0,0))
 
     def test_xyzAvg_keepsSingletonElement (self):
         self.assertEquals(tf.xyzAvg([(2,1,-3)]), (2,1,-3))
 
     def test_xyzAvg_sameTriplesAverageToThemselves (self):
-        self.assertEquals(tf.xyzAvg([(1,2,3)] * 35), (1,2,3))
+        (x,y,z) = tf.xyzAvg([(1,2,3)] * 35)
+        self.assertAlmostEquals(x, 1)
+        self.assertAlmostEquals(y, 2)
+        self.assertAlmostEquals(z, 3)
 
     def test_xyzAvg_averagesSomeIntegers (self):
         self.assertEquals(tf.xyzAvg([(1,2,3),(2,3,1),(3,4,-3),(2,3,-1)]), (2,3,0))
