@@ -115,6 +115,18 @@ class Test_xyzScale (unittest.TestCase):
         self.assertEquals(tf.xyzScale(-1)((-2,3,1)), (2,-3,-1))
 
 
+class Test_xyzSum (unittest.TestCase):
+
+    def test_xyzSum_preservesIdentity (self):
+        self.assertEquals(tf.xyzSum([]), (0,0,0))
+
+    def test_xyzSum_keepsSingletonElement (self):
+        self.assertEquals(tf.xyzSum([(2,-1,3)]), (2,-1,3))
+
+    def test_xyzSum_sumsElements (self):
+        self.assertEquals(tf.xyzSum([(2,-1,3),(1,1,2),(-3,2,-2),(-3,-1,2)]), (-3,1,5))
+
+
 class Test_xyzAvg (unittest.TestCase):
 
     def test_xyzAvg_preservesIdentity (self):
