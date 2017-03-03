@@ -335,3 +335,21 @@ class Test_setWSPos (unittest.TestCase):
         result = tf.setWSPos(loc)((4,2,1))
         self.assertEquals(result, None)
 
+
+@attr('maya')
+class Test_getRot (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_getRot_canGetRot (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.xform(loc, rotation=(20,50,85))
+        self.assertEquals(tf.getRot(loc), (20,50,85))
+
+    def test_getRot_doesNotInerheritRotationOfContainer (self):
+        loc = cmds.spaceLocator()[0]
+        grp = cmds.group()
+        cmds.xform(grp, rotation=(37,-23,14))
+        self.assertEquals(tf.getRot(loc), (0,0,0))
+
