@@ -379,3 +379,40 @@ class Test_setRot (unittest.TestCase):
         self.assertEquals(result, None)
 
 
+@attr('maya')
+class Test_getWSRot (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_getWSRot_newTransformAtOrigin (self):
+        loc = cmds.spaceLocator()[0]
+        self.assertEquals(tf.getWSRot(loc), (0,0,0))
+
+    def test_getWSRot_getsSetRot (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.rotate(10, 43, 49, loc)
+        x, y, z = tf.getWSRot(loc)
+        self.assertAlmostEquals(x, 10)
+        self.assertAlmostEquals(y, 43)
+        self.assertAlmostEquals(z, 49)
+
+    def test_getWSRot_getsUnrotatedWorldRotFromInsideRotatedContainer (self):
+        loc = cmds.spaceLocator()[0]
+        grp = cmds.group()
+        cmds.rotate(10, 11, 23, grp)
+        x, y, z = tf.getWSRot(loc)
+        self.assertAlmostEquals(x, 10)
+        self.assertAlmostEquals(y, 11)
+        self.assertAlmostEquals(z, 23)
+
+    def test_getWSRot_getsWorldRotFromSetRotInsideMovedContainer (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.rotate(90, -90, 270, loc)
+        grp = cmds.group()
+        cmds.rotate(0, -90, 180, grp)
+        x, y, z = tf.getWSRot(loc)
+        self.assertAlmostEquals(x, 360)
+        self.assertAlmostEquals(y, -180)
+        self.assertAlmostEquals(z, 180)
+
