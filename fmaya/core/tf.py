@@ -69,6 +69,9 @@ class V3 (object):
     def __mul__ (self, other):
         return V3(xyzMul(self.xyz)(other.xyz))
 
+    def __div__ (self, other):
+        return V3(xyzDiv(self.xyz)(other.xyz))
+
 
 # IMPURE
 

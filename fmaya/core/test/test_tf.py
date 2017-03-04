@@ -315,6 +315,18 @@ class Test_V3 (unittest.TestCase):
         result = reduce(lambda x, y: x * y, v3s)
         self.assertEquals(result, tf.V3((8,-12,9)))
 
+    def test_V3_canDivideV3s (self):
+        x, y, z = (tf.V3((9,4,3)) / tf.V3((3,2,3))).xyz
+        self.assertAlmostEquals(x, 3)
+        self.assertAlmostEquals(y, 2)
+        self.assertAlmostEquals(z, 1)
+
+    def test_V3_divisionHasRightIdentity (self):
+        self.assertEquals(tf.V3((9,4,3)) / tf.V3((1,1,1)), tf.V3((9,4,3)))
+
+    def test_V3_cannotDivideByZero (self):
+        self.assertRaises(ZeroDivisionError, lambda: tf.V3((1,3,5)) / tf.V3((0,0,0)))
+
 
 # IMPURE
 
