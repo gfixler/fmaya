@@ -301,6 +301,24 @@ class Test_V3 (unittest.TestCase):
     def test_V3_subtractionHasRightIdentity (self):
         self.assertEquals(tf.V3((3,1,2)) - tf.V3((0,0,0)), tf.V3((3,1,2)))
 
+    def test_V3_canMultiplyV3s (self):
+        self.assertEquals(tf.V3((1,2,3)) * tf.V3((2,3,1)), tf.V3((2,6,3)))
+
+    def test_V3_multiplicationHasLeftIdentity (self):
+        v3a = tf.V3((1,1,1))
+        v3b = tf.V3((-2,3,1))
+        self.assertEquals(v3a * v3b, tf.V3((-2,3,1)))
+
+    def test_V3_multiplicationHasRightIdentity (self):
+        v3a = tf.V3((-2,3,1))
+        v3b = tf.V3((1,1,1))
+        self.assertEquals(v3a * v3b, tf.V3((-2,3,1)))
+
+    def test_V3_canReduceV3sWithMultiplication (self):
+        v3s = [tf.V3((1,2,3)), tf.V3((2,1,1)), tf.V3((-2,-3,1)), tf.V3((-2,2,3))]
+        result = reduce(lambda x, y: x * y, v3s)
+        self.assertEquals(result, tf.V3((8,-12,9)))
+
 
 # IMPURE
 
