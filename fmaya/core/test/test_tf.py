@@ -301,6 +301,12 @@ class Test_V3 (unittest.TestCase):
         result = reduce(lambda x, y: x + y, v3s)
         self.assertEquals(result, tf.V3((-1,2,8)))
 
+    def test_V3_canSubtractV3s (self):
+        self.assertEquals(tf.V3((2,4,1)) - tf.V3((-1,3,2)), tf.V3((3,1,-1)))
+
+    def test_V3_subtractionHasRightIdentity (self):
+        self.assertEquals(tf.V3((3,1,2)) - tf.V3((0,0,0)), tf.V3((3,1,2)))
+
 
 # IMPURE
 

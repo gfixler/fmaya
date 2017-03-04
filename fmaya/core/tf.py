@@ -63,6 +63,9 @@ class V3 (object):
     def __add__ (self, other):
         return V3(xyzAdd(self.xyz)(other.xyz))
 
+    def __sub__ (self, other):
+        return V3(xyzSub(self.xyz)(other.xyz))
+
 
 # IMPURE
 
