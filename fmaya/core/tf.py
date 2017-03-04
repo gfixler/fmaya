@@ -60,6 +60,9 @@ class V3 (object):
     def __ne__ (self, other):
         return (self.xyz != other.xyz)
 
+    def __add__ (self, other):
+        return V3(xyzAdd(self.xyz)(other.xyz))
+
 
 # IMPURE
 

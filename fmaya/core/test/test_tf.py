@@ -281,6 +281,26 @@ class Test_V3 (unittest.TestCase):
     def test_V3_inequality (self):
         self.assertNotEqual(tf.V3((2,2,3)), tf.V3((1,2,3)))
 
+    def test_V3_canAddV3s (self):
+        v3a = tf.V3((1,2,3))
+        v3b = tf.V3((-2,3,1))
+        self.assertEquals(v3a + v3b, tf.V3((-1,5,4)))
+
+    def test_V3_additionHasLeftIdentity (self):
+        v3a = tf.V3((0,0,0))
+        v3b = tf.V3((-2,3,1))
+        self.assertEquals(v3a + v3b, tf.V3((-2,3,1)))
+
+    def test_V3_additionHasRightIdentity (self):
+        v3a = tf.V3((-2,3,1))
+        v3b = tf.V3((0,0,0))
+        self.assertEquals(v3a + v3b, tf.V3((-2,3,1)))
+
+    def test_V3_canReduceV3sWithAddition (self):
+        v3s = [tf.V3((1,2,3)), tf.V3((2,1,1)), tf.V3((-2,-3,1)), tf.V3((-2,2,3))]
+        result = reduce(lambda x, y: x + y, v3s)
+        self.assertEquals(result, tf.V3((-1,2,8)))
+
 
 # IMPURE
 
