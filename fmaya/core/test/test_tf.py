@@ -315,6 +315,15 @@ class Test_V3 (unittest.TestCase):
         result = reduce(lambda x, y: x * y, v3s)
         self.assertEquals(result, tf.V3((8,-12,9)))
 
+    def test_V3_canScaleByMultiplyingWithAnIntOnTheLeft (self):
+        self.assertEquals(tf.V3((1,3,2)) * 3, tf.V3((3,9,6)))
+
+    def test_V3_canScaleByMultiplyingWithAnIntOnTheRight (self):
+        self.assertEquals(3 * tf.V3((1,3,2)), tf.V3((3,9,6)))
+
+    def test_V3_canScaleByMultiplyingWithAFloat (self):
+        self.assertEquals(tf.V3((1,3,2)) * 2.5, tf.V3((2.5,7.5,5.0)))
+
     def test_V3_canDivideV3s (self):
         x, y, z = (tf.V3((9,4,3)) / tf.V3((3,2,3))).xyz
         self.assertAlmostEquals(x, 3)

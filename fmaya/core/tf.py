@@ -67,7 +67,13 @@ class V3 (object):
         return V3(xyzSub(self.xyz)(other.xyz))
 
     def __mul__ (self, other):
-        return V3(xyzMul(self.xyz)(other.xyz))
+        if type(other) == int or type(other) == float:
+            return V3(xyzMul(self.xyz)((other,other,other)))
+        else:
+            return V3(xyzMul(self.xyz)(other.xyz))
+
+    def __rmul__ (self, other):
+        return self.__mul__(other)
 
     def __div__ (self, other):
         return V3(xyzDiv(self.xyz)(other.xyz))
