@@ -275,6 +275,12 @@ class Test_V3 (unittest.TestCase):
         v3 = tf.V3((2,4,8))
         self.assertEquals(repr(v3), "V3 (2, 4, 8)")
 
+    def test_V3_equality (self):
+        self.assertEquals(tf.V3((1,2,3)), tf.V3((1,2,3)))
+
+    def test_V3_inequality (self):
+        self.assertNotEqual(tf.V3((2,2,3)), tf.V3((1,2,3)))
+
 
 # IMPURE
 

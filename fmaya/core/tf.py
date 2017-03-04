@@ -54,6 +54,12 @@ class V3 (object):
     def __repr__ (self):
         return ("V3 " + str(self.xyz))
 
+    def __eq__ (self, other):
+        return self.xyz == other.xyz
+
+    def __ne__ (self, other):
+        return (self.xyz != other.xyz)
+
 
 # IMPURE
 
