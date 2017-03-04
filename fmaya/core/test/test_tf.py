@@ -305,14 +305,10 @@ class Test_V3 (unittest.TestCase):
         self.assertEquals(tf.V3((1,2,3)) * tf.V3((2,3,1)), tf.V3((2,6,3)))
 
     def test_V3_multiplicationHasLeftIdentity (self):
-        v3a = tf.V3((1,1,1))
-        v3b = tf.V3((-2,3,1))
-        self.assertEquals(v3a * v3b, tf.V3((-2,3,1)))
+        self.assertEquals(tf.V3((1,1,1)) * tf.V3((-2,3,1)), tf.V3((-2,3,1)))
 
     def test_V3_multiplicationHasRightIdentity (self):
-        v3a = tf.V3((-2,3,1))
-        v3b = tf.V3((1,1,1))
-        self.assertEquals(v3a * v3b, tf.V3((-2,3,1)))
+        self.assertEquals(tf.V3((-2,3,1)) * tf.V3((1,1,1)), tf.V3((-2,3,1)))
 
     def test_V3_canReduceV3sWithMultiplication (self):
         v3s = [tf.V3((1,2,3)), tf.V3((2,1,1)), tf.V3((-2,-3,1)), tf.V3((-2,2,3))]
