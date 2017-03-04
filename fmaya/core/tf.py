@@ -22,6 +22,39 @@ xyzHypot = xyzDist((0,0,0))
 xyzUnit = lambda xyz: xyzScale(1.0/xyzHypot(xyz))(xyz)
 
 
+class V3 (object):
+
+    def __init__ (self, xyz=(0,0,0)):
+        self.xyz = tuple(xyz)
+
+    @property
+    def x (self):
+        return (lambda (x,y,z): x)(self.xyz)
+
+    @x.setter
+    def x (self, value):
+        self.xyz = (lambda (x,y,z): (value,y,z))(self.xyz)
+
+    @property
+    def y (self):
+        return (lambda (x,y,z): y)(self.xyz)
+
+    @y.setter
+    def y (self, value):
+        self.xyz = (lambda (x,y,z): (x,value,z))(self.xyz)
+
+    @property
+    def z (self):
+        return (lambda (x,y,z): z)(self.xyz)
+
+    @z.setter
+    def z (self, value):
+        self.xyz = (lambda (x,y,z): (x,y,value))(self.xyz)
+
+    def __repr__ (self):
+        return ("V3 " + str(self.xyz))
+
+
 # IMPURE
 
 getPos = lambda tf: tuple(cmds.xform(tf, query=True, translation=True))

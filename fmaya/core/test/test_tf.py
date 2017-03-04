@@ -230,6 +230,52 @@ class Test_xyzUnit (unittest.TestCase):
         self.assertEquals(tf.xyzHypot(tf.xyzUnit((23.3,-12.8,4.2))), 1.0)
 
 
+class Test_V3 (unittest.TestCase):
+
+    def test_V3_canInstantitateAndReadDefaultXYZValues (self):
+        v3 = tf.V3()
+        self.assertEquals(v3.xyz, (0,0,0))
+
+    def test_V3_canInstantiateWithXYZValues (self):
+        v3 = tf.V3((3,7,4))
+        self.assertEquals(v3.xyz, (3,7,4))
+
+    def test_V3_convertsToTupleUnderTheHood (self):
+        v3 = tf.V3([1,2,3])
+        self.assertEquals(v3.xyz, (1,2,3))
+
+    def test_V3_canGetXValue (self):
+        v3 = tf.V3((2,3,4))
+        self.assertEquals(v3.x, 2)
+
+    def test_V3_canSetXValue (self):
+        v3 = tf.V3((5,6,7))
+        v3.x = 9
+        self.assertEquals(v3.xyz, (9,6,7))
+
+    def test_V3_canGetYValue (self):
+        v3 = tf.V3((2,3,4))
+        self.assertEquals(v3.y, 3)
+
+    def test_V3_canSetXValue (self):
+        v3 = tf.V3((5,6,7))
+        v3.y = 11
+        self.assertEquals(v3.xyz, (5,11,7))
+
+    def test_V3_canGetZValue (self):
+        v3 = tf.V3((2,3,4))
+        self.assertEquals(v3.z, 4)
+
+    def test_V3_canSetXValue (self):
+        v3 = tf.V3((5,6,7))
+        v3.z = 13
+        self.assertEquals(v3.xyz, (5,6,13))
+
+    def test_V3_reprIncluesV3Tag (self):
+        v3 = tf.V3((2,4,8))
+        self.assertEquals(repr(v3), "V3 (2, 4, 8)")
+
+
 # IMPURE
 
 @attr('maya')
