@@ -81,6 +81,9 @@ class V3 (object):
     def mag (self):
         return xyzHypot(self.xyz)
 
+    def unit (self):
+        return self * (1 / self.mag())
+
 
 # IMPURE
 

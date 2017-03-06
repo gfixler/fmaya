@@ -351,6 +351,18 @@ class Test_V3 (unittest.TestCase):
     def test_V3_magnitudeAtX1Y1Z1IsSqrt3 (self):
         self.assertEquals(tf.V3((1,1,1)).mag(), sqrt(3))
 
+    def test_V3_unitIsIdempotentOnX1Y0Z0 (self):
+        self.assertEquals(tf.V3((1,0,0)).unit(), tf.V3((1,0,0)))
+
+    def test_V3_unitIsIdempotentOnX0Y1Z0 (self):
+        self.assertEquals(tf.V3((0,1,0)).unit(), tf.V3((0,1,0)))
+
+    def test_V3_unitIsIdempotentOnX0Y0Z1 (self):
+        self.assertEquals(tf.V3((0,0,1)).unit(), tf.V3((0,0,1)))
+
+    def test_V3_unitIsRecipOfSqrt3PerAxisOnX1Y1Z1 (self):
+        self.assertEquals(tf.V3((1,1,1)).unit(), tf.V3((1.0/sqrt(3),1.0/sqrt(3),1.0/sqrt(3))))
+
 
 # IMPURE
 
