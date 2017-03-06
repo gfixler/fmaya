@@ -379,6 +379,22 @@ class Test_V3 (unittest.TestCase):
         self.assertEquals(tf.V3((1,1,1)).unit(), tf.V3((1.0/sqrt(3),1.0/sqrt(3),1.0/sqrt(3))))
 
 
+class Test_v3Avg (unittest.TestCase):
+
+    def test_v3Avg_emptyListYieldsEmptyList (self):
+        self.assertEquals(tf.v3Avg([]), tf.V3([]))
+
+    def test_v3Avg_singleListYieldsItsElement (self):
+        self.assertEquals(tf.v3Avg([tf.V3((1,2,3))]), tf.V3((1,2,3)))
+
+    def test_v3Avg_2ElementListFindsMidpoint (self):
+        self.assertEquals(tf.v3Avg([tf.V3((1,2,3)),tf.V3((3,2,0))]), tf.V3((2,2,1.5)))
+
+    def test_v3Avg_averagesManyElements (self):
+        elems = [tf.V3((1,2,2)), tf.V3((3,1,3)), tf.V3((2,2,1)), tf.V3((3,1,2))]
+        self.assertEquals(tf.v3Avg(elems), tf.V3((2.25,1.5,2.0)))
+
+
 # IMPURE
 
 @attr('maya')

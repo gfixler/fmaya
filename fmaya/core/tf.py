@@ -94,6 +94,9 @@ class V3 (object):
         return self * (1 / self.mag())
 
 
+v3Avg = lambda vs: V3([]) if len(vs) == 0 else sum(vs) / len(vs)
+
+
 # IMPURE
 
 getPos = lambda tf: tuple(cmds.xform(tf, query=True, translation=True))
