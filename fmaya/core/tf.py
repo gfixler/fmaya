@@ -76,7 +76,10 @@ class V3 (object):
         return self.__mul__(other)
 
     def __div__ (self, other):
-        return V3(xyzDiv(self.xyz)(other.xyz))
+        if type(other) == int or type(other) == float:
+            return V3(xyzMul(self.xyz)((1.0/other,1.0/other,1.0/other)))
+        else:
+            return V3(xyzDiv(self.xyz)(other.xyz))
 
     def mag (self):
         return xyzHypot(self.xyz)

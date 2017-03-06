@@ -336,6 +336,12 @@ class Test_V3 (unittest.TestCase):
     def test_V3_cannotDivideByZero (self):
         self.assertRaises(ZeroDivisionError, lambda: tf.V3((1,3,5)) / tf.V3((0,0,0)))
 
+    def test_V3_canBeDividedByAnInt (self):
+        self.assertEquals(tf.V3((1,2,3)) / 2, tf.V3((0.5,1,1.5)))
+
+    def test_V3_canBeDividedByAnFloat (self):
+        self.assertEquals(tf.V3((1,2,3)) / 0.1, tf.V3((10,20,30)))
+
     def test_V3_magnitudeAtOriginIsZero (self):
         self.assertEquals(tf.V3((0,0,0)).mag(), 0)
 
