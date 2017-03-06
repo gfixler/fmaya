@@ -395,6 +395,22 @@ class Test_v3Avg (unittest.TestCase):
         self.assertEquals(tf.v3Avg(elems), tf.V3((2.25,1.5,2.0)))
 
 
+class Test_v3Mid (unittest.TestCase):
+
+    def test_v3Mid_midpointOf2OriginsIsOrigin (self):
+        o = tf.V3((0,0,0))
+        self.assertEquals(tf.v3Mid(o)(o), o)
+
+    def test_v3Mid_findsMidpointOf2PositivePoints (self):
+        self.assertEquals(tf.v3Mid(tf.V3((2,3,1)))(tf.V3((2,0,3))), tf.V3((2,1.5,2)))
+
+    def test_v3Mid_findsMidpointOf2NegativePoints (self):
+        self.assertEquals(tf.v3Mid(tf.V3((-2,-3,-1)))(tf.V3((-2,-0,-3))), tf.V3((-2,-1.5,-2)))
+
+    def test_v3Mid_midPointOfOriginAndX2Y2Z2IsX1Y1Z1 (self):
+        self.assertEquals(tf.v3Mid(tf.V3((0,0,0)))(tf.V3((2,2,2))), tf.V3((1,1,1)))
+
+
 # IMPURE
 
 @attr('maya')

@@ -95,6 +95,7 @@ class V3 (object):
 
 
 v3Avg = lambda vs: V3([]) if len(vs) == 0 else sum(vs) / len(vs)
+v3Mid = lambda a: lambda b: v3Avg([a,b])
 
 
 # IMPURE
