@@ -290,6 +290,15 @@ class Test_V3 (unittest.TestCase):
     def test_V3_additionHasRightIdentity (self):
         self.assertEquals(tf.V3((-2,3,1)) + tf.V3((0,0,0)), tf.V3((-2,3,1)))
 
+    def test_V3_canAddIntOnRight (self):
+        self.assertEquals(tf.V3((3,1,2)) + 5, tf.V3((8,6,7)))
+
+    def test_V3_canAddIntOnLeft (self):
+        self.assertEquals(3 + tf.V3((3,1,2)), tf.V3((6,4,5)))
+
+    def test_V3_canSumV3s (self):
+        self.assertEquals(sum([tf.V3((1,2,3)),tf.V3((3,2,2)),tf.V3((3,2,2))]), tf.V3((7,6,7)))
+
     def test_V3_canReduceV3sWithAddition (self):
         v3s = [tf.V3((1,2,3)), tf.V3((2,1,1)), tf.V3((-2,-3,1)), tf.V3((-2,2,3))]
         result = reduce(lambda x, y: x + y, v3s)

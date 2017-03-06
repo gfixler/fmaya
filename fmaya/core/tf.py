@@ -61,7 +61,13 @@ class V3 (object):
         return (self.xyz != other.xyz)
 
     def __add__ (self, other):
-        return V3(xyzAdd(self.xyz)(other.xyz))
+        if type(other) == int or type(other) == float:
+            return V3(xyzAdd(self.xyz)((other,other,other)))
+        else:
+            return V3(xyzAdd(self.xyz)(other.xyz))
+
+    def __radd__ (self, other):
+        return self.__add__(other)
 
     def __sub__ (self, other):
         return V3(xyzSub(self.xyz)(other.xyz))
