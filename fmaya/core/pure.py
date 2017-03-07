@@ -10,7 +10,8 @@ cmap = lambda f: lambda xs: map(f, xs)
 czip = lambda xs: lambda ys: zip(xs, ys)
 
 curry = lambda f: lambda x: lambda y: f(x, y)
-uncurry = lambda f: lambda (x, y): f(x)(y)
+uncurry = lambda f: lambda x, y: f(x)(y)
+uncurryPair = lambda f: lambda (x, y): f(x)(y)
 
 fst = lambda (x, _): x
 snd = lambda (_, y): y
@@ -36,7 +37,4 @@ anyBy = lambda f: lambda xs: any(cmap(f)(xs))
 lerp = lambda t: lambda a: lambda b: (b - a) * t + a
 
 grep = lambda pat: lambda xs: [x for x in xs if re.search(pat, x)]
-
-xyzAdd = lambda (x, y, z): lambda (u, v, w): (x + u, y + v, z + w)
-xyzSub = lambda (x, y, z): lambda (u, v, w): (x - u, y - v, z - w)
 

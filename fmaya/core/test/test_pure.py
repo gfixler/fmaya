@@ -119,11 +119,22 @@ class Test_uncurry (unittest.TestCase):
 
     def test_uncurry_uncurriesAddition (self):
         add = lambda x: lambda y: x + y
-        self.assertEquals(pure.uncurry(add)((7, 9)), 16)
+        self.assertEquals(pure.uncurry(add)(7, 9), 16)
 
     def test_uncurry_uncurriesComparison (self):
         lessThan = lambda x: lambda y: x < y
-        self.assertEquals(pure.uncurry(lessThan)((7, 9)), True)
+        self.assertEquals(pure.uncurry(lessThan)(7, 9), True)
+
+
+class Test_uncurryPair (unittest.TestCase):
+
+    def test_uncurryPair_uncurriesAddition (self):
+        add = lambda x: lambda y: x + y
+        self.assertEquals(pure.uncurryPair(add)((7, 9)), 16)
+
+    def test_uncurryPair_uncurriesComparison (self):
+        lessThan = lambda x: lambda y: x < y
+        self.assertEquals(pure.uncurryPair(lessThan)((7, 9)), True)
 
 
 class Test_fst (unittest.TestCase):
@@ -356,28 +367,4 @@ class Test_grep (unittest.TestCase):
         given = ["a:b","a:b:c","a","b","a:b:d","a:e","::"]
         expected = ["a:b:c","a:b:d","::"]
         self.assertEquals(pure.grep("^[^:]*:[^:]*:[^:]*$")(given), expected)
-
-
-class Test_xyzAdd (unittest.TestCase):
-
-    def test_xyzAdd_adds (self):
-        self.assertEquals(pure.xyzAdd((1,2,3))((2,1,1)), (3,3,4))
-
-    def test_xyzAdd_leftIdentity (self):
-        self.assertEquals(pure.xyzAdd((0,0,0))((2,1,1)), (2,1,1))
-
-    def test_xyzAdd_rightIdentity (self):
-        self.assertEquals(pure.xyzAdd((3,2,7))((0,0,0)), (3,2,7))
-
-
-class Test_xyzSub (unittest.TestCase):
-
-    def test_xyzSub_subtracts (self):
-        self.assertEquals(pure.xyzSub((1,2,3))((2,1,1)), (-1,1,2))
-
-    def test_xyzSub_noLeftIdentity (self):
-        self.assertEquals(pure.xyzSub((0,0,0))((2,1,1)), (-2,-1,-1))
-
-    def test_xyzSub_rightIdentity (self):
-        self.assertEquals(pure.xyzSub((3,2,7))((0,0,0)), (3,2,7))
 
