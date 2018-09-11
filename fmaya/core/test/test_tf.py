@@ -619,7 +619,7 @@ class Test_setWSRot (unittest.TestCase):
         self.assertAlmostEquals(z, 0)
         tf.setWSRot(loc)((90,-90,180))
         x, y, z = tuple(cmds.xform(loc, query=True, worldSpace=True, rotation=True))
-        self.assertAlmostEquals(x, 270)
+        self.assertAlmostEquals(x, -90)
         self.assertAlmostEquals(y, 270)
         self.assertAlmostEquals(z, 0)
 
