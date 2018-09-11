@@ -14,19 +14,24 @@ from .. import scene
 @attr('maya')
 class Test_scenePath (unittest.TestCase):
 
-    def setUp (self):
-        cmds.file(new=True, force=True)
-
     def test_scenePath_getsScenePath (self):
-        testPath = "/tmp/testMayaScene.ma"
-        cmds.file(rename=testPath)
-        self.assertEquals(scene.scenePath(), testPath)
+        tf = tempfile.TemporaryFile(suffix='.ma')
+        tfn = os.path.normpath(tf.name)
+        tfn = os.path.normpath(tfn)
+        cmds.file(rename=tfn)
+        sp = scene.scenePath()
+        spn = os.path.normpath(sp)
+        self.assertEquals(spn, tfn)
 
-    def test_sceneName_getsSceneName (self):
-        testPath = "/tmp/testMayaScene.ma"
-        testName = "testMayaScene.ma"
-        cmds.file(rename=testPath)
-        self.assertEquals(scene.sceneName(), testName)
+
+@attr('maya')
+class Test_sceneName (unittest.TestCase):
+
+    def test_scenePath_getsSceneName (self):
+        tf = tempfile.TemporaryFile(suffix='.ma')
+        cmds.file(rename=tf.name)
+        name = os.path.basename(tf.name)
+        self.assertEquals(scene.sceneName(), name)
 
 
 @attr('maya')
