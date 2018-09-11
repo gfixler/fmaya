@@ -8,6 +8,8 @@ except ImportError:
 
 from .. import scene
 
+import os
+import tempfile
 
 # IMPURE
 
@@ -122,5 +124,5 @@ class Test_lsNamespacesContaining (unittest.TestCase):
         cmds.namespace(set="foo")
         cmds.spaceLocator(name="Waldo")
         cmds.namespace(set=":")
-        self.assertEquals(scene.lsNamespacesContaining("Waldo"), ["foo"])
+        self.assertEquals(scene.lsNamespacesContaining("Waldo"), [":", "foo"])
 
