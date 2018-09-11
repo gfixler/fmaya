@@ -332,6 +332,21 @@ class Test_anyBy (unittest.TestCase):
         self.assertEquals(pure.anyBy(lambda x: x > 5)([1,2,4,2,7,3,2,4,1]), True)
 
 
+class Test_iterateTimes (unittest.TestCase):
+
+    def test_iterateTimes_identity (self):
+        self.assertEquals(pure.iterateTimes(5)(lambda x: x)("foo"), "foo")
+
+    def test_iterateTimes_incrementation (self):
+        self.assertEquals(pure.iterateTimes(7)(lambda x: x + 1)(5), 12)
+
+    def test_iterateTimes_doubling (self):
+        self.assertEquals(pure.iterateTimes(16)(lambda x: x * 2)(1), 65536)
+
+    def test_iterateTimes_concatenation (self):
+        self.assertEquals(pure.iterateTimes(5)(lambda x: x + "cat")(""), "catcatcatcatcat")
+
+
 class Test_lerp (unittest.TestCase):
 
     def test_lerp_0YieldsFirstPoint (self):

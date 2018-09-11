@@ -34,6 +34,8 @@ mid = lambda a: lambda b: (a + b) / 2.0
 filt = lambda f: lambda xs: filter(f, xs)
 anyBy = lambda f: lambda xs: any(cmap(f)(xs))
 
+iterateTimes = lambda n: lambda f: lambda x: x if n <= 0 else iterateTimes(n-1)(f)(f(x))
+
 lerp = lambda t: lambda a: lambda b: (b - a) * t + a
 
 grep = lambda pat: lambda xs: [x for x in xs if re.search(pat, x)]
