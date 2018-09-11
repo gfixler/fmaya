@@ -11,8 +11,8 @@ except ImportError:
 
 # IMPURE
 
-selection = lambda: (lambda xs: xs if xs else [])(cmds.ls(selection=True, flatten=True))
-selection1 = lambda: selection()[0] # non-total; errors on empty selection
+sel = lambda: cmds.ls(selection=True, flatten=True) or []
+sel1 = lambda: selection()[0] # non-total; errors on empty selection
 
 channelBoxSelection = lambda: mel.eval("channelBox -query -selectedMainAttributes $gChannelBoxName;")
 
