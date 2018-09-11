@@ -1,6 +1,11 @@
 import unittest
 from nose.plugins.attrib import attr
 
+try:
+    import maya.cmds as cmds
+except ImportError:
+    print 'WARNING (%s): failed to load maya.cmds module.' % __file__
+
 from .. import name
 
 
@@ -47,4 +52,23 @@ class Test_stripNS (unittest.TestCase):
 
     def test_stripNS_removesManyNamespaces (self):
         self.assertEquals(name.stripNS("a:b:c:d:e"), "e")
+
+
+@attr('maya')
+class Test_renameBy (unittest.TestCase):
+
+    def setUp (self):
+        self.loc = cmds.spaceLocator()[0]
+
+    def test_renameBy_identity (self):
+        result = name.renameBy(lambda x: x)(self.loc)
+        self.assertTrue(cmds.objExists(self.loc))
+
+    def test_renameBy_tail (self):
+        result = name.renameBy(lambda x: x[1:])(self.loc)
+        self.assertTrue(cmds.objExists(self.loc[1:]))
+
+    def test_renameBy_doubling (self):
+        result = name.renameBy(lambda x: x + x)(self.loc)
+        self.assertTrue(cmds.objExists(self.loc + self.loc))
 

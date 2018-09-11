@@ -1,6 +1,11 @@
-from string import digits, ascii_letters
+try:
+    import maya.cmds as cmds
+except ImportError:
+    print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
 from .pure import cmap
+
+from string import digits, ascii_letters
 
 
 # PURE
@@ -10,4 +15,9 @@ toValidMayaName = lambda name: ''.join(cmap(lambda x: x if x in validNameChars e
 
 withNS = lambda ns: lambda x: ns + ":" + x
 stripNS = lambda x: x.split(":")[-1]
+
+
+# IMPURE
+
+renameBy = lambda f: lambda n: cmds.rename(n, f(n))
 
