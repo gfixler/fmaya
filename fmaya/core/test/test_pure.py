@@ -104,26 +104,26 @@ class Test_czip (unittest.TestCase):
         self.assertEquals(pure.czip([1,2,3,4,5])([6,7,8]), [(1,6),(2,7),(3,8)])
 
 
-class Test_curry (unittest.TestCase):
+class Test_curry2 (unittest.TestCase):
 
-    def test_curry_curriesAddition (self):
+    def test_curry2_curriesAddition (self):
         add = lambda x, y: x + y
-        self.assertEquals(pure.curry(add)(7)(9), 16)
+        self.assertEquals(pure.curry2(add)(7)(9), 16)
 
-    def test_curry_curriesComparison (self):
+    def test_curry2_curriesComparison (self):
         lessThan = lambda x, y: x < y
-        self.assertEquals(pure.curry(lessThan)(7)(9), True)
+        self.assertEquals(pure.curry2(lessThan)(7)(9), True)
 
 
-class Test_uncurry (unittest.TestCase):
+class Test_uncurry2 (unittest.TestCase):
 
-    def test_uncurry_uncurriesAddition (self):
+    def test_uncurry2_uncurriesAddition (self):
         add = lambda x: lambda y: x + y
-        self.assertEquals(pure.uncurry(add)(7, 9), 16)
+        self.assertEquals(pure.uncurry2(add)(7, 9), 16)
 
-    def test_uncurry_uncurriesComparison (self):
+    def test_uncurry2_uncurriesComparison (self):
         lessThan = lambda x: lambda y: x < y
-        self.assertEquals(pure.uncurry(lessThan)(7, 9), True)
+        self.assertEquals(pure.uncurry2(lessThan)(7, 9), True)
 
 
 class Test_uncurryPair (unittest.TestCase):

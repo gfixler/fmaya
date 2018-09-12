@@ -9,8 +9,8 @@ comp = lambda *fs: reduce(lambda f, g: lambda x: f(g(x)), fs, ident)
 cmap = lambda f: lambda xs: map(f, xs)
 czip = lambda xs: lambda ys: zip(xs, ys)
 
-curry = lambda f: lambda x: lambda y: f(x, y)
-uncurry = lambda f: lambda x, y: f(x)(y)
+curry2 = lambda f: lambda x: lambda y: f(x, y)
+uncurry2 = lambda f: lambda x, y: f(x)(y)
 uncurryPair = lambda f: lambda (x, y): f(x)(y)
 
 fst = lambda (x, _): x
