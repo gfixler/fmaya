@@ -22,6 +22,8 @@ concat = lambda xss: reduce(lambda x, y: x + y, xss) if xss else []
 emptyNone = lambda xs: xs or []
 isEmpty = lambda xs: len(xs) == 0
 
+reverse = lambda xs: xs[::-1]
+
 bnot = lambda b: not b
 eq = lambda a: lambda b: a == b
 neq = lambda a: comp(bnot, eq(a))

@@ -206,6 +206,33 @@ class Test_isEmpty (unittest.TestCase):
         self.assertEquals(pure.isEmpty(""), True)
 
 
+class Test_reverse (unittest.TestCase):
+
+    def test_reverse_identityOnEmptyList (self):
+        self.assertEquals(pure.reverse([]), [])
+
+    def test_reverse_identityOnSingletonList (self):
+        self.assertEquals(pure.reverse([1]), [1])
+
+    def test_reverse_reverses2ElementList (self):
+        self.assertEquals(pure.reverse([1,2]), [2,1])
+
+    def test_reverse_reversesList (self):
+        self.assertEquals(pure.reverse([4,3,2,6,1,4]), [4,1,6,2,3,4])
+
+    def test_reverse_identityOnEmptyString (self):
+        self.assertEquals(pure.reverse(""), "")
+
+    def test_reverse_identityOnSingletonString (self):
+        self.assertEquals(pure.reverse("c"), "c")
+
+    def test_reverse_reverses2ElementString (self):
+        self.assertEquals(pure.reverse("ab"), "ba")
+
+    def test_reverse_reversesString (self):
+        self.assertEquals(pure.reverse("testing"), "gnitset")
+
+
 class Test_bnot (unittest.TestCase):
 
     def test_bnot_flipsTrueToFalse (self):
