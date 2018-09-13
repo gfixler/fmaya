@@ -263,6 +263,48 @@ class Test_neq (unittest.TestCase):
         self.assertEquals(pure.neq("bar")("foo"), True)
 
 
+class Test_begins (unittest.TestCase):
+
+    def test_begins_begins (self):
+        self.assertEquals(pure.begins("foo")("foobar"), True)
+
+    def test_begins_doesNotBegin (self):
+        self.assertEquals(pure.begins("foo")("barquux"), False)
+
+    def test_begins_fullMatchCounts (self):
+        self.assertEquals(pure.begins("foo")("foo"), True)
+
+    def test_begins_emptyPrefixAlwaysMatches (self):
+        self.assertEquals(pure.begins("")("nonempty"), True)
+
+    def test_begins_anyMatchOnEmptyIsFalse (self):
+        self.assertEquals(pure.begins("test")(""), False)
+
+    def test_begins_twoEmptyStringsMatch (self):
+        self.assertEquals(pure.begins("")(""), True)
+
+
+class Test_ends (unittest.TestCase):
+
+    def test_ends_ends (self):
+        self.assertEquals(pure.ends("bar")("foobar"), True)
+
+    def test_ends_doesNotEnd (self):
+        self.assertEquals(pure.ends("foo")("barquux"), False)
+
+    def test_ends_emptyPrefixAlwaysMatches (self):
+        self.assertEquals(pure.ends("")("nonempty"), True)
+
+    def test_ends_fullMatchCounts (self):
+        self.assertEquals(pure.ends("foo")("foo"), True)
+
+    def test_ends_anyMatchOnEmptyIsFalse (self):
+        self.assertEquals(pure.ends("test")(""), False)
+
+    def test_ends_twoEmptyStringsMatch (self):
+        self.assertEquals(pure.ends("")(""), True)
+
+
 class Test_preadd (unittest.TestCase):
 
     def test_preadd_canAddNumbers (self):

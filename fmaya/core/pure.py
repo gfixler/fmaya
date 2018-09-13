@@ -26,6 +26,9 @@ bnot = lambda b: not b
 eq = lambda a: lambda b: a == b
 neq = lambda a: comp(bnot, eq(a))
 
+begins = lambda b: lambda s: s.startswith(b)
+ends = lambda b: lambda s: s.endswith(b)
+
 preadd = lambda p: lambda s: p + s
 postadd = lambda p: lambda s: s + p
 
