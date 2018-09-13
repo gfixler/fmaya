@@ -12,6 +12,31 @@ from .. import select
 # IMPURE
 
 @attr('maya')
+class Test_grab (unittest.TestCase):
+
+    def test_grab_grabsNothing (self):
+        cmds.select(None)
+        select.grab()
+        self.assertEquals(cmds.ls(selection=True), [])
+
+    def test_grab_persp (self):
+        select.grab("persp")
+        self.assertEquals(cmds.ls(selection=True), ["persp"])
+
+    def test_grab_andrelease (self):
+        select.grab("persp")
+        self.assertEquals(cmds.ls(selection=True), ["persp"])
+        select.grab(None)
+        self.assertEquals(cmds.ls(selection=True), [])
+
+    def test_grab_changeGrabs (self):
+        select.grab("persp")
+        self.assertEquals(cmds.ls(selection=True), ["persp"])
+        select.grab("side")
+        self.assertEquals(cmds.ls(selection=True), ["side"])
+
+
+@attr('maya')
 class Test_selAndSelection1 (unittest.TestCase):
 
     def setUp (self):

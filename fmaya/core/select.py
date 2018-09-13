@@ -11,6 +11,8 @@ except ImportError:
 
 # IMPURE
 
+grab = lambda *args, **kwargs: cmds.select(*args, **kwargs)
+
 sel = lambda: cmds.ls(selection=True, flatten=True) or []
 sel1 = lambda: sel()[0] # non-total; errors on empty selection
 
