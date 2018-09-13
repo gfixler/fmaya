@@ -3,7 +3,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import cmap
+from .pure import const, cmap
 
 from string import digits, ascii_letters
 
@@ -20,4 +20,5 @@ stripNS = lambda x: x.split(":")[-1]
 # IMPURE
 
 renameBy = lambda f: lambda n: cmds.rename(n, f(n))
+renameTo = lambda n: renameBy(const(n))
 

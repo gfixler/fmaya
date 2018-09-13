@@ -72,3 +72,17 @@ class Test_renameBy (unittest.TestCase):
         result = name.renameBy(lambda x: x + x)(self.loc)
         self.assertTrue(cmds.objExists(self.loc + self.loc))
 
+@attr('maya')
+class Test_renameTo (unittest.TestCase):
+
+    def setUp (self):
+        self.loc = cmds.spaceLocator()[0]
+
+    def test_renameTo_sameName (self):
+        result = name.renameTo(self.loc)(self.loc)
+        self.assertEquals(result, self.loc)
+
+    def test_renameTo_simpleRename (self):
+        result = name.renameTo("bob")(self.loc)
+        self.assertEquals(result, "bob")
+
