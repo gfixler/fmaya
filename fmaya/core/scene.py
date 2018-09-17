@@ -20,3 +20,6 @@ inNS = lambda ns: comp(obExists, withNS(ns))
 lsNamespaces = lambda: [":"] + cmds.namespaceInfo(':', listOnlyNamespaces=True, recurse=True)
 lsNamespacesContaining = lambda x: filt(flip(inNS)(x))(lsNamespaces())
 
+
+atTime = lambda t: lambda f: lambda x: [cmds.currentTime(t), f(x)][-1]
+

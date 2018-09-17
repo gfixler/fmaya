@@ -126,3 +126,20 @@ class Test_lsNamespacesContaining (unittest.TestCase):
         cmds.namespace(set=":")
         self.assertEquals(scene.lsNamespacesContaining("Waldo"), [":", "foo"])
 
+
+@attr('maya')
+class Test_atTime (unittest.TestCase):
+
+    def setUp (self):
+        self.loc = cmds.spaceLocator()[0]
+        self.testAttr = self.loc + ".ty"
+
+        cmds.setKeyframe(self.testAttr, time=0, value=0)
+        cmds.setKeyframe(self.testAttr, time=10, value=5)
+
+    def test_atTime_readsKeyedValueAtIntTime (self):
+        self.assertAlmostEquals(scene.atTime(5)(cmds.getAttr)(self.testAttr), 2.5)
+
+    def test_atTime_readsKeyedValueAtFloatTime (self):
+        self.assertAlmostEquals(scene.atTime(7.5)(cmds.getAttr)(self.testAttr), 3.75)
+
