@@ -153,3 +153,17 @@ class Test_atTime_ (unittest.TestCase):
     def test_atTime__readsTimeAtFloatTime (self):
         self.assertAlmostEquals(scene.atTime_(13.7)(lambda: cmds.currentTime(query=True)), 13.7)
 
+
+@attr('maya')
+class Test_atFrame (unittest.TestCase):
+
+    def setUp (self):
+        self.loc = cmds.spaceLocator()[0]
+        self.testAttr = self.loc + ".ty"
+
+        cmds.setKeyframe(self.testAttr, time=0, value=0)
+        cmds.setKeyframe(self.testAttr, time=10, value=5)
+
+    def test_atFrame_readsValueAtNearestFrame (self):
+        self.assertAlmostEquals(scene.atFrame(9.51)(cmds.getAttr)(self.testAttr), 5)
+
