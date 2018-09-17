@@ -177,3 +177,21 @@ class Test_atFrame_ (unittest.TestCase):
     def test_atFrame__readsFrameAtFloatTime (self):
         self.assertEquals(scene.atFrame_(13.7)(lambda: cmds.currentTime(query=True)), 14)
 
+
+@attr('maya')
+class Test_inTime (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_inTime_getsFrame1FromNewScene (self):
+        self.assertEquals(scene.inTime(), 1.0)
+
+    def test_inTime_getsIntFirstFrameTime (self):
+        cmds.playbackOptions(edit=True, minTime=37)
+        self.assertEquals(scene.inTime(), 37.0)
+
+    def test_inTime_getsFloatFirstFrameTime (self):
+        cmds.playbackOptions(edit=True, minTime=13.23)
+        self.assertEquals(scene.inTime(), 13.23)
+

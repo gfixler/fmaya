@@ -27,3 +27,5 @@ atTime_ = lambda t: lambda f: [cmds.currentTime(t), f()][-1]
 atFrame = lambda t: atTime(round(t))
 atFrame_ = lambda t: atTime_(round(t))
 
+inTime = lambda: cmds.playbackOptions(query=True, minTime=True)
+
