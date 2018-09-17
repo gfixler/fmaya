@@ -167,3 +167,13 @@ class Test_atFrame (unittest.TestCase):
     def test_atFrame_readsValueAtNearestFrame (self):
         self.assertAlmostEquals(scene.atFrame(9.51)(cmds.getAttr)(self.testAttr), 5)
 
+
+@attr('maya')
+class Test_atFrame_ (unittest.TestCase):
+
+    def test_atFrame__readsFrameAtIntTime (self):
+        self.assertEquals(scene.atFrame_(37)(lambda: cmds.currentTime(query=True)), 37)
+
+    def test_atFrame__readsFrameAtFloatTime (self):
+        self.assertEquals(scene.atFrame_(13.7)(lambda: cmds.currentTime(query=True)), 14)
+

@@ -25,4 +25,5 @@ atTime = lambda t: lambda f: lambda x: [cmds.currentTime(t), f(x)][-1]
 atTime_ = lambda t: lambda f: [cmds.currentTime(t), f()][-1]
 
 atFrame = lambda t: atTime(round(t))
+atFrame_ = lambda t: atTime_(round(t))
 
