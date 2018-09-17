@@ -143,3 +143,13 @@ class Test_atTime (unittest.TestCase):
     def test_atTime_readsKeyedValueAtFloatTime (self):
         self.assertAlmostEquals(scene.atTime(7.5)(cmds.getAttr)(self.testAttr), 3.75)
 
+
+@attr('maya')
+class Test_atTime_ (unittest.TestCase):
+
+    def test_atTime__readsTimeAtIntTime (self):
+        self.assertEquals(scene.atTime_(37)(lambda: cmds.currentTime(query=True)), 37)
+
+    def test_atTime__readsTimeAtFloatTime (self):
+        self.assertAlmostEquals(scene.atTime_(13.7)(lambda: cmds.currentTime(query=True)), 13.7)
+
