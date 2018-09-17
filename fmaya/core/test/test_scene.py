@@ -195,3 +195,21 @@ class Test_inTime (unittest.TestCase):
         cmds.playbackOptions(edit=True, minTime=13.23)
         self.assertEquals(scene.inTime(), 13.23)
 
+
+@attr('maya')
+class Test_outTime (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_outTime_getsFrame120FromNewScene (self):
+        self.assertEquals(scene.outTime(), 120.0)
+
+    def test_outTime_getsIntLastFrameTime (self):
+        cmds.playbackOptions(edit=True, maxTime=234.0)
+        self.assertEquals(scene.outTime(), 234.0)
+
+    def test_outTime_getsFloatLastFrameTime (self):
+        cmds.playbackOptions(edit=True, maxTime=17.3)
+        self.assertEquals(scene.outTime(), 17.3)
+
