@@ -58,6 +58,12 @@ class Test_juxt (unittest.TestCase):
         self.assertEquals(pure.juxt(rev, len, cap)("function"), ["noitcnuf", 8, "FUNCTION"])
 
 
+class Test_both (unittest.TestCase):
+
+    def test_both_doesBoth (self):
+        self.assertEquals(pure.both(lambda x: x)(lambda y: y[::-1])("cat"), ("cat", "tac"))
+
+
 class Test_comp (unittest.TestCase):
 
     def test_comp_oneFunctionWorksAsApply (self):
