@@ -228,3 +228,18 @@ class Test_inFrame (unittest.TestCase):
         cmds.playbackOptions(edit=True, minTime=29.6)
         self.assertEquals(scene.inFrame(), 30.0)
 
+
+@attr('maya')
+class Test_outFrame (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_outFrame_getIntOutFrame (self):
+        cmds.playbackOptions(edit=True, maxTime=180.0)
+        self.assertEquals(scene.outFrame(), 180.0)
+
+    def test_outFrame_getFloatOutFrame (self):
+        cmds.playbackOptions(edit=True, maxTime=221.3)
+        self.assertEquals(scene.outFrame(), 221.0)
+

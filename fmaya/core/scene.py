@@ -31,4 +31,5 @@ inTime = lambda: cmds.playbackOptions(query=True, minTime=True)
 outTime = lambda: cmds.playbackOptions(query=True, maxTime=True)
 
 inFrame = lambda: round(inTime())
+outFrame = lambda: round(outTime())
 
