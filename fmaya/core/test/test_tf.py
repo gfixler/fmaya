@@ -658,3 +658,31 @@ class Test_posrot (unittest.TestCase):
         self.assertAlmostEquals(rz, 0)
 
 
+@attr('maya')
+class Test_wposrot (unittest.TestCase):
+
+    def test_wposrot_getsTestObjectTransforms (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.move(1, 2, 3)
+        cmds.rotate(23, 43, 12)
+        (tx, ty, tz), (rx, ry, rz) = tf.wposrot(loc)
+        self.assertAlmostEquals(tx, 1)
+        self.assertAlmostEquals(ty, 2)
+        self.assertAlmostEquals(tz, 3)
+        self.assertAlmostEquals(rx, 23)
+        self.assertAlmostEquals(ry, 43)
+        self.assertAlmostEquals(rz, 12)
+
+    def test_wposrot_getsTestObjectTransformsRelativeToWorld (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.group()
+        cmds.move(1, 2, 3)
+        cmds.rotate(23, 43, 12)
+        (tx, ty, tz), (rx, ry, rz) = tf.wposrot(loc)
+        self.assertAlmostEquals(tx, 1)
+        self.assertAlmostEquals(ty, 2)
+        self.assertAlmostEquals(tz, 3)
+        self.assertAlmostEquals(rx, 23)
+        self.assertAlmostEquals(ry, 43)
+        self.assertAlmostEquals(rz, 12)
+

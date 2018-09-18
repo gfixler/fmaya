@@ -113,4 +113,5 @@ wrot = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, rotation=Tru
 setwrot = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, rotation=xyz)
 
 posrot = both(pos)(rot)
+wposrot = both(wpos)(wrot)
 
