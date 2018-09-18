@@ -243,3 +243,23 @@ class Test_outFrame (unittest.TestCase):
         cmds.playbackOptions(edit=True, maxTime=221.3)
         self.assertEquals(scene.outFrame(), 221.0)
 
+
+@attr('maya')
+class Test_allFrames (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+
+    def test_allFrames_defaultsTo1To120 (self):
+        self.assertEquals(list(scene.allFrames()), list(xrange(1, 120)))
+
+    def test_allFrames_getsSetIntRange (self):
+        cmds.playbackOptions(edit=True, minTime=23.0)
+        cmds.playbackOptions(edit=True, maxTime=67.0)
+        self.assertEquals(list(scene.allFrames()), list(xrange(23, 67)))
+
+    def test_allFrames_getsSetFloatRange (self):
+        cmds.playbackOptions(edit=True, minTime=23.7)
+        cmds.playbackOptions(edit=True, maxTime=67.6)
+        self.assertEquals(list(scene.allFrames()), list(xrange(24, 68)))
+
