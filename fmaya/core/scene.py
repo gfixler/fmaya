@@ -30,3 +30,5 @@ atFrame_ = lambda t: atTime_(round(t))
 inTime = lambda: cmds.playbackOptions(query=True, minTime=True)
 outTime = lambda: cmds.playbackOptions(query=True, maxTime=True)
 
+inFrame = lambda: round(inTime())
+
