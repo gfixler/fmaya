@@ -5,7 +5,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import uncurry2
+from .pure import both, uncurry2
 
 
 # PURE
@@ -111,4 +111,6 @@ setRot = lambda tf: lambda xyz: cmds.xform(tf, rotation=xyz)
 
 wrot = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, rotation=True))
 setwrot = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, rotation=xyz)
+
+posrot = both(pos)(rot)
 

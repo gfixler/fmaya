@@ -628,3 +628,33 @@ class Test_setwrot (unittest.TestCase):
         result = tf.setwrot(loc)((4,2,1))
         self.assertEquals(result, None)
 
+
+@attr('maya')
+class Test_posrot (unittest.TestCase):
+
+    def test_posrot_getsTestObjectTransforms (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.move(1, 2, 3)
+        cmds.rotate(23, 43, 12)
+        (tx, ty, tz), (rx, ry, rz) = tf.posrot(loc)
+        self.assertAlmostEquals(tx, 1)
+        self.assertAlmostEquals(ty, 2)
+        self.assertAlmostEquals(tz, 3)
+        self.assertAlmostEquals(rx, 23)
+        self.assertAlmostEquals(ry, 43)
+        self.assertAlmostEquals(rz, 12)
+
+    def test_posrot_getsTestObjectTransformsRelativeToParent (self):
+        loc = cmds.spaceLocator()[0]
+        cmds.group()
+        cmds.move(1, 2, 3)
+        cmds.rotate(23, 43, 12)
+        (tx, ty, tz), (rx, ry, rz) = tf.posrot(loc)
+        self.assertAlmostEquals(tx, 0)
+        self.assertAlmostEquals(ty, 0)
+        self.assertAlmostEquals(tz, 0)
+        self.assertAlmostEquals(rx, 0)
+        self.assertAlmostEquals(ry, 0)
+        self.assertAlmostEquals(rz, 0)
+
+
