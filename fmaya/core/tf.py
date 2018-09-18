@@ -100,15 +100,15 @@ v3Mid = lambda a: lambda b: v3Avg([a,b])
 
 # IMPURE
 
-getPos = lambda tf: tuple(cmds.xform(tf, query=True, translation=True))
+pos = lambda tf: tuple(cmds.xform(tf, query=True, translation=True))
 setPos = lambda tf: lambda xyz: cmds.xform(tf, translation=xyz)
 
-getWSPos = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, translation=True))
-setWSPos = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, translation=xyz)
+wpos = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, translation=True))
+setwpos = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, translation=xyz)
 
-getRot = lambda tf: tuple(cmds.xform(tf, query=True, rotation=True))
+rot = lambda tf: tuple(cmds.xform(tf, query=True, rotation=True))
 setRot = lambda tf: lambda xyz: cmds.xform(tf, rotation=xyz)
 
-getWSRot = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, rotation=True))
-setWSRot = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, rotation=xyz)
+wrot = lambda tf: tuple(cmds.xform(tf, query=True, worldSpace=True, rotation=True))
+setwrot = lambda tf: lambda xyz: cmds.xform(tf, worldSpace=True, rotation=xyz)
 

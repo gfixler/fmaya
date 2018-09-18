@@ -414,32 +414,32 @@ class Test_v3Mid (unittest.TestCase):
 # IMPURE
 
 @attr('maya')
-class Test_getPos (unittest.TestCase):
+class Test_pos (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
 
-    def test_getPos_newTransformAtOrigin (self):
+    def test_pos_newTransformAtOrigin (self):
         loc = cmds.spaceLocator()[0]
-        self.assertEquals(tf.getPos(loc), (0,0,0))
+        self.assertEquals(tf.pos(loc), (0,0,0))
 
-    def test_getPos_getsSetPos (self):
+    def test_pos_getsSetPos (self):
         loc = cmds.spaceLocator()[0]
         cmds.move(1, 2, 3, loc)
-        self.assertEquals(tf.getPos(loc), (1,2,3))
+        self.assertEquals(tf.pos(loc), (1,2,3))
 
-    def test_getPos_getsLocalPos (self):
+    def test_pos_getsLocalPos (self):
         loc = cmds.spaceLocator()[0]
         grp = cmds.group()
         cmds.move(1, 2, 3, grp)
-        self.assertEquals(tf.getPos(loc), (0,0,0))
+        self.assertEquals(tf.pos(loc), (0,0,0))
 
-    def test_getPos_getsLocalSetPos (self):
+    def test_pos_getsLocalSetPos (self):
         loc = cmds.spaceLocator()[0]
         cmds.move(2, -3, 1, loc)
         grp = cmds.group()
         cmds.move(1, 2, 3, grp)
-        self.assertEquals(tf.getPos(loc), (2,-3,1))
+        self.assertEquals(tf.pos(loc), (2,-3,1))
 
 
 @attr('maya')
@@ -461,78 +461,78 @@ class Test_setPos (unittest.TestCase):
 
 
 @attr('maya')
-class Test_getWSPos (unittest.TestCase):
+class Test_wpos (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
 
-    def test_getWSPos_newTransformAtOrigin (self):
+    def test_wpos_newTransformAtOrigin (self):
         loc = cmds.spaceLocator()[0]
-        self.assertEquals(tf.getWSPos(loc), (0,0,0))
+        self.assertEquals(tf.wpos(loc), (0,0,0))
 
-    def test_getWSPos_getsSetPos (self):
+    def test_wpos_getsSetPos (self):
         loc = cmds.spaceLocator()[0]
         cmds.move(1, 2, 3, loc)
-        self.assertEquals(tf.getWSPos(loc), (1,2,3))
+        self.assertEquals(tf.wpos(loc), (1,2,3))
 
-    def test_getWSPos_getsWorldPosFromInsideMovedContainer (self):
+    def test_wpos_getsWorldPosFromInsideMovedContainer (self):
         loc = cmds.spaceLocator()[0]
         grp = cmds.group()
         cmds.move(1, 2, 3, grp)
-        self.assertEquals(tf.getWSPos(loc), (1,2,3))
+        self.assertEquals(tf.wpos(loc), (1,2,3))
 
-    def test_getWSPos_getsWorldPosFromSetPosInsideMovedContainer (self):
+    def test_wpos_getsWorldPosFromSetPosInsideMovedContainer (self):
         loc = cmds.spaceLocator()[0]
         cmds.move(2, -3, 1, loc)
         grp = cmds.group()
         cmds.move(1, 2, 3, grp)
-        self.assertEquals(tf.getWSPos(loc), (3,-1,4))
+        self.assertEquals(tf.wpos(loc), (3,-1,4))
 
 
 @attr('maya')
-class Test_setWSPos (unittest.TestCase):
+class Test_setwpos (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
 
-    def test_setWSPos_canSetWSPos (self):
+    def test_setwpos_canSetWSPos (self):
         loc = cmds.spaceLocator()[0]
-        tf.setWSPos(loc)((4,2,1))
+        tf.setwpos(loc)((4,2,1))
         pos = tuple(cmds.xform(loc, query=True, translation=True))
         self.assertEquals(pos, (4,2,1))
 
-    def test_setWSPos_canSetWSPosInsideMovedContainer (self):
+    def test_setwpos_canSetWSPosInsideMovedContainer (self):
         loc = cmds.spaceLocator()[0]
         grp = cmds.group()
         cmds.move(1, 2, 3, grp)
         pos = tuple(cmds.xform(loc, query=True, worldSpace=True, translation=True))
         self.assertEquals(pos, (1,2,3))
-        tf.setWSPos(loc)((4,2,1))
+        tf.setwpos(loc)((4,2,1))
         pos = tuple(cmds.xform(loc, query=True, worldSpace=True, translation=True))
         self.assertEquals(pos, (4,2,1))
 
-    def test_setWSPos_returnsNone (self):
+    def test_setwpos_returnsNone (self):
         loc = cmds.spaceLocator()[0]
-        result = tf.setWSPos(loc)((4,2,1))
+        result = tf.setwpos(loc)((4,2,1))
         self.assertEquals(result, None)
 
 
 @attr('maya')
-class Test_getRot (unittest.TestCase):
+class Test_rot (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
 
-    def test_getRot_canGetRot (self):
+    def test_rot_canGetRot (self):
         loc = cmds.spaceLocator()[0]
         cmds.xform(loc, rotation=(20,50,85))
-        self.assertEquals(tf.getRot(loc), (20,50,85))
+        self.assertEquals(tf.rot(loc), (20,50,85))
 
-    def test_getRot_doesNotInerheritRotationOfContainer (self):
+    def test_rot_doesNotInerheritRotationOfContainer (self):
         loc = cmds.spaceLocator()[0]
         grp = cmds.group()
         cmds.xform(grp, rotation=(37,-23,14))
-        self.assertEquals(tf.getRot(loc), (0,0,0))
+        self.assertEquals(tf.rot(loc), (0,0,0))
 
 
 @attr('maya')
@@ -552,7 +552,7 @@ class Test_setRot (unittest.TestCase):
         cmds.xform(grp, rotation=(34,56,23))
         tf.setRot(loc)((10,23,34))
         rot = cmds.xform(loc, query=True, rotation=True)
-        self.assertEquals(tf.getRot(loc), (10,23,34))
+        self.assertEquals(tf.rot(loc), (10,23,34))
 
     def test_setRot_returnsNone (self):
         loc = cmds.spaceLocator()[0]
@@ -561,55 +561,55 @@ class Test_setRot (unittest.TestCase):
 
 
 @attr('maya')
-class Test_getWSRot (unittest.TestCase):
+class Test_wrot (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
 
-    def test_getWSRot_newTransformAtOrigin (self):
+    def test_wrot_newTransformAtOrigin (self):
         loc = cmds.spaceLocator()[0]
-        self.assertEquals(tf.getWSRot(loc), (0,0,0))
+        self.assertEquals(tf.wrot(loc), (0,0,0))
 
-    def test_getWSRot_getsSetRot (self):
+    def test_wrot_getsSetRot (self):
         loc = cmds.spaceLocator()[0]
         cmds.rotate(10, 43, 49, loc)
-        x, y, z = tf.getWSRot(loc)
+        x, y, z = tf.wrot(loc)
         self.assertAlmostEquals(x, 10)
         self.assertAlmostEquals(y, 43)
         self.assertAlmostEquals(z, 49)
 
-    def test_getWSRot_getsUnrotatedWorldRotFromInsideRotatedContainer (self):
+    def test_wrot_getsUnrotatedWorldRotFromInsideRotatedContainer (self):
         loc = cmds.spaceLocator()[0]
         grp = cmds.group()
         cmds.rotate(10, 11, 23, grp)
-        x, y, z = tf.getWSRot(loc)
+        x, y, z = tf.wrot(loc)
         self.assertAlmostEquals(x, 10)
         self.assertAlmostEquals(y, 11)
         self.assertAlmostEquals(z, 23)
 
-    def test_getWSRot_getsWorldRotFromSetRotInsideMovedContainer (self):
+    def test_wrot_getsWorldRotFromSetRotInsideMovedContainer (self):
         loc = cmds.spaceLocator()[0]
         cmds.rotate(90, -90, 270, loc)
         grp = cmds.group()
         cmds.rotate(0, -90, 180, grp)
-        x, y, z = tf.getWSRot(loc)
+        x, y, z = tf.wrot(loc)
         self.assertAlmostEquals(x, 360)
         self.assertAlmostEquals(y, -180)
         self.assertAlmostEquals(z, 180)
 
 
 @attr('maya')
-class Test_setWSRot (unittest.TestCase):
+class Test_setwrot (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
 
-    def test_setWSRot_newTransformAtOrigin (self):
+    def test_setwrot_newTransformAtOrigin (self):
         loc = cmds.spaceLocator()[0]
         rot = tuple(cmds.xform(loc, query=True, rotation=True))
         self.assertEquals(rot, (0,0,0))
 
-    def test_setWSRot_canSetWSRotInsideRotatedContainer (self):
+    def test_setwrot_canSetWSRotInsideRotatedContainer (self):
         loc = cmds.spaceLocator()[0]
         grp = cmds.group()
         cmds.rotate(-90, 90, -180, grp)
@@ -617,14 +617,14 @@ class Test_setWSRot (unittest.TestCase):
         self.assertAlmostEquals(x, 90)
         self.assertAlmostEquals(y, 90)
         self.assertAlmostEquals(z, 0)
-        tf.setWSRot(loc)((90,-90,180))
+        tf.setwrot(loc)((90,-90,180))
         x, y, z = tuple(cmds.xform(loc, query=True, worldSpace=True, rotation=True))
         self.assertAlmostEquals(x, -90)
         self.assertAlmostEquals(y, 270)
         self.assertAlmostEquals(z, 0)
 
-    def test_setWSRot_returnsNone (self):
+    def test_setwrot_returnsNone (self):
         loc = cmds.spaceLocator()[0]
-        result = tf.setWSRot(loc)((4,2,1))
+        result = tf.setwrot(loc)((4,2,1))
         self.assertEquals(result, None)
 
