@@ -181,6 +181,22 @@ class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
 
 
 @attr('maya')
+class Test_hasKeys (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
+        cmds.setKeyframe('persp.tx', time=-3, value=100)
+        cmds.setKeyframe('persp.tx', time=0, value=-56)
+        cmds.setKeyframe('persp.tx', time=5, value=33)
+
+    def test_hasKeys_keyedCameraHasKeys (self):
+        self.assertTrue(chan.hasKeys("persp"))
+
+    def test_hasKeys_unkeyedCameraHasNoKeys (self):
+        self.assertFalse(chan.hasKeys("side"))
+
+
+@attr('maya')
 class Test_artistAttrs (unittest.TestCase):
 
     def setUp (self):

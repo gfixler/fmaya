@@ -3,7 +3,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import comp, cmap, uncurryPair, snd, mid, preadd, emptyNone
+from .pure import bnot, comp, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone
 
 
 # PURE
@@ -32,6 +32,8 @@ setChannel = lambda c: lambda (t, v): cmds.setKeyframe(c, time=t, value=v)
 getKeyTimes = lambda channel: emptyNone(cmds.keyframe(channel, query=True, timeChange=True))
 getKeyValues = lambda channel: emptyNone(cmds.keyframe(channel, query=True, valueChange=True))
 getKeys = lambda channel: zip(getKeyTimes(channel), getKeyValues(channel))
+
+hasKeys = comp(bnot, isEmpty, getKeyTimes)
 
 artistAttrs = lambda node: cmds.listAttr(node, keyable=True, visible=True, unlocked=True) or []
 artistChannels = lambda node: cmap(attrToChannel(node))(artistAttrs(node))
