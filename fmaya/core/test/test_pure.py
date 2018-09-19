@@ -398,6 +398,24 @@ class Test_unprefix (unittest.TestCase):
         self.assertEquals(pure.unprefix("")(""), "")
 
 
+class Test_unsuffix (unittest.TestCase):
+
+    def test_unsuffix_nullPrefixIsIdentity (self):
+        self.assertEquals(pure.unsuffix("")("testing"), "testing")
+
+    def test_unsuffix_suffixNotFoundIsIdentity (self):
+        self.assertEquals(pure.unsuffix("nope")("whatever"), "whatever")
+
+    def test_unsuffix_removesPrefix (self):
+        self.assertEquals(pure.unsuffix("dog")("catdog"), "cat")
+
+    def test_unsuffix_handlesEmptyInput (self):
+        self.assertEquals(pure.unsuffix("uhoh")(""), "")
+
+    def test_unsuffix_handlesBothEmptyStrings (self):
+        self.assertEquals(pure.unsuffix("")(""), "")
+
+
 class Test_mid (unittest.TestCase):
 
     def test_mid_findsSameNumberGivenTwice (self):

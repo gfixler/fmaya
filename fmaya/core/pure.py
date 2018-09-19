@@ -37,6 +37,7 @@ preadd = lambda p: lambda s: p + s
 postadd = lambda p: lambda s: s + p
 
 unprefix = lambda p: lambda s: s[len(p):] if s.startswith(p) else s
+unsuffix = lambda p: lambda s: s[:-len(p)] if s.endswith(p) and not len(p) == 0 else s
 
 mid = lambda a: lambda b: (a + b) / 2.0
 
