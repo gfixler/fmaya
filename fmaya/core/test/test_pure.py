@@ -110,6 +110,24 @@ class Test_czip (unittest.TestCase):
         self.assertEquals(pure.czip([1,2,3,4,5])([6,7,8]), [(1,6),(2,7),(3,8)])
 
 
+class Test_zipWith (unittest.TestCase):
+
+    def test_zipWith_additionOfSameLengthLists (self):
+        add = lambda x: lambda y: x + y
+        self.assertEquals(pure.zipWith(add)([3,2,6,1,2])([5,5,3,2,5]), [8,7,9,3,7])
+
+    def test_zipWith_concatenationOfMismatchedLists (self):
+        conc = lambda x: lambda y: x + y
+        a = ["dino","mega","beetle"]
+        b = ["cat","dog","bird","frog"]
+        expected = ["dinocat","megadog","beetlebird"]
+        self.assertEquals(pure.zipWith(conc)(a)(b), expected)
+
+    def test_zipWith_tupleWithEmptyList (self):
+        entuple = lambda x: lambda y: (x, y)
+        self.assertEquals(pure.zipWith(entuple)([])([1,2,3]), [])
+
+
 class Test_curry2 (unittest.TestCase):
 
     def test_curry2_curriesAddition (self):
