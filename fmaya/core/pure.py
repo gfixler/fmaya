@@ -36,6 +36,8 @@ ends = lambda b: lambda s: s.endswith(b)
 preadd = lambda p: lambda s: p + s
 postadd = lambda p: lambda s: s + p
 
+unprefix = lambda p: lambda s: s[len(p):] if s.startswith(p) else s
+
 mid = lambda a: lambda b: (a + b) / 2.0
 
 filt = lambda f: lambda xs: filter(f, xs)

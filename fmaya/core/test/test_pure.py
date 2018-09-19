@@ -380,6 +380,24 @@ class Test_postadd (unittest.TestCase):
         self.assertEquals(pure.postadd([1,2,3])([4,5]), [4,5,1,2,3])
 
 
+class Test_unprefix (unittest.TestCase):
+
+    def test_unprefix_nullPrefixIsIdentity (self):
+        self.assertEquals(pure.unprefix("")("testing"), "testing")
+
+    def test_unprefix_prefixNotFoundIsIdentity (self):
+        self.assertEquals(pure.unprefix("nope")("whatever"), "whatever")
+
+    def test_unprefix_removesPrefix (self):
+        self.assertEquals(pure.unprefix("cat")("catdog"), "dog")
+
+    def test_unprefix_handlesEmptyInput (self):
+        self.assertEquals(pure.unprefix("uhoh")(""), "")
+
+    def test_unprefix_handlesBothEmptyStrings (self):
+        self.assertEquals(pure.unprefix("")(""), "")
+
+
 class Test_mid (unittest.TestCase):
 
     def test_mid_findsSameNumberGivenTwice (self):
