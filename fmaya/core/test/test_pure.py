@@ -257,13 +257,13 @@ class Test_reverse (unittest.TestCase):
         self.assertEquals(pure.reverse("testing"), "gnitset")
 
 
-class Test_bnot (unittest.TestCase):
+class Test__not (unittest.TestCase):
 
-    def test_bnot_flipsTrueToFalse (self):
-        self.assertEquals(pure.bnot(True), False)
+    def test__not_flipsTrueToFalse (self):
+        self.assertEquals(pure._not(True), False)
 
-    def test_bnot_flipsFalseToTrue (self):
-        self.assertEquals(pure.bnot(False), True)
+    def test__not_flipsFalseToTrue (self):
+        self.assertEquals(pure._not(False), True)
 
 
 class Test_eq (unittest.TestCase):

@@ -26,9 +26,9 @@ isEmpty = lambda xs: len(xs) == 0
 
 reverse = lambda xs: xs[::-1]
 
-bnot = lambda b: not b
+_not = lambda b: not b
 eq = lambda a: lambda b: a == b
-neq = lambda a: comp(bnot, eq(a))
+neq = lambda a: comp(_not, eq(a))
 
 begins = lambda b: lambda s: s.startswith(b)
 ends = lambda b: lambda s: s.endswith(b)
