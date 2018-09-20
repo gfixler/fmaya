@@ -443,20 +443,20 @@ class Test_pos (unittest.TestCase):
 
 
 @attr('maya')
-class Test_setPos (unittest.TestCase):
+class Test_setpos (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
 
-    def test_setPos_canSetPos (self):
+    def test_setpos_canSetPos (self):
         loc = cmds.spaceLocator()[0]
-        tf.setPos(loc)((4,2,1))
+        tf.setpos(loc)((4,2,1))
         pos = tuple(cmds.xform(loc, query=True, translation=True))
         self.assertEquals(pos, (4,2,1))
 
-    def test_setPos_returnsNone (self):
+    def test_setpos_returnsNone (self):
         loc = cmds.spaceLocator()[0]
-        result = tf.setPos(loc)((4,2,1))
+        result = tf.setpos(loc)((4,2,1))
         self.assertEquals(result, None)
 
 
@@ -543,20 +543,20 @@ class Test_setRot (unittest.TestCase):
 
     def test_setRot_canSetRot (self):
         loc = cmds.spaceLocator()[0]
-        tf.setRot(loc)((23,34,45))
+        tf.setrot(loc)((23,34,45))
         rot = cmds.xform(loc, query=True, rotation=True)
 
     def test_setRot_setsLocalRotationInRotatedContainer (self):
         loc = cmds.spaceLocator()[0]
         grp = cmds.group()
         cmds.xform(grp, rotation=(34,56,23))
-        tf.setRot(loc)((10,23,34))
+        tf.setrot(loc)((10,23,34))
         rot = cmds.xform(loc, query=True, rotation=True)
         self.assertEquals(tf.rot(loc), (10,23,34))
 
     def test_setRot_returnsNone (self):
         loc = cmds.spaceLocator()[0]
-        result = tf.setRot(loc)((55,98,-23))
+        result = tf.setrot(loc)((55,98,-23))
         self.assertEquals(result, None)
 
 
