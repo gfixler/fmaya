@@ -449,6 +449,27 @@ class Test_filterBy (unittest.TestCase):
         self.assertEquals(pure.filterBy(lambda c: c in "aeiou")("eleanor"), "eeao")
 
 
+class Test_firstBy (unittest.TestCase):
+
+    def test_firstBy_findsValueInFirstPosition (self):
+        self.assertEquals(pure.firstBy(lambda x: x == 3)([3,4,5,2,1]), 3)
+
+    def test_firstBy_findsValueInLastPosition (self):
+        self.assertEquals(pure.firstBy(lambda x: x == 1)([3,4,5,2,1]), 1)
+
+    def test_firstBy_findsValueInMiddle (self):
+        self.assertEquals(pure.firstBy(lambda x: x == 5)([3,4,5,2,1]), 5)
+
+    def test_firstBy_findsBySecondElementInTuple (self):
+        self.assertEquals(pure.firstBy(lambda (_, y): y == 3)([(0,1),(2,3),(4,5),(6,7)]), (2,3))
+
+    def test_firstBy_raisesOnUnfoundElement (self):
+        self.assertRaises(IndexError, lambda: pure.firstBy(lambda _: False)([1,2,3,4,5]))
+
+    def test_firstBy_raisesOnEmptyList (self):
+        self.assertRaises(IndexError, lambda: pure.firstBy(lambda _: True)([]))
+
+
 class Test_anyBy (unittest.TestCase):
 
     def test_anyBy_constTrueYieldsTrue (self):
