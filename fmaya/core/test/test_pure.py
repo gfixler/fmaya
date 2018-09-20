@@ -197,6 +197,12 @@ class Test_onSnd (unittest.TestCase):
         self.assertEquals(pure.onSnd(lambda x: x[::-1])((3,"foo")), (3,"oof"))
 
 
+class Test_swap (unittest.TestCase):
+
+    def test_swap_swaps (self):
+        self.assertEquals(pure.swap(('a',2)), (2,'a'))
+
+
 class Test_concat (unittest.TestCase):
 
     def test_concatsStrings (self):
