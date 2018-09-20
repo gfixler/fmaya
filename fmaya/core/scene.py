@@ -3,7 +3,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import comp, flip, grep, filt
+from .pure import comp, flip, grep, filterBy
 from .name import withNS
 
 
@@ -18,7 +18,7 @@ obExists = lambda x: cmds.objExists(x)
 
 inNS = lambda ns: comp(obExists, withNS(ns))
 lsNamespaces = lambda: [":"] + cmds.namespaceInfo(':', listOnlyNamespaces=True, recurse=True)
-lsNamespacesContaining = lambda x: filt(flip(inNS)(x))(lsNamespaces())
+lsNamespacesContaining = lambda x: filterBy(flip(inNS)(x))(lsNamespaces())
 
 
 atTime = lambda t: lambda f: lambda x: [cmds.currentTime(t), f(x)][-1]
