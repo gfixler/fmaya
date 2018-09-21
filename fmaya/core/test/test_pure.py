@@ -488,6 +488,16 @@ class Test_anyBy (unittest.TestCase):
         self.assertEquals(pure.anyBy(lambda x: x > 5)([1,2,4,2,7,3,2,4,1]), True)
 
 
+class Test_minBy (unittest.TestCase):
+
+    def test_minBy_identity (self):
+        self.assertEquals(pure.minBy(lambda x: x)([5,3,6,2,3,4]), 2)
+
+    def test_minBy_length (self):
+        # also gives evidence that it's a stable sort
+        self.assertEquals(pure.minBy(len)(["three","seven","six","four","two"]), "six")
+
+
 class Test_iterateTimes (unittest.TestCase):
 
     def test_iterateTimes_identity (self):
