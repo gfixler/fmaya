@@ -146,6 +146,20 @@ class Test_setChannel (unittest.TestCase):
 
 
 @attr('maya')
+class Test_getAttr (unittest.TestCase):
+
+    def setUp (self):
+        self.loc = cmds.spaceLocator()[0]
+        cmds.setAttr(self.loc + ".ty", -23.0)
+        cmds.setAttr(self.loc + ".tz", 7.5)
+        cmds.setAttr(self.loc + ".ry", 123.0)
+        cmds.setAttr(self.loc + ".rz", -220.0)
+
+    def test_getAttr_getsAnAttr (self):
+        self.assertEquals(chan.getAttr("ty")(self.loc), -23.0)
+
+
+@attr('maya')
 class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
 
     def setUp (self):
