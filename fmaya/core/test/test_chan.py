@@ -95,22 +95,6 @@ class Test_keysValueCenter (unittest.TestCase):
 # IMPURE
 
 @attr('maya')
-class Test_getTime (unittest.TestCase):
-
-    def test_getTime_time0 (self):
-        cmds.currentTime(5, edit=True)
-        self.assertEquals(chan.getTime(), 5)
-
-    def test_getTime_timeNegative20 (self):
-        cmds.currentTime(-20, edit=True)
-        self.assertEquals(chan.getTime(), -20)
-
-    def test_getTime_time123 (self):
-        cmds.currentTime(123, edit=True)
-        self.assertEquals(chan.getTime(), 123)
-
-
-@attr('maya')
 class Test_getAttrType (unittest.TestCase):
 
     def test_getAttrType_translateX (self):

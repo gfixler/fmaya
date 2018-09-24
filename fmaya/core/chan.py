@@ -4,6 +4,7 @@ except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
 from .pure import _not, comp, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone
+from .scene import getTime
 
 
 # PURE
@@ -19,8 +20,6 @@ keysValueCenter = comp(uncurryPair(mid), keysValueRange) # non-total: fails on e
 
 
 # IMPURE
-
-getTime = lambda: cmds.currentTime(query=True)
 
 getAttrType = lambda channel: cmds.getAttr(channel, type=True)
 

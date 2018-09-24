@@ -14,6 +14,8 @@ sceneName = lambda: scenePath().split('/')[-1]
 
 grepScene = lambda pat: grep(pat)(cmds.ls(allPaths=True))
 
+getTime = lambda: cmds.currentTime(query=True)
+
 obExists = lambda x: cmds.objExists(x)
 
 inNS = lambda ns: comp(obExists, withNS(ns))
