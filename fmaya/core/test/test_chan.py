@@ -95,13 +95,13 @@ class Test_keysValueCenter (unittest.TestCase):
 # IMPURE
 
 @attr('maya')
-class Test_getAttrType (unittest.TestCase):
+class Test_getChanType (unittest.TestCase):
 
     def test_getAttrType_translateX (self):
-        self.assertEquals(chan.getAttrType('persp.translateX'), 'doubleLinear')
+        self.assertEquals(chan.getChannelType('persp.translateX'), 'doubleLinear')
 
     def test_getAttrType_visibility (self):
-        self.assertEquals(chan.getAttrType('persp.visibility'), 'bool')
+        self.assertEquals(chan.getChannelType('persp.visibility'), 'bool')
 
 
 @attr('maya')

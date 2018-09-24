@@ -21,7 +21,7 @@ keysValueCenter = comp(uncurryPair(mid), keysValueRange) # non-total: fails on e
 
 # IMPURE
 
-getAttrType = lambda channel: cmds.getAttr(channel, type=True)
+getChannelType = lambda channel: cmds.getAttr(channel, type=True)
 
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
 getChannel = comp(getChannelAtTime, getTime)
@@ -38,6 +38,6 @@ artistAttrs = lambda node: cmds.listAttr(node, keyable=True, visible=True, unloc
 artistChannels = lambda node: cmap(attrToChannel(node))(artistAttrs(node))
 
 numericChannelTypes = ['doubleLinear','doubleAngle','double']
-isNumericChannel = lambda channel: getAttrType(channel) in numericChannelTypes
+isNumericChannel = lambda channel: getChannelType(channel) in numericChannelTypes
 numericArtistChannels = lambda node: filter(isNumericChannel, artistChannels(node))
 
