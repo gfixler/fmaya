@@ -169,6 +169,20 @@ class Test_setAttr (unittest.TestCase):
         chan.setAttr("ty")(37.0)(self.loc)
         self.assertEquals(cmds.getAttr(self.loc + ".ty"), 37.0)
 
+@attr('maya')
+class Test_modAttr (unittest.TestCase):
+
+    def setUp (self):
+        self.loc = cmds.spaceLocator()[0]
+
+    def test_modAttr_modsAndAttrWithAddition (self):
+        chan.modAttr("ty")(lambda y: y + 3)(self.loc)
+        self.assertEquals(cmds.getAttr(self.loc + ".ty"), 3.0)
+
+    def tests_modAttr_modsAnAttrWithMultiplication (self):
+        chan.modAttr("sz")(lambda z: z * 4)(self.loc)
+        self.assertEquals(cmds.getAttr(self.loc + ".sz"), 4.0)
+
 
 @attr('maya')
 class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):

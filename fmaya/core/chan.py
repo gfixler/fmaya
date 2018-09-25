@@ -29,6 +29,7 @@ setChannel = lambda c: lambda (t, v): cmds.setKeyframe(c, time=t, value=v)
 
 getAttr = lambda a: lambda n: cmds.getAttr(n + "." + a)
 setAttr = lambda a: lambda v: lambda n: cmds.setAttr(n + "." + a, v)
+modAttr = lambda a: lambda f: lambda n: cmds.setAttr(n + "." + a, f(getAttr(a)(n)))
 
 getKeyTimes = lambda channel: emptyNone(cmds.keyframe(channel, query=True, timeChange=True))
 getKeyValues = lambda channel: emptyNone(cmds.keyframe(channel, query=True, valueChange=True))
