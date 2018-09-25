@@ -3,7 +3,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import _not, comp, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone
+from .pure import _not, comp, const, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone
 from .scene import getTime
 
 
@@ -28,8 +28,8 @@ getChannel = comp(getChannelAtTime, getTime)
 setChannel = lambda c: lambda (t, v): cmds.setKeyframe(c, time=t, value=v)
 
 getAttr = lambda a: lambda n: cmds.getAttr(n + "." + a)
-setAttr = lambda a: lambda v: lambda n: cmds.setAttr(n + "." + a, v)
 modAttr = lambda a: lambda f: lambda n: cmds.setAttr(n + "." + a, f(getAttr(a)(n)))
+setAttr = lambda a: lambda v: modAttr(a)(const(v))
 
 getKeyTimes = lambda channel: emptyNone(cmds.keyframe(channel, query=True, timeChange=True))
 getKeyValues = lambda channel: emptyNone(cmds.keyframe(channel, query=True, valueChange=True))
