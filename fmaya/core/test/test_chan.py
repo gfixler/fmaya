@@ -56,18 +56,6 @@ class Test_attrToChannel (unittest.TestCase):
         self.assertEquals(chan.attrToChannel("")(""), ".")
 
 
-class Test_minAndMax (unittest.TestCase):
-
-    def test_minAndMax_raisesOnEmptyList (self):
-        self.assertRaises(ValueError, lambda: chan.minAndMax([]))
-
-    def test_minAndMax_findsOnlyElementInSingletonList (self):
-        self.assertEquals(chan.minAndMax([3]), (3, 3))
-
-    def test_minAndMax_findsMinAndMaxInLengthNList (self):
-        self.assertEquals(chan.minAndMax([3,4,2,8,1,2,7]), (1, 8))
-
-
 class Test_keysValueRange (unittest.TestCase):
 
     def test_keysValueRange_raisesOnEmptyList (self):
@@ -164,6 +152,10 @@ class Test_modAttr (unittest.TestCase):
 
     def setUp (self):
         self.loc = cmds.spaceLocator()[0]
+
+    def tests_modAttr_identity (self):
+        chan.modAttr("sy")(lambda x: x)(self.loc)
+        self.assertEquals(cmds.getAttr(self.loc + ".sy"), 1.0)
 
     def test_modAttr_modsAndAttrWithAddition (self):
         chan.modAttr("ty")(lambda y: y + 3)(self.loc)

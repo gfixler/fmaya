@@ -508,6 +508,18 @@ class Test_maxBy (unittest.TestCase):
         self.assertEquals(pure.maxBy(len)(["three","seven","six","four","two"]), "seven")
 
 
+class Test_minAndMax (unittest.TestCase):
+
+    def test_minAndMax_raisesOnEmptyList (self):
+        self.assertRaises(ValueError, lambda: pure.minAndMax([]))
+
+    def test_minAndMax_findsOnlyElementInSingletonList (self):
+        self.assertEquals(pure.minAndMax([3]), (3, 3))
+
+    def test_minAndMax_findsMinAndMaxInLengthNList (self):
+        self.assertEquals(pure.minAndMax([3,4,2,8,1,2,7]), (1, 8))
+
+
 class Test_iterateTimes (unittest.TestCase):
 
     def test_iterateTimes_identity (self):

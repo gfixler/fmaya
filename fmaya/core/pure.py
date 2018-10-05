@@ -46,8 +46,9 @@ filterBy = lambda f: lambda xs: filter(f, xs)
 firstBy = lambda f: lambda xs: xs[0] if f(xs[0]) else firstBy(f)(xs[1:]) # non-total
 anyBy = lambda f: lambda xs: any(cmap(f)(xs))
 
-minBy = lambda f: lambda xs: sorted(xs, key=f)[0] # non-total
-maxBy = lambda f: lambda xs: sorted(xs, key=f)[-1] # non-total
+minBy = lambda f: lambda xs: sorted(xs, key=f)[0] # non-total: fails on empty list
+maxBy = lambda f: lambda xs: sorted(xs, key=f)[-1] # non-total: fails on empty list
+minAndMax = lambda xs: (min(xs), max(xs)) # non-total: fails on empty list
 
 iterateTimes = lambda n: lambda f: lambda x: x if n <= 0 else iterateTimes(n-1)(f)(f(x))
 

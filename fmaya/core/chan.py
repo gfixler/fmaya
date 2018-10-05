@@ -3,7 +3,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import _not, comp, const, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone
+from .pure import _not, comp, const, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone, minAndMax
 from .scene import getTime
 
 
@@ -14,7 +14,6 @@ attrFromChannel = lambda channel: channel.split('.')[-1]
 chanFromChannel = lambda channel: (nodeFromChannel(channel), attrFromChannel(channel))
 attrToChannel = lambda node: preadd(node + ".")
 
-minAndMax = lambda xs: (min(xs), max(xs)) # non-total: fails on empty list
 keysValueRange = lambda keys: minAndMax(cmap(snd)(keys)) # non-total: fails on empty keys list
 keysValueCenter = comp(uncurryPair(mid), keysValueRange) # non-total: fails on empty keys list
 
