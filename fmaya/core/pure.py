@@ -27,10 +27,6 @@ isEmpty = lambda xs: len(xs) == 0
 
 reverse = lambda xs: xs[::-1]
 
-_not = lambda b: not b
-eq = lambda a: lambda b: a == b
-neq = lambda a: comp(_not, eq(a))
-
 begins = lambda b: lambda s: s.startswith(b)
 ends = lambda b: lambda s: s.endswith(b)
 
@@ -56,8 +52,13 @@ lerp = lambda t: lambda a: lambda b: (b - a) * t + a
 
 grep = lambda pat: lambda xs: [x for x in xs if re.search(pat, x)]
 
+_not = lambda b: not b
+
 lt = lambda x: lambda y: y < x
 lte = lambda x: lambda y: y <= x
 gte = lambda x: lambda y: y >= x
 gt = lambda x: lambda y: y > x
+
+eq = lambda a: lambda b: a == b
+neq = lambda a: comp(_not, eq(a))
 
