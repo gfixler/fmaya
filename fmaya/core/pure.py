@@ -27,7 +27,7 @@ isEmpty = lambda xs: len(xs) == 0
 
 reverse = lambda xs: xs[::-1]
 
-begins = lambda b: lambda s: s.startswith(b)
+starts = lambda b: lambda s: s.startswith(b)
 ends = lambda b: lambda s: s.endswith(b)
 
 preadd = lambda p: lambda s: p + s

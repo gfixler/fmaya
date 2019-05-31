@@ -263,25 +263,25 @@ class Test_reverse (unittest.TestCase):
         self.assertEquals(pure.reverse("testing"), "gnitset")
 
 
-class Test_begins (unittest.TestCase):
+class Test_starts (unittest.TestCase):
 
-    def test_begins_begins (self):
-        self.assertEquals(pure.begins("foo")("foobar"), True)
+    def test_starts_starts (self):
+        self.assertEquals(pure.starts("foo")("foobar"), True)
 
-    def test_begins_doesNotBegin (self):
-        self.assertEquals(pure.begins("foo")("barquux"), False)
+    def test_starts_doesNotStart (self):
+        self.assertEquals(pure.starts("foo")("barquux"), False)
 
-    def test_begins_fullMatchCounts (self):
-        self.assertEquals(pure.begins("foo")("foo"), True)
+    def test_starts_fullMatchCounts (self):
+        self.assertEquals(pure.starts("foo")("foo"), True)
 
-    def test_begins_emptyPrefixAlwaysMatches (self):
-        self.assertEquals(pure.begins("")("nonempty"), True)
+    def test_starts_emptyPrefixAlwaysMatches (self):
+        self.assertEquals(pure.starts("")("nonempty"), True)
 
-    def test_begins_anyMatchOnEmptyIsFalse (self):
-        self.assertEquals(pure.begins("test")(""), False)
+    def test_starts_anyMatchOnEmptyIsFalse (self):
+        self.assertEquals(pure.starts("test")(""), False)
 
-    def test_begins_twoEmptyStringsMatch (self):
-        self.assertEquals(pure.begins("")(""), True)
+    def test_starts_twoEmptyStringsMatch (self):
+        self.assertEquals(pure.starts("")(""), True)
 
 
 class Test_ends (unittest.TestCase):
@@ -501,7 +501,7 @@ class Test_grep (unittest.TestCase):
         expected = ["apple","banana_apple","apple-pen","grapple"]
         self.assertEquals(pure.grep('apple')(given), expected)
 
-    def test_grep_findsAtBeginning (self):
+    def test_grep_findsAtStartning (self):
         self.assertEquals(pure.grep("^abc")(["abc","cabc","abcdef"]), ["abc","abcdef"])
 
     def test_grep_findsAtEnd (self):
