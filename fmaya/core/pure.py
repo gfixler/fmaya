@@ -56,3 +56,8 @@ lerp = lambda t: lambda a: lambda b: (b - a) * t + a
 
 grep = lambda pat: lambda xs: [x for x in xs if re.search(pat, x)]
 
+lt = lambda x: lambda y: y < x
+lte = lambda x: lambda y: y <= x
+gte = lambda x: lambda y: y >= x
+gt = lambda x: lambda y: y > x
+

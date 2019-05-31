@@ -571,3 +571,41 @@ class Test_grep (unittest.TestCase):
         expected = ["a:b:c","a:b:d","::"]
         self.assertEquals(pure.grep("^[^:]*:[^:]*:[^:]*$")(given), expected)
 
+class Test_comparators (unittest.TestCase):
+
+    def test_lt_trueWhenLessThan (self):
+        self.assertTrue(pure.lt(5)(3))
+
+    def test_lt_falseWhenEqual (self):
+        self.assertFalse(pure.lt(3)(3))
+
+    def test_lt_falseWhenGreaterThan (self):
+        self.assertFalse(pure.lt(3)(5))
+
+    def test_lte_trueWhenLessThan (self):
+        self.assertTrue(pure.lte(5)(3))
+
+    def test_lte_trueWhenEqual (self):
+        self.assertTrue(pure.lte(3)(3))
+
+    def test_lte_falseWhenGreaterThan (self):
+        self.assertFalse(pure.lte(3)(5))
+
+    def test_gte_falseWhenLessThan (self):
+        self.assertFalse(pure.gte(5)(3))
+
+    def test_gte_trueWhenEqual (self):
+        self.assertTrue(pure.gte(3)(3))
+
+    def test_gte_trueWhenGreaterThan (self):
+        self.assertTrue(pure.gte(3)(5))
+
+    def test_gt_falseWhenLessThan (self):
+        self.assertFalse(pure.gt(5)(3))
+
+    def test_gt_falseWhenEqual (self):
+        self.assertFalse(pure.gt(3)(3))
+
+    def test_gt_trueWhenGreaterThan (self):
+        self.assertTrue(pure.gt(3)(5))
+
