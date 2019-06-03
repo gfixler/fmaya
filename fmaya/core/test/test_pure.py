@@ -64,6 +64,21 @@ class Test_both (unittest.TestCase):
         self.assertEquals(pure.both(lambda x: x)(lambda y: y[::-1])("cat"), ("cat", "tac"))
 
 
+class Test_comp2 (unittest.TestCase):
+
+    def test_comp2_twoIdentsAreIdent (self):
+        self.assertEquals((pure.comp2(lambda x: x)(lambda y: y))("foo"), "foo")
+
+    def test_comp2_composesTwoFunctions (self):
+        self.assertEquals((pure.comp2(lambda x: x * 2)(lambda y: y + 3))(5), 16)
+
+    def test_comp2_canNest (self):
+        f = lambda x: x + 7
+        g = lambda y: y * 3
+        h = lambda z: z - 4
+        self.assertEquals((pure.comp2(pure.comp2(f)(g))(h))(9), 22)
+
+
 class Test_comp (unittest.TestCase):
 
     def test_comp_oneFunctionWorksAsApply (self):

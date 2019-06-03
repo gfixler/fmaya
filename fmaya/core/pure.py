@@ -6,6 +6,7 @@ app = lambda f: lambda x: f(x)
 flip = lambda f: lambda x: lambda y: f(y)(x)
 juxt = lambda *fs: lambda x: [f(x) for f in fs]
 both = lambda f: lambda g: lambda x: (f(x), g(x))
+comp2 = lambda f: lambda g: lambda x: f(g(x))
 comp = lambda *fs: reduce(lambda f, g: lambda x: f(g(x)), fs, ident)
 cmap = lambda f: lambda xs: map(f, xs)
 czip = lambda xs: lambda ys: zip(xs, ys)
