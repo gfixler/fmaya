@@ -28,7 +28,8 @@ gridXY0_ = lambda x: lambda y: take(x * y)(gridXY0(x))
 
 strict(cmap(locAt)(gridXY0_(10)(15)))
 
+"""
 g = grid2D(5)
 ab2abx(0)(g.next())
-
+"""
 
