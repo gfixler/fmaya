@@ -56,5 +56,5 @@ normpath = lambda path: os.path.normpath(path)
 dirwalk = lambda d: os.walk(d)
 tree = lambda dir: concat(cmap(comp2(normpath)(jnpath(r)))(fs) for (r, ds, fs) in dirwalk(dir))
 
-open = lambda path: cmds.file(path, open=True, force=True)
+loadScene = lambda path: cmds.file(path, open=True, force=True)
 
