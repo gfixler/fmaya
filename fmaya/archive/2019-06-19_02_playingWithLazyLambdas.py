@@ -32,5 +32,5 @@ take(5)(drop(2)(grid2D(5)))
 
 take(5)(lazy("this is a test"))
 strict(doTimes(5)(loc))
-""
+"""
 
