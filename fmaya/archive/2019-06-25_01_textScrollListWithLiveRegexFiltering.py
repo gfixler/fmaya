@@ -5,14 +5,14 @@ comp2 = lambda f: lambda g: lambda x: f(g(x))
 cmap = lambda f: lambda xs: map(f, xs)
 concat = lambda xss: (x for xs in xss for x in xs)
 
-lsdir = lambda d: os.listdir(d)
+lsdir = os.listdir
+realpath = os.path.realpath # cleans up, e.g. "foo/../foo"
+dirwalk = os.walk
 jnpath = lambda l: lambda r: os.path.join(l, r)
-realpath = lambda path: os.path.realpath(path)
-dirwalk = lambda d: os.walk(d)
 tree = lambda dir: concat(cmap(comp2(realpath)(jnpath(r)))(fs) for (r, ds, fs) in dirwalk(dir))
 
 
-p = "D:/p4/wwe2k/main/Art/../Art/Characters20/" # realpath cleans up the ../Art bit
+p = "your/path/here" # e.g. some project path with tons of files
 
 cmds.waitCursor(state=True)
 t = tree(p)
