@@ -24,7 +24,7 @@ getChannelType = lambda channel: cmds.getAttr(channel, type=True)
 
 getChannelAtTime = lambda time: lambda channel: cmds.getAttr(channel, time=time)
 getChannel = comp(getChannelAtTime, getTime)
-setChannel = lambda c: lambda (t, v): cmds.setKeyframe(c, time=t, value=v)
+setChannel = lambda c: lambda tv: cmds.setKeyframe(c, time=tv[0], value=tv[1])
 
 getAttr = lambda a: lambda n: cmds.getAttr(n + "." + a)
 modAttr = lambda a: lambda f: lambda n: cmds.setAttr(n + "." + a, f(getAttr(a)(n)))

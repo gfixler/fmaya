@@ -13,13 +13,13 @@ zipWith = lambda f: lambda xs: lambda ys: [f(x)(y) for (x, y) in zip(xs, ys)]
 
 curry2 = lambda f: lambda x: lambda y: f(x, y)
 uncurry2 = lambda f: lambda x, y: f(x)(y)
-uncurryPair = lambda f: lambda (x, y): f(x)(y)
+uncurryPair = lambda f: lambda p: f(p[0])(p[1])
 
-fst = lambda (x, _): x
-snd = lambda (_, y): y
-onFst = lambda f: lambda (x, y): (f(x), y)
-onSnd = lambda f: lambda (x, y): (x, f(y))
-swap = lambda (a, b): (b, a)
+fst = lambda xy: xy[0]
+snd = lambda xy: xy[1]
+onFst = lambda f: lambda xy: (f(xy[0]), xy[1])
+onSnd = lambda f: lambda xy: (xy[0], f(xy[1]))
+swap = lambda xy: (xy[1], xy[0])
 
 concat = lambda xss: reduce(lambda x, y: x + y, xss) if xss else []
 emptyNone = lambda xs: xs or []

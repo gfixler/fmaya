@@ -10,14 +10,14 @@ from pure import both, uncurry2
 
 # PURE
 
-xyzAdd = lambda (x,y,z): lambda (u,v,w): (x+u, y+v, z+w)
-xyzSub = lambda (x,y,z): lambda (u,v,w): (x-u, y-v, z-w)
-xyzMul = lambda (x,y,z): lambda (u,v,w): (x*u, y*v, z*w)
-xyzDiv = lambda (x,y,z): lambda (u,v,w): (float(x)/float(u), float(y)/float(v), (z)/float(w))
-xyzScale = lambda s: lambda (x,y,z): (s*x, s*y, s*z)
+xyzAdd = lambda a: lambda b: (a[0]+b[0], a[1]+b[1], a[2]+b[2])
+xyzSub = lambda a: lambda b: (a[0]-b[0], a[1]-b[1], a[2]-b[2])
+xyzMul = lambda a: lambda b: (a[0]*b[0], a[1]*b[1], a[2]*b[2])
+xyzDiv = lambda a: lambda b: (float(a[0])/float(b[0]), float(a[1])/float(b[1]), (a[2])/float(b[2]))
+xyzScale = lambda s: lambda p: (s*p[0], s*p[1], s*p[2])
 xyzSum = lambda xs: (0,0,0) if len(xs) == 0 else reduce(uncurry2(xyzAdd), xs, (0,0,0))
 xyzAvg = lambda xs: (0,0,0) if len(xs) == 0 else xyzSum(map(xyzScale(1.0/len(xs)), xs))
-xyzDist = lambda (x,y,z): lambda (u,v,w): sqrt((x-u) * (x-u) + (y-v) * (y-v) + (z-w) * (z-w))
+xyzDist = lambda a: lambda b: sqrt((a[0]-b[0]) * (a[0]-b[0]) + (a[1]-b[1]) * (a[1]-b[1]) + (a[2]-b[2]) * (a[2]-b[2]))
 xyzHypot = xyzDist((0,0,0))
 xyzUnit = lambda xyz: xyzScale(1.0/xyzHypot(xyz))(xyz)
 
@@ -29,27 +29,27 @@ class V3 (object):
 
     @property
     def x (self):
-        return (lambda (x,y,z): x)(self.xyz)
+        return (lambda v: v[0])(self.xyz)
 
     @x.setter
     def x (self, value):
-        self.xyz = (lambda (x,y,z): (value,y,z))(self.xyz)
+        self.xyz = (lambda v: (value,v[1],v[2]))(self.xyz)
 
     @property
     def y (self):
-        return (lambda (x,y,z): y)(self.xyz)
+        return (lambda v: v[1])(self.xyz)
 
     @y.setter
     def y (self, value):
-        self.xyz = (lambda (x,y,z): (x,value,z))(self.xyz)
+        self.xyz = (lambda v: (v[0],value,v[2]))(self.xyz)
 
     @property
     def z (self):
-        return (lambda (x,y,z): z)(self.xyz)
+        return (lambda v: v[2])(self.xyz)
 
     @z.setter
     def z (self, value):
-        self.xyz = (lambda (x,y,z): (x,y,value))(self.xyz)
+        self.xyz = (lambda v: (v[0],v[1],value))(self.xyz)
 
     def __repr__ (self):
         return ("V3 " + str(self.xyz))

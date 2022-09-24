@@ -461,7 +461,7 @@ class Test_firstBy (unittest.TestCase):
         self.assertEquals(pure.firstBy(lambda x: x == 5)([3,4,5,2,1]), 5)
 
     def test_firstBy_findsBySecondElementInTuple (self):
-        self.assertEquals(pure.firstBy(lambda (_, y): y == 3)([(0,1),(2,3),(4,5),(6,7)]), (2,3))
+        self.assertEquals(pure.firstBy(lambda xy: xy[1] == 3)([(0,1),(2,3),(4,5),(6,7)]), (2,3))
 
     def test_firstBy_raisesOnUnfoundElement (self):
         self.assertRaises(IndexError, lambda: pure.firstBy(lambda _: False)([1,2,3,4,5]))
