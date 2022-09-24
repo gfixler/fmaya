@@ -5,7 +5,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import both, uncurry2
+from pure import both, uncurry2
 
 
 # PURE

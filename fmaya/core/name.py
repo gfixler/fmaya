@@ -3,7 +3,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import const, cmap
+from pure import const, cmap
 
 from string import digits, ascii_letters
 

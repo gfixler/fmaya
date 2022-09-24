@@ -3,8 +3,8 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import comp, eq
-from .name import stripNS
+from pure import comp, eq
+from name import stripNS
 
 
 getParent = lambda x: (lambda y: y[0] if y else None)(cmds.listRelatives(x, parent=True))

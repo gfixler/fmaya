@@ -1,7 +1,7 @@
 import unittest
 from nose.plugins.attrib import attr
 
-from .. import node
+import node
 
 
 @attr('maya')

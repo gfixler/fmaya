@@ -3,8 +3,8 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .pure import comp, flip, grep, filterBy
-from .name import withNS
+from pure import comp, flip, grep, filterBy
+from name import withNS
 
 
 # IMPURE

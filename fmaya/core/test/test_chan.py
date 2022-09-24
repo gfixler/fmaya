@@ -6,7 +6,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .. import chan
+import chan
 
 
 # PURE

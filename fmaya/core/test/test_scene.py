@@ -6,7 +6,7 @@ try:
 except ImportError:
     print 'WARNING (%s): failed to load maya.cmds module.' % __file__
 
-from .. import scene
+import scene
 
 import os
 import tempfile

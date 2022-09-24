@@ -1,7 +1,7 @@
 import unittest
 from nose.plugins.attrib import attr
 
-from .. import pure
+import pure
 
 
 class Test_ident (unittest.TestCase):
