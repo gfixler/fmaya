@@ -82,7 +82,7 @@ class V3 (object):
     def __rmul__ (self, other):
         return self.__mul__(other)
 
-    def __div__ (self, other):
+    def __truediv__ (self, other):
         if type(other) == int or type(other) == float:
             return V3(xyzMul(self.xyz)((1.0/other,1.0/other,1.0/other)))
         else:
