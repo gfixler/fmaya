@@ -7,8 +7,8 @@ flip = lambda f: lambda x: lambda y: f(y)(x)
 juxt = lambda *fs: lambda x: [f(x) for f in fs]
 both = lambda f: lambda g: lambda x: (f(x), g(x))
 comp = lambda *fs: reduce(lambda f, g: lambda x: f(g(x)), fs, ident)
-cmap = lambda f: lambda xs: map(f, xs)
-czip = lambda xs: lambda ys: zip(xs, ys)
+cmap = lambda f: lambda xs: list(map(f, xs))
+czip = lambda xs: lambda ys: list(zip(xs, ys))
 zipWith = lambda f: lambda xs: lambda ys: [f(x)(y) for (x, y) in zip(xs, ys)]
 
 curry2 = lambda f: lambda x: lambda y: f(x, y)
@@ -42,7 +42,7 @@ unsuffix = lambda p: lambda s: s[:-len(p)] if s.endswith(p) and not len(p) == 0 
 
 mid = lambda a: lambda b: (a + b) / 2.0
 
-filterBy = lambda f: lambda xs: filter(f, xs)
+filterBy = lambda f: lambda xs: list(filter(f, xs))
 firstBy = lambda f: lambda xs: xs[0] if f(xs[0]) else firstBy(f)(xs[1:]) # non-total
 anyBy = lambda f: lambda xs: any(cmap(f)(xs))
 
