@@ -3,8 +3,10 @@ from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
+    hasMaya = True
 except ImportError:
     print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    hasMaya = False
 
 import chan
 
@@ -83,6 +85,7 @@ class Test_keysValueCenter (unittest.TestCase):
 # IMPURE
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getChanType (unittest.TestCase):
 
     def test_getAttrType_translateX (self):
@@ -93,6 +96,7 @@ class Test_getChanType (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getChannelAtTime (unittest.TestCase):
 
     def setUp (self):
@@ -114,6 +118,7 @@ class Test_getChannelAtTime (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setChannel (unittest.TestCase):
 
     def setUp (self):
@@ -134,6 +139,7 @@ class Test_setChannel (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getAttr (unittest.TestCase):
 
     def setUp (self):
@@ -148,6 +154,7 @@ class Test_getAttr (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_modAttr (unittest.TestCase):
 
     def setUp (self):
@@ -167,6 +174,7 @@ class Test_modAttr (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setAttr (unittest.TestCase):
 
     def setUp (self):
@@ -178,6 +186,7 @@ class Test_setAttr (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
 
     def setUp (self):
@@ -197,6 +206,7 @@ class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_hasKeys (unittest.TestCase):
 
     def setUp (self):
@@ -213,6 +223,7 @@ class Test_hasKeys (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_artistAttrs (unittest.TestCase):
 
     def setUp (self):
@@ -262,6 +273,7 @@ class Test_artistAttrs (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_artistChannels (unittest.TestCase):
 
     def setUp (self):
@@ -311,6 +323,7 @@ class Test_artistChannels (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_isNumericChannel (unittest.TestCase):
 
     def test_isNumericChannel_nonNumericChannelYieldsFalse (self):
@@ -321,6 +334,7 @@ class Test_isNumericChannel (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_numericArtistChannels (unittest.TestCase):
 
     def setUp (self):

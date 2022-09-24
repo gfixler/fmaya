@@ -3,8 +3,10 @@ from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
+    hasMaya = True
 except ImportError:
     print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    hasMaya = False
 
 import name
 
@@ -55,6 +57,7 @@ class Test_stripNS (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_renameBy (unittest.TestCase):
 
     def setUp (self):
@@ -73,6 +76,7 @@ class Test_renameBy (unittest.TestCase):
         self.assertTrue(cmds.objExists(self.loc + self.loc))
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_renameTo (unittest.TestCase):
 
     def setUp (self):

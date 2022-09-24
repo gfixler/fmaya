@@ -6,8 +6,10 @@ from math import sqrt
 
 try:
     import maya.cmds as cmds
+    hasMaya = True
 except ImportError:
     print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    hasMaya = False
 
 import tf
 
@@ -415,6 +417,7 @@ class Test_v3Mid (unittest.TestCase):
 # IMPURE
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_pos (unittest.TestCase):
 
     def setUp (self):
@@ -444,6 +447,7 @@ class Test_pos (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setpos (unittest.TestCase):
 
     def setUp (self):
@@ -462,6 +466,7 @@ class Test_setpos (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_wpos (unittest.TestCase):
 
     def setUp (self):
@@ -491,6 +496,7 @@ class Test_wpos (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setwpos (unittest.TestCase):
 
     def setUp (self):
@@ -519,6 +525,7 @@ class Test_setwpos (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_rot (unittest.TestCase):
 
     def setUp (self):
@@ -537,6 +544,7 @@ class Test_rot (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setRot (unittest.TestCase):
 
     def setUp (self):
@@ -562,6 +570,7 @@ class Test_setRot (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_wrot (unittest.TestCase):
 
     def setUp (self):
@@ -600,6 +609,7 @@ class Test_wrot (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setwrot (unittest.TestCase):
 
     def setUp (self):
@@ -631,6 +641,7 @@ class Test_setwrot (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_posrot (unittest.TestCase):
 
     def test_posrot_getsTestObjectTransforms (self):
@@ -660,6 +671,7 @@ class Test_posrot (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_wposrot (unittest.TestCase):
 
     def test_wposrot_getsTestObjectTransforms (self):

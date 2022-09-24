@@ -3,8 +3,10 @@ from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
+    hasMaya = True
 except ImportError:
     print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    hasMaya = False
 
 import scene
 
@@ -14,6 +16,7 @@ import tempfile
 # IMPURE
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_scenePath (unittest.TestCase):
 
     def test_scenePath_getsScenePath (self):
@@ -27,6 +30,7 @@ class Test_scenePath (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_sceneName (unittest.TestCase):
 
     def test_scenePath_getsSceneName (self):
@@ -37,6 +41,7 @@ class Test_sceneName (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_grepScene (unittest.TestCase):
 
     def setUp (self):
@@ -66,6 +71,7 @@ class Test_grepScene (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getTime (unittest.TestCase):
 
     def test_getTime_time0 (self):
@@ -82,6 +88,7 @@ class Test_getTime (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_obExists (unittest.TestCase):
 
     def setUp (self):
@@ -95,6 +102,7 @@ class Test_obExists (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_inNS (unittest.TestCase):
 
     def setUp (self):
@@ -111,6 +119,7 @@ class Test_inNS (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_lsNamespaces (unittest.TestCase):
 
     def setUp (self):
@@ -126,6 +135,7 @@ class Test_lsNamespaces (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_lsNamespacesContaining (unittest.TestCase):
 
     def setUp (self):
@@ -144,6 +154,7 @@ class Test_lsNamespacesContaining (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atTime (unittest.TestCase):
 
     def setUp (self):
@@ -161,6 +172,7 @@ class Test_atTime (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atTime_ (unittest.TestCase):
 
     def test_atTime__readsTimeAtIntTime (self):
@@ -171,6 +183,7 @@ class Test_atTime_ (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atFrame (unittest.TestCase):
 
     def setUp (self):
@@ -185,6 +198,7 @@ class Test_atFrame (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atFrame_ (unittest.TestCase):
 
     def test_atFrame__readsFrameAtIntTime (self):
@@ -195,6 +209,7 @@ class Test_atFrame_ (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_inTime (unittest.TestCase):
 
     def setUp (self):
@@ -213,6 +228,7 @@ class Test_inTime (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_outTime (unittest.TestCase):
 
     def setUp (self):
@@ -231,6 +247,7 @@ class Test_outTime (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_inFrame (unittest.TestCase):
 
     def setUp (self):
@@ -246,6 +263,7 @@ class Test_inFrame (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_outFrame (unittest.TestCase):
 
     def setUp (self):
@@ -261,6 +279,7 @@ class Test_outFrame (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_allFrames (unittest.TestCase):
 
     def setUp (self):

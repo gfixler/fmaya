@@ -3,13 +3,16 @@ from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
+    hasMaya = True
 except ImportError:
     print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    hasMaya = False
 
 import hier
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getParent (unittest.TestCase):
 
     def setUp (self):
@@ -26,6 +29,7 @@ class Test_getParent (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_withParent (unittest.TestCase):
 
     def setUp (self):
@@ -49,6 +53,7 @@ class Test_withParent (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_parentPred (unittest.TestCase):
 
     def setUp (self):
@@ -68,6 +73,7 @@ class Test_parentPred (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_parentNameIs (unittest.TestCase):
 
     def setUp (self):

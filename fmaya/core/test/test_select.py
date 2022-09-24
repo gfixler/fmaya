@@ -3,8 +3,10 @@ from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
+    hasMaya = True
 except ImportError:
     print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    hasMaya = False
 
 import select
 
@@ -12,6 +14,7 @@ import select
 # IMPURE
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_grab (unittest.TestCase):
 
     def test_grab_grabsNothing (self):
@@ -37,6 +40,7 @@ class Test_grab (unittest.TestCase):
 
 
 @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
 class Test_selAndSelection1 (unittest.TestCase):
 
     def setUp (self):
