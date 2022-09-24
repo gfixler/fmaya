@@ -412,7 +412,7 @@ class Test_unsuffix (unittest.TestCase):
     def test_unsuffix_suffixNotFoundIsIdentity (self):
         self.assertEquals(pure.unsuffix("nope")("whatever"), "whatever")
 
-    def test_unsuffix_removesPrefix (self):
+    def test_unsuffix_removesSuffix (self):
         self.assertEquals(pure.unsuffix("dog")("catdog"), "cat")
 
     def test_unsuffix_handlesEmptyInput (self):
