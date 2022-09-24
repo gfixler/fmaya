@@ -1,4 +1,5 @@
 from math import sqrt
+from functools import reduce
 
 try:
     import maya.cmds as cmds

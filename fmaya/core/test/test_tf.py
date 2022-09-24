@@ -1,5 +1,6 @@
 import unittest
 from nose.plugins.attrib import attr
+from functools import reduce
 
 from math import sqrt
 
