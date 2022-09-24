@@ -1,12 +1,12 @@
 try:
     import maya.cmds as cmds
 except ImportError:
-    print 'WARNING (%s): failed to load maya.cmds module.' % __file__
+    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
 
 try:
     import maya.mel as mel
 except ImportError:
-    print 'WARNING (%s): failed to load maya.mel module.' % __file__
+    print('WARNING (%s): failed to load maya.mel module.' % __file__)
 
 
 # IMPURE
