@@ -23,7 +23,7 @@ class Test_scenePath (unittest.TestCase):
         cmds.file(rename=tfn)
         sp = scene.scenePath()
         spn = os.path.normpath(sp)
-        self.assertEquals(spn, tfn)
+        self.assertEqual(spn, tfn)
 
 
 @attr('maya')
@@ -33,7 +33,7 @@ class Test_sceneName (unittest.TestCase):
         tf = tempfile.TemporaryFile(suffix='.ma')
         cmds.file(rename=tf.name)
         name = os.path.basename(tf.name)
-        self.assertEquals(scene.sceneName(), name)
+        self.assertEqual(scene.sceneName(), name)
 
 
 @attr('maya')
@@ -43,26 +43,26 @@ class Test_grepScene (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_grepScene_emptyPatternFindsAllObjects (self):
-        self.assertEquals(scene.grepScene(""), cmds.ls(allPaths=True))
+        self.assertEqual(scene.grepScene(""), cmds.ls(allPaths=True))
 
     def test_grepScene_findsCameras (self):
-        self.assertEquals(set(scene.grepScene("Shape$")), set(["perspShape","topShape","frontShape","sideShape"]))
+        self.assertEqual(set(scene.grepScene("Shape$")), set(["perspShape","topShape","frontShape","sideShape"]))
 
     def test_grepScene_findsDefaultGlobals (self):
         expected = ["defaultRenderGlobals","defaultHardwareRenderGlobals","defaultColorMgtGlobals"]
-        self.assertEquals(set(scene.grepScene("^default.*Globals$")), set(expected))
+        self.assertEqual(set(scene.grepScene("^default.*Globals$")), set(expected))
 
     def test_grepScene_findsNumericPatterns (self):
         for i in xrange(20):
             cmds.spaceLocator(name="loc{0:b}".format(i))
         expected = ["loc101", "loc1111", "loc1101", "loc111"]
-        self.assertEquals(set(scene.grepScene("1[01]1$")), set(expected))
+        self.assertEqual(set(scene.grepScene("1[01]1$")), set(expected))
 
     def test_grepScene_findsNamesWithNoCapitalLetters (self):
-        self.assertEquals(set(scene.grepScene("^[a-z]+$")), set(["front","persp","top","side"]))
+        self.assertEqual(set(scene.grepScene("^[a-z]+$")), set(["front","persp","top","side"]))
 
     def test_grepScene_findsASpecificPattern (self):
-        self.assertEquals(set(scene.grepScene("e......s")), set(["strokeGlobals", "defaultRenderingList1"]))
+        self.assertEqual(set(scene.grepScene("e......s")), set(["strokeGlobals", "defaultRenderingList1"]))
 
 
 @attr('maya')
@@ -70,15 +70,15 @@ class Test_getTime (unittest.TestCase):
 
     def test_getTime_time0 (self):
         cmds.currentTime(5, edit=True)
-        self.assertEquals(scene.getTime(), 5)
+        self.assertEqual(scene.getTime(), 5)
 
     def test_getTime_timeNegative20 (self):
         cmds.currentTime(-20, edit=True)
-        self.assertEquals(scene.getTime(), -20)
+        self.assertEqual(scene.getTime(), -20)
 
     def test_getTime_time123 (self):
         cmds.currentTime(123, edit=True)
-        self.assertEquals(scene.getTime(), 123)
+        self.assertEqual(scene.getTime(), 123)
 
 
 @attr('maya')
@@ -117,12 +117,12 @@ class Test_lsNamespaces (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_lsNamespaces_findsDefaults (self):
-        self.assertEquals(set(scene.lsNamespaces()), set([":","UI","shared"]))
+        self.assertEqual(set(scene.lsNamespaces()), set([":","UI","shared"]))
 
     def test_lsNamespaces_findsUserCreated (self):
         cmds.namespace(add="foo:bar")
         cmds.namespace(add="baz")
-        self.assertEquals(set(scene.lsNamespaces()), set([":","UI","shared","foo","foo:bar","baz"]))
+        self.assertEqual(set(scene.lsNamespaces()), set([":","UI","shared","foo","foo:bar","baz"]))
 
 
 @attr('maya')
@@ -132,7 +132,7 @@ class Test_lsNamespacesContaining (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_lsNamespacesContaining_findsPerspInDefaultSceneRoot (self):
-        self.assertEquals(set(scene.lsNamespacesContaining("persp")), set([":"]))
+        self.assertEqual(set(scene.lsNamespacesContaining("persp")), set([":"]))
 
     def test_lsNamespacesContaining_findsObjectNamespaceAmongMany (self):
         cmds.namespace(add="foo:bar")
@@ -140,7 +140,7 @@ class Test_lsNamespacesContaining (unittest.TestCase):
         cmds.namespace(set="foo")
         cmds.spaceLocator(name="Waldo")
         cmds.namespace(set=":")
-        self.assertEquals(scene.lsNamespacesContaining("Waldo"), [":", "foo"])
+        self.assertEqual(scene.lsNamespacesContaining("Waldo"), [":", "foo"])
 
 
 @attr('maya')
@@ -164,7 +164,7 @@ class Test_atTime (unittest.TestCase):
 class Test_atTime_ (unittest.TestCase):
 
     def test_atTime__readsTimeAtIntTime (self):
-        self.assertEquals(scene.atTime_(37)(lambda: cmds.currentTime(query=True)), 37)
+        self.assertEqual(scene.atTime_(37)(lambda: cmds.currentTime(query=True)), 37)
 
     def test_atTime__readsTimeAtFloatTime (self):
         self.assertAlmostEquals(scene.atTime_(13.7)(lambda: cmds.currentTime(query=True)), 13.7)
@@ -188,10 +188,10 @@ class Test_atFrame (unittest.TestCase):
 class Test_atFrame_ (unittest.TestCase):
 
     def test_atFrame__readsFrameAtIntTime (self):
-        self.assertEquals(scene.atFrame_(37)(lambda: cmds.currentTime(query=True)), 37)
+        self.assertEqual(scene.atFrame_(37)(lambda: cmds.currentTime(query=True)), 37)
 
     def test_atFrame__readsFrameAtFloatTime (self):
-        self.assertEquals(scene.atFrame_(13.7)(lambda: cmds.currentTime(query=True)), 14)
+        self.assertEqual(scene.atFrame_(13.7)(lambda: cmds.currentTime(query=True)), 14)
 
 
 @attr('maya')
@@ -201,15 +201,15 @@ class Test_inTime (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_inTime_getsFrame1FromNewScene (self):
-        self.assertEquals(scene.inTime(), 1.0)
+        self.assertEqual(scene.inTime(), 1.0)
 
     def test_inTime_getsIntFirstFrameTime (self):
         cmds.playbackOptions(edit=True, minTime=37)
-        self.assertEquals(scene.inTime(), 37.0)
+        self.assertEqual(scene.inTime(), 37.0)
 
     def test_inTime_getsFloatFirstFrameTime (self):
         cmds.playbackOptions(edit=True, minTime=13.23)
-        self.assertEquals(scene.inTime(), 13.23)
+        self.assertEqual(scene.inTime(), 13.23)
 
 
 @attr('maya')
@@ -219,15 +219,15 @@ class Test_outTime (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_outTime_getsFrame120FromNewScene (self):
-        self.assertEquals(scene.outTime(), 120.0)
+        self.assertEqual(scene.outTime(), 120.0)
 
     def test_outTime_getsIntLastFrameTime (self):
         cmds.playbackOptions(edit=True, maxTime=234.0)
-        self.assertEquals(scene.outTime(), 234.0)
+        self.assertEqual(scene.outTime(), 234.0)
 
     def test_outTime_getsFloatLastFrameTime (self):
         cmds.playbackOptions(edit=True, maxTime=17.3)
-        self.assertEquals(scene.outTime(), 17.3)
+        self.assertEqual(scene.outTime(), 17.3)
 
 
 @attr('maya')
@@ -238,11 +238,11 @@ class Test_inFrame (unittest.TestCase):
 
     def test_inFrame_getIntInFrame (self):
         cmds.playbackOptions(edit=True, minTime=23.0)
-        self.assertEquals(scene.inFrame(), 23.0)
+        self.assertEqual(scene.inFrame(), 23.0)
 
     def test_inFrame_getFloatInFrame (self):
         cmds.playbackOptions(edit=True, minTime=29.6)
-        self.assertEquals(scene.inFrame(), 30.0)
+        self.assertEqual(scene.inFrame(), 30.0)
 
 
 @attr('maya')
@@ -253,11 +253,11 @@ class Test_outFrame (unittest.TestCase):
 
     def test_outFrame_getIntOutFrame (self):
         cmds.playbackOptions(edit=True, maxTime=180.0)
-        self.assertEquals(scene.outFrame(), 180.0)
+        self.assertEqual(scene.outFrame(), 180.0)
 
     def test_outFrame_getFloatOutFrame (self):
         cmds.playbackOptions(edit=True, maxTime=221.3)
-        self.assertEquals(scene.outFrame(), 221.0)
+        self.assertEqual(scene.outFrame(), 221.0)
 
 
 @attr('maya')
@@ -267,15 +267,15 @@ class Test_allFrames (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_allFrames_defaultsTo1To120 (self):
-        self.assertEquals(list(scene.allFrames()), list(xrange(1, 120)))
+        self.assertEqual(list(scene.allFrames()), list(xrange(1, 120)))
 
     def test_allFrames_getsSetIntRange (self):
         cmds.playbackOptions(edit=True, minTime=23.0)
         cmds.playbackOptions(edit=True, maxTime=67.0)
-        self.assertEquals(list(scene.allFrames()), list(xrange(23, 67)))
+        self.assertEqual(list(scene.allFrames()), list(xrange(23, 67)))
 
     def test_allFrames_getsSetFloatRange (self):
         cmds.playbackOptions(edit=True, minTime=23.7)
         cmds.playbackOptions(edit=True, maxTime=67.6)
-        self.assertEquals(list(scene.allFrames()), list(xrange(24, 68)))
+        self.assertEqual(list(scene.allFrames()), list(xrange(24, 68)))
 

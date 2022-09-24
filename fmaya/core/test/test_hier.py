@@ -16,13 +16,13 @@ class Test_getParent (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_getParent_returnsNoneOnRootObject (self):
-        self.assertEquals(hier.getParent("persp"), None)
+        self.assertEqual(hier.getParent("persp"), None)
 
     def test_getParent_returnsParentIfOneExists (self):
         a = cmds.spaceLocator()[0]
         b = cmds.spaceLocator()[0]
         a2 = cmds.parent(a, b)
-        self.assertEquals(hier.getParent(a2), b)
+        self.assertEqual(hier.getParent(a2), b)
 
 
 @attr('maya')
@@ -32,13 +32,13 @@ class Test_withParent (unittest.TestCase):
         cmds.file(new=True, force=True)
 
     def test_withParent_returnsDefaultWhenNoParent (self):
-        self.assertEquals(hier.withParent("nope")(lambda x: x)("persp"), "nope")
+        self.assertEqual(hier.withParent("nope")(lambda x: x)("persp"), "nope")
 
     def test_withParent_returnsParentViaIdentityFunction (self):
         a = cmds.spaceLocator()[0]
         b = cmds.spaceLocator()[0]
         a2 = cmds.parent(a, b)
-        self.assertEquals(hier.withParent("default")(lambda x: x)(a2), b)
+        self.assertEqual(hier.withParent("default")(lambda x: x)(a2), b)
 
     def test_withParent_canRunPredicatesOnTheParent (self):
         a = cmds.spaceLocator()[0]

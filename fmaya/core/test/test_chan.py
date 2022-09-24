@@ -14,46 +14,46 @@ import chan
 class Test_nodeFromChannel (unittest.TestCase):
 
     def test_nodeFromChannel_getsNodeFromNormalChannel (self):
-        self.assertEquals(chan.nodeFromChannel("foo.bar"), "foo")
+        self.assertEqual(chan.nodeFromChannel("foo.bar"), "foo")
 
     def test_nodeFromChannel_doesNotAffectNonDottedName (self):
-        self.assertEquals(chan.nodeFromChannel("foo"), "foo")
+        self.assertEqual(chan.nodeFromChannel("foo"), "foo")
 
     def test_nodeFromChannel_handlesEmptyString (self):
-        self.assertEquals(chan.nodeFromChannel(""), "")
+        self.assertEqual(chan.nodeFromChannel(""), "")
 
 
 class Test_attrFromChannel (unittest.TestCase):
 
     def test_attrFromChannel_getsAttrFromNormalChannel (self):
-        self.assertEquals(chan.attrFromChannel("foo.bar"), "bar")
+        self.assertEqual(chan.attrFromChannel("foo.bar"), "bar")
 
     def test_attrFromChannel_doesNotAffectNonDottedName (self):
-        self.assertEquals(chan.attrFromChannel("bar"), "bar")
+        self.assertEqual(chan.attrFromChannel("bar"), "bar")
 
 
 class Test_chanFromChannel (unittest.TestCase):
 
     def test_chanFromChannel_splitsAChannel (self):
-        self.assertEquals(chan.chanFromChannel("foo.bar"), ("foo", "bar"))
+        self.assertEqual(chan.chanFromChannel("foo.bar"), ("foo", "bar"))
 
     def test_chanFromChannel_emptyStringsFromEmptyString (self):
-        self.assertEquals(chan.chanFromChannel(""), ("", ""))
+        self.assertEqual(chan.chanFromChannel(""), ("", ""))
 
 
 class Test_attrToChannel (unittest.TestCase):
 
     def test_attrToChannel_createsChannel (self):
-        self.assertEquals(chan.attrToChannel("foo")("bar"), "foo.bar")
+        self.assertEqual(chan.attrToChannel("foo")("bar"), "foo.bar")
 
     def test_attrToChannel_emptyNode (self):
-        self.assertEquals(chan.attrToChannel("")("bar"), ".bar")
+        self.assertEqual(chan.attrToChannel("")("bar"), ".bar")
 
     def test_attrToChannel_emptyAttr (self):
-        self.assertEquals(chan.attrToChannel("foo")(""), "foo.")
+        self.assertEqual(chan.attrToChannel("foo")(""), "foo.")
 
     def test_attrToChannel_emptyNodeAndAttr (self):
-        self.assertEquals(chan.attrToChannel("")(""), ".")
+        self.assertEqual(chan.attrToChannel("")(""), ".")
 
 
 class Test_keysValueRange (unittest.TestCase):
@@ -62,10 +62,10 @@ class Test_keysValueRange (unittest.TestCase):
         self.assertRaises(ValueError, lambda: chan.keysValueRange([]))
 
     def test_keysValueRange_reportsProperRangeOnSingletonKeysList (self):
-        self.assertEquals(chan.keysValueRange([(2,3)]), (3, 3))
+        self.assertEqual(chan.keysValueRange([(2,3)]), (3, 3))
 
     def test_keysValueRange_getsProperValueRange (self):
-        self.assertEquals(chan.keysValueRange([(2,3),(4,2),(5,-1),(8,1)]), (-1, 3))
+        self.assertEqual(chan.keysValueRange([(2,3),(4,2),(5,-1),(8,1)]), (-1, 3))
 
 
 class Test_keysValueCenter (unittest.TestCase):
@@ -74,10 +74,10 @@ class Test_keysValueCenter (unittest.TestCase):
         self.assertRaises(ValueError, lambda: chan.keysValueCenter([]))
 
     def test_keysValueCenter_reportsProperRangeOnSingletonKeysList (self):
-        self.assertEquals(chan.keysValueCenter([(2,3)]), 3)
+        self.assertEqual(chan.keysValueCenter([(2,3)]), 3)
 
     def test_keysValueCenter_getsProperValueCenter (self):
-        self.assertEquals(chan.keysValueCenter([(2,3),(4,2),(5,-1),(8,1)]), 1)
+        self.assertEqual(chan.keysValueCenter([(2,3),(4,2),(5,-1),(8,1)]), 1)
 
 
 # IMPURE
@@ -86,10 +86,10 @@ class Test_keysValueCenter (unittest.TestCase):
 class Test_getChanType (unittest.TestCase):
 
     def test_getAttrType_translateX (self):
-        self.assertEquals(chan.getChannelType('persp.translateX'), 'doubleLinear')
+        self.assertEqual(chan.getChannelType('persp.translateX'), 'doubleLinear')
 
     def test_getAttrType_visibility (self):
-        self.assertEquals(chan.getChannelType('persp.visibility'), 'bool')
+        self.assertEqual(chan.getChannelType('persp.visibility'), 'bool')
 
 
 @attr('maya')
@@ -102,15 +102,15 @@ class Test_getChannelAtTime (unittest.TestCase):
 
     def test_getChannelAtTime_getsValueOfUnkeyedChannel (self):
         cmds.setAttr('persp.rz', 23)
-        self.assertEquals(chan.getChannelAtTime(-4)('persp.rz'), 23)
-        self.assertEquals(chan.getChannelAtTime(0)('persp.rz'), 23)
-        self.assertEquals(chan.getChannelAtTime(17)('persp.rz'), 23)
+        self.assertEqual(chan.getChannelAtTime(-4)('persp.rz'), 23)
+        self.assertEqual(chan.getChannelAtTime(0)('persp.rz'), 23)
+        self.assertEqual(chan.getChannelAtTime(17)('persp.rz'), 23)
 
     def test_getChannelAtTime_getsValueAtKey (self):
-        self.assertEquals(chan.getChannelAtTime(-3)('persp.tx'), 7)
+        self.assertEqual(chan.getChannelAtTime(-3)('persp.tx'), 7)
 
     def test_getChannelAtTime_getsValueAtAnotherKey (self):
-        self.assertEquals(chan.getChannelAtTime(8)('persp.tx'), 13)
+        self.assertEqual(chan.getChannelAtTime(8)('persp.tx'), 13)
 
 
 @attr('maya')
@@ -144,7 +144,7 @@ class Test_getAttr (unittest.TestCase):
         cmds.setAttr(self.loc + ".rz", -220.0)
 
     def test_getAttr_getsAnAttr (self):
-        self.assertEquals(chan.getAttr("ty")(self.loc), -23.0)
+        self.assertEqual(chan.getAttr("ty")(self.loc), -23.0)
 
 
 @attr('maya')
@@ -155,15 +155,15 @@ class Test_modAttr (unittest.TestCase):
 
     def tests_modAttr_identity (self):
         chan.modAttr("sy")(lambda x: x)(self.loc)
-        self.assertEquals(cmds.getAttr(self.loc + ".sy"), 1.0)
+        self.assertEqual(cmds.getAttr(self.loc + ".sy"), 1.0)
 
     def test_modAttr_modsAndAttrWithAddition (self):
         chan.modAttr("ty")(lambda y: y + 3)(self.loc)
-        self.assertEquals(cmds.getAttr(self.loc + ".ty"), 3.0)
+        self.assertEqual(cmds.getAttr(self.loc + ".ty"), 3.0)
 
     def tests_modAttr_modsAnAttrWithMultiplication (self):
         chan.modAttr("sz")(lambda z: z * 4)(self.loc)
-        self.assertEquals(cmds.getAttr(self.loc + ".sz"), 4.0)
+        self.assertEqual(cmds.getAttr(self.loc + ".sz"), 4.0)
 
 
 @attr('maya')
@@ -174,7 +174,7 @@ class Test_setAttr (unittest.TestCase):
 
     def test_setAttr_setsAnAttr (self):
         chan.setAttr("ty")(37.0)(self.loc)
-        self.assertEquals(cmds.getAttr(self.loc + ".ty"), 37.0)
+        self.assertEqual(cmds.getAttr(self.loc + ".ty"), 37.0)
 
 
 @attr('maya')
@@ -187,13 +187,13 @@ class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
         cmds.setKeyframe('persp.tx', time=5, value=33)
 
     def test_getKeyTimes_getsKeys (self):
-        self.assertEquals(chan.getKeyTimes('persp.tx'), [-3,0,5])
+        self.assertEqual(chan.getKeyTimes('persp.tx'), [-3,0,5])
 
     def test_getKeyValues_getsValues (self):
-        self.assertEquals(chan.getKeyValues('persp.tx'), [100,-56,33])
+        self.assertEqual(chan.getKeyValues('persp.tx'), [100,-56,33])
 
     def test_getKeys_getsKeys (self):
-        self.assertEquals(chan.getKeys('persp.tx'), [(-3,100),(0,-56),(5,33)])
+        self.assertEqual(chan.getKeys('persp.tx'), [(-3,100),(0,-56),(5,33)])
 
 
 @attr('maya')
@@ -242,7 +242,7 @@ class Test_artistAttrs (unittest.TestCase):
                    , "scaleZ"
                    , "visibility"
                    ]
-        self.assertEquals(sorted(chan.artistAttrs(self.cube)), sorted(expected))
+        self.assertEqual(sorted(chan.artistAttrs(self.cube)), sorted(expected))
 
     def test_artistAttrs_doesNotFindHiddenLockedOrNonKeyableChannels (self):
         expected = [ "translateX"
@@ -255,10 +255,10 @@ class Test_artistAttrs (unittest.TestCase):
                    , "visibility"
                    , "bar"
                    ]
-        self.assertEquals(sorted(chan.artistAttrs(self.ball)), sorted(expected))
+        self.assertEqual(sorted(chan.artistAttrs(self.ball)), sorted(expected))
 
     def test_artistAttrs_returnsEmptyListWhenAllChannelsNonKeyable (self):
-        self.assertEquals(chan.artistAttrs(self.loc), [])
+        self.assertEqual(chan.artistAttrs(self.loc), [])
 
 
 @attr('maya')
@@ -291,7 +291,7 @@ class Test_artistChannels (unittest.TestCase):
                    , self.cube + ".scaleZ"
                    , self.cube + ".visibility"
                    ]
-        self.assertEquals(sorted(chan.artistChannels(self.cube)), sorted(expected))
+        self.assertEqual(sorted(chan.artistChannels(self.cube)), sorted(expected))
 
     def test_artistChannels_doesNotFindHiddenLockedOrNonKeyableChannels (self):
         expected = [ self.ball + ".translateX"
@@ -304,20 +304,20 @@ class Test_artistChannels (unittest.TestCase):
                    , self.ball + ".visibility"
                    , self.ball + ".bar"
                    ]
-        self.assertEquals(sorted(chan.artistChannels(self.ball)), sorted(expected))
+        self.assertEqual(sorted(chan.artistChannels(self.ball)), sorted(expected))
 
     def test_artistChannels_returnsEmptyListWhenAllChannelsNonKeyable (self):
-        self.assertEquals(chan.artistChannels(self.loc), [])
+        self.assertEqual(chan.artistChannels(self.loc), [])
 
 
 @attr('maya')
 class Test_isNumericChannel (unittest.TestCase):
 
     def test_isNumericChannel_nonNumericChannelYieldsFalse (self):
-        self.assertEquals(chan.isNumericChannel('persp.visibility'), False)
+        self.assertEqual(chan.isNumericChannel('persp.visibility'), False)
 
     def test_isNumericChannel_numericChannelYieldsTrue (self):
-        self.assertEquals(chan.isNumericChannel('persp.rx'), True)
+        self.assertEqual(chan.isNumericChannel('persp.rx'), True)
 
 
 @attr('maya')
@@ -350,7 +350,7 @@ class Test_numericArtistChannels (unittest.TestCase):
                    , self.cube + ".scaleY"
                    , self.cube + ".scaleZ"
                    ]
-        self.assertEquals(sorted(chan.numericArtistChannels(self.cube)), sorted(expected))
+        self.assertEqual(sorted(chan.numericArtistChannels(self.cube)), sorted(expected))
 
     def test_numericArtistChannels_doesNotFindHiddenLockedOrNonKeyableChannels (self):
         expected = [ self.ball + ".translateX"
@@ -362,8 +362,8 @@ class Test_numericArtistChannels (unittest.TestCase):
                    , self.ball + ".scaleZ"
                    , self.ball + ".baz"
                    ]
-        self.assertEquals(sorted(chan.numericArtistChannels(self.ball)), sorted(expected))
+        self.assertEqual(sorted(chan.numericArtistChannels(self.ball)), sorted(expected))
 
     def test_artistChannels_returnsEmptyListWhenAllChannelsNonKeyable (self):
-        self.assertEquals(chan.numericArtistChannels(self.loc), [])
+        self.assertEqual(chan.numericArtistChannels(self.loc), [])
 
