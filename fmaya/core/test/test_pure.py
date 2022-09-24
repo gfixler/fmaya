@@ -445,8 +445,8 @@ class Test_filterBy (unittest.TestCase):
     def test_filterBy_keepValuesGreaterThan5 (self):
         self.assertEqual(pure.filterBy(lambda n: n > 5)([2,3,6,4,7,2,1,7,4,6,8,4]), [6,7,7,6,8])
 
-    def test_filterBy_keepVowelsInString (self):
-        self.assertEquals(pure.filterBy(lambda c: c in "aeiou")("eleanor"), "eeao")
+    def test_filterBy_specialCasesStringsToAvoidConversionToList (self):
+        self.assertEqual(pure.filterBy(lambda c: c in "aeiou")("eleanor"), "eeao")
 
 
 class Test_firstBy (unittest.TestCase):

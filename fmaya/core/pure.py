@@ -43,7 +43,7 @@ unsuffix = lambda p: lambda s: s[:-len(p)] if s.endswith(p) and not len(p) == 0 
 
 mid = lambda a: lambda b: (a + b) / 2.0
 
-filterBy = lambda f: lambda xs: list(filter(f, xs))
+filterBy = lambda f: lambda xs: (lambda r: ''.join(r) if type(xs) == str else r)(list(filter(f, xs)))
 firstBy = lambda f: lambda xs: xs[0] if f(xs[0]) else firstBy(f)(xs[1:]) # non-total
 anyBy = lambda f: lambda xs: any(cmap(f)(xs))
 
