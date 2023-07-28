@@ -1,5 +1,5 @@
 import unittest
-from nose.plugins.attrib import attr
+# from nose.plugins.attrib import attr
 from functools import reduce
 
 from math import sqrt
@@ -8,7 +8,7 @@ try:
     import maya.cmds as cmds
     hasMaya = True
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
     hasMaya = False
 
 import tf
@@ -416,7 +416,7 @@ class Test_v3Mid (unittest.TestCase):
 
 # IMPURE
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_pos (unittest.TestCase):
 
@@ -446,7 +446,7 @@ class Test_pos (unittest.TestCase):
         self.assertEqual(tf.pos(loc), (2,-3,1))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setpos (unittest.TestCase):
 
@@ -465,7 +465,7 @@ class Test_setpos (unittest.TestCase):
         self.assertEqual(result, None)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_wpos (unittest.TestCase):
 
@@ -495,7 +495,7 @@ class Test_wpos (unittest.TestCase):
         self.assertEqual(tf.wpos(loc), (3,-1,4))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setwpos (unittest.TestCase):
 
@@ -524,7 +524,7 @@ class Test_setwpos (unittest.TestCase):
         self.assertEqual(result, None)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_rot (unittest.TestCase):
 
@@ -543,7 +543,7 @@ class Test_rot (unittest.TestCase):
         self.assertEqual(tf.rot(loc), (0,0,0))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setRot (unittest.TestCase):
 
@@ -569,7 +569,7 @@ class Test_setRot (unittest.TestCase):
         self.assertEqual(result, None)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_wrot (unittest.TestCase):
 
@@ -608,7 +608,7 @@ class Test_wrot (unittest.TestCase):
         self.assertAlmostEqual(z, 180)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setwrot (unittest.TestCase):
 
@@ -640,7 +640,7 @@ class Test_setwrot (unittest.TestCase):
         self.assertEqual(result, None)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_posrot (unittest.TestCase):
 
@@ -670,7 +670,7 @@ class Test_posrot (unittest.TestCase):
         self.assertAlmostEqual(rz, 0)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_wposrot (unittest.TestCase):
 
@@ -698,4 +698,12 @@ class Test_wposrot (unittest.TestCase):
         self.assertAlmostEqual(rx, 23)
         self.assertAlmostEqual(ry, 43)
         self.assertAlmostEqual(rz, 12)
+
+
+# @attr('maya')
+@unittest.skipUnless(hasMaya, "requires Maya")
+class Test_resolveWorldXYZ (unittest.TestCase):
+
+    def setUp (self):
+        cmds.file(new=True, force=True)
 

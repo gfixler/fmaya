@@ -1,17 +1,20 @@
 import unittest
-from nose.plugins.attrib import attr
+# from nose.plugins.attrib import attr
+
+import maya.standalone
+maya.standalone.initialize(name="python")
 
 try:
     import maya.cmds as cmds
     hasMaya = True
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
     hasMaya = False
 
 import hier
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getParent (unittest.TestCase):
 
@@ -28,7 +31,7 @@ class Test_getParent (unittest.TestCase):
         self.assertEqual(hier.getParent(a2), b)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_withParent (unittest.TestCase):
 
@@ -52,7 +55,7 @@ class Test_withParent (unittest.TestCase):
         self.assertFalse(hier.withParent(False)(lambda x: x == "mom")(a2))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_parentPred (unittest.TestCase):
 
@@ -72,7 +75,7 @@ class Test_parentPred (unittest.TestCase):
         self.assertTrue(hier.parentPred(lambda x: x == b)(a2))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_parentNameIs (unittest.TestCase):
 

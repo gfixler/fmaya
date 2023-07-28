@@ -1,10 +1,11 @@
 try:
     import maya.cmds as cmds
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    pass
 
-from pure import _not, comp, const, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone, minAndMax
-from scene import getTime
+from .pure import _not, comp, const, cmap, isEmpty, uncurryPair, snd, mid, preadd, emptyNone, minAndMax
+from .scene import getTime
 
 
 # PURE

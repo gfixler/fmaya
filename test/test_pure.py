@@ -1,5 +1,5 @@
 import unittest
-from nose.plugins.attrib import attr
+# from nose.plugins.attrib import attr
 
 import pure
 

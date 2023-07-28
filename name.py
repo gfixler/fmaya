@@ -1,9 +1,10 @@
 try:
     import maya.cmds as cmds
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    pass
 
-from pure import const, cmap
+from .pure import const, cmap
 
 from string import digits, ascii_letters
 

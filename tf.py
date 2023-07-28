@@ -4,7 +4,8 @@ from functools import reduce
 try:
     import maya.cmds as cmds
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    pass
 
 from pure import both, uncurry2
 

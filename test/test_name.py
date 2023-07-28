@@ -1,11 +1,14 @@
 import unittest
-from nose.plugins.attrib import attr
+# from nose.plugins.attrib import attr
+
+import maya.standalone
+maya.standalone.initialize(name="python")
 
 try:
     import maya.cmds as cmds
     hasMaya = True
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
     hasMaya = False
 
 import name
@@ -56,7 +59,7 @@ class Test_stripNS (unittest.TestCase):
         self.assertEqual(name.stripNS("a:b:c:d:e"), "e")
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_renameBy (unittest.TestCase):
 
@@ -75,7 +78,7 @@ class Test_renameBy (unittest.TestCase):
         result = name.renameBy(lambda x: x + x)(self.loc)
         self.assertTrue(cmds.objExists(self.loc + self.loc))
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_renameTo (unittest.TestCase):
 

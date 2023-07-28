@@ -1,11 +1,11 @@
 import unittest
-from nose.plugins.attrib import attr
+# from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
     hasMaya = True
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
     hasMaya = False
 
 import chan
@@ -84,7 +84,7 @@ class Test_keysValueCenter (unittest.TestCase):
 
 # IMPURE
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getChanType (unittest.TestCase):
 
@@ -95,7 +95,7 @@ class Test_getChanType (unittest.TestCase):
         self.assertEqual(chan.getChannelType('persp.visibility'), 'bool')
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getChannelAtTime (unittest.TestCase):
 
@@ -117,7 +117,7 @@ class Test_getChannelAtTime (unittest.TestCase):
         self.assertEqual(chan.getChannelAtTime(8)('persp.tx'), 13)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setChannel (unittest.TestCase):
 
@@ -138,7 +138,7 @@ class Test_setChannel (unittest.TestCase):
         self.assertAlmostEquals(cmds.getAttr("persp.rz"), -3)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getAttr (unittest.TestCase):
 
@@ -153,7 +153,7 @@ class Test_getAttr (unittest.TestCase):
         self.assertEqual(chan.getAttr("ty")(self.loc), -23.0)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_modAttr (unittest.TestCase):
 
@@ -173,7 +173,7 @@ class Test_modAttr (unittest.TestCase):
         self.assertEqual(cmds.getAttr(self.loc + ".sz"), 4.0)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_setAttr (unittest.TestCase):
 
@@ -185,7 +185,7 @@ class Test_setAttr (unittest.TestCase):
         self.assertEqual(cmds.getAttr(self.loc + ".ty"), 37.0)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
 
@@ -205,7 +205,7 @@ class Test_getKeyTimesAndValuesAndKeys (unittest.TestCase):
         self.assertEqual(chan.getKeys('persp.tx'), [(-3,100),(0,-56),(5,33)])
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_hasKeys (unittest.TestCase):
 
@@ -222,7 +222,7 @@ class Test_hasKeys (unittest.TestCase):
         self.assertFalse(chan.hasKeys("side"))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_artistAttrs (unittest.TestCase):
 
@@ -272,7 +272,7 @@ class Test_artistAttrs (unittest.TestCase):
         self.assertEqual(chan.artistAttrs(self.loc), [])
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_artistChannels (unittest.TestCase):
 
@@ -322,7 +322,7 @@ class Test_artistChannels (unittest.TestCase):
         self.assertEqual(chan.artistChannels(self.loc), [])
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_isNumericChannel (unittest.TestCase):
 
@@ -333,7 +333,7 @@ class Test_isNumericChannel (unittest.TestCase):
         self.assertEqual(chan.isNumericChannel('persp.rx'), True)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_numericArtistChannels (unittest.TestCase):
 

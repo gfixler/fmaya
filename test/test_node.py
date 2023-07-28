@@ -1,17 +1,17 @@
 import unittest
-from nose.plugins.attrib import attr
-
-import node
+# from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
     hasMaya = True
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
     hasMaya = False
 
+import node
 
-@attr('maya')
+
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_hasAttr (unittest.TestCase):
 

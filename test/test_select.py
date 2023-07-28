@@ -1,11 +1,11 @@
 import unittest
-from nose.plugins.attrib import attr
+# from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
     hasMaya = True
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
     hasMaya = False
 
 import select
@@ -13,7 +13,7 @@ import select
 
 # IMPURE
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_grab (unittest.TestCase):
 
@@ -39,14 +39,14 @@ class Test_grab (unittest.TestCase):
         self.assertEqual(cmds.ls(selection=True), ["side"])
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_selAndSelection1 (unittest.TestCase):
 
     def setUp (self):
         cmds.file(new=True, force=True)
-        self.bs = map(lambda _: cmds.polySphere()[0], xrange(10))
-        self.cs = map(lambda _: cmds.polyCube()[0], xrange(10))
+        self.bs = list(map(lambda _: cmds.polySphere()[0], range(10)))
+        self.cs = list(map(lambda _: cmds.polyCube()[0], range(10)))
         cmds.select(None)
 
     def test_sel_noSelectionYieldsEmptyList (self):
@@ -78,7 +78,7 @@ class Test_selAndSelection1 (unittest.TestCase):
         self.assertEqual(select.sel1(), xs[0])
 
 
-@attr('maya')
+# @attr('maya')
 class Test_channelBoxSelection (unittest.TestCase):
 
     # this relies on the GUI, and is therefore untestable

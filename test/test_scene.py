@@ -1,11 +1,11 @@
 import unittest
-from nose.plugins.attrib import attr
+# from nose.plugins.attrib import attr
 
 try:
     import maya.cmds as cmds
     hasMaya = True
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
     hasMaya = False
 
 import scene
@@ -13,9 +13,10 @@ import scene
 import os
 import tempfile
 
+
 # IMPURE
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_scenePath (unittest.TestCase):
 
@@ -29,7 +30,7 @@ class Test_scenePath (unittest.TestCase):
         self.assertEqual(spn, tfn)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_sceneName (unittest.TestCase):
 
@@ -40,7 +41,7 @@ class Test_sceneName (unittest.TestCase):
         self.assertEqual(scene.sceneName(), name)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_grepScene (unittest.TestCase):
 
@@ -70,7 +71,7 @@ class Test_grepScene (unittest.TestCase):
         self.assertEqual(set(scene.grepScene("e......s")), set(["strokeGlobals", "defaultRenderingList1"]))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_getTime (unittest.TestCase):
 
@@ -87,7 +88,7 @@ class Test_getTime (unittest.TestCase):
         self.assertEqual(scene.getTime(), 123)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_obExists (unittest.TestCase):
 
@@ -101,7 +102,7 @@ class Test_obExists (unittest.TestCase):
         self.assertTrue(scene.obExists("persp"))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_inNS (unittest.TestCase):
 
@@ -118,7 +119,7 @@ class Test_inNS (unittest.TestCase):
         self.assertFalse(scene.inNS("foo:bar")(loc))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_lsNamespaces (unittest.TestCase):
 
@@ -134,7 +135,7 @@ class Test_lsNamespaces (unittest.TestCase):
         self.assertEqual(set(scene.lsNamespaces()), set([":","UI","shared","foo","foo:bar","baz"]))
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_lsNamespacesContaining (unittest.TestCase):
 
@@ -153,7 +154,7 @@ class Test_lsNamespacesContaining (unittest.TestCase):
         self.assertEqual(scene.lsNamespacesContaining("Waldo"), [":", "foo"])
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atTime (unittest.TestCase):
 
@@ -171,7 +172,7 @@ class Test_atTime (unittest.TestCase):
         self.assertAlmostEquals(scene.atTime(7.5)(cmds.getAttr)(self.testAttr), 3.75)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atTime_ (unittest.TestCase):
 
@@ -182,7 +183,7 @@ class Test_atTime_ (unittest.TestCase):
         self.assertAlmostEquals(scene.atTime_(13.7)(lambda: cmds.currentTime(query=True)), 13.7)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atFrame (unittest.TestCase):
 
@@ -197,7 +198,7 @@ class Test_atFrame (unittest.TestCase):
         self.assertAlmostEquals(scene.atFrame(9.51)(cmds.getAttr)(self.testAttr), 5)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_atFrame_ (unittest.TestCase):
 
@@ -208,7 +209,7 @@ class Test_atFrame_ (unittest.TestCase):
         self.assertEqual(scene.atFrame_(13.7)(lambda: cmds.currentTime(query=True)), 14)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_inTime (unittest.TestCase):
 
@@ -227,7 +228,7 @@ class Test_inTime (unittest.TestCase):
         self.assertEqual(scene.inTime(), 13.23)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_outTime (unittest.TestCase):
 
@@ -246,7 +247,7 @@ class Test_outTime (unittest.TestCase):
         self.assertEqual(scene.outTime(), 17.3)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_inFrame (unittest.TestCase):
 
@@ -262,7 +263,7 @@ class Test_inFrame (unittest.TestCase):
         self.assertEqual(scene.inFrame(), 30.0)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_outFrame (unittest.TestCase):
 
@@ -278,7 +279,7 @@ class Test_outFrame (unittest.TestCase):
         self.assertEqual(scene.outFrame(), 221.0)
 
 
-@attr('maya')
+# @attr('maya')
 @unittest.skipUnless(hasMaya, "requires Maya")
 class Test_allFrames (unittest.TestCase):
 

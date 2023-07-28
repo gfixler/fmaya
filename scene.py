@@ -1,10 +1,11 @@
 try:
     import maya.cmds as cmds
 except ImportError:
-    print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    # print('WARNING (%s): failed to load maya.cmds module.' % __file__)
+    pass
 
-from pure import comp, flip, grep, filterBy
-from name import withNS
+from .pure import comp, flip, grep, filterBy
+from .name import withNS
 
 
 # IMPURE
